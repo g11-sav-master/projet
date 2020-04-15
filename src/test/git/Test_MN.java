@@ -1,11 +1,10 @@
 package test.git;
 
-public class Test_VR2 {
+public class Test_MN {
 	
 	
 	public void bonjour() {
-		System.out.println( "Bye Bye" );
-		System.out.println( "Ca va ?" );
+		System.out.println( "Bonjoour" );
 	}
 	
 	
@@ -21,7 +20,7 @@ public class Test_VR2 {
 		if ( 0 <= i && i < adresses.length ) {
 			return adresses[i];
 		} else {
-			return "Erreur";
+			return null;
 		}
 	}
 	
