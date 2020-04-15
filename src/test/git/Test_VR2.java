@@ -4,7 +4,8 @@ public class Test_VR2 {
 	
 	
 	public void bonjour() {
-		System.out.println( "Bye Bye Be belle" );
+		System.out.println( "Bye Bye" );
+		System.out.println( "Ca va ?" );
 	}
 	
 	
