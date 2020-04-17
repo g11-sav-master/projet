@@ -10,17 +10,9 @@ public class Test_MV2 {
 	
 	
 	private String[] adresses = {
-<<<<<<< HEAD
-			"99 Rue Mozart, Paris",
-=======
-			"14 Rue Mozart, Montreuil",
->>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
+			"99 Rue Mozart, Montreuil",
 			"77 Rue Picasso, Toulouse", 
-<<<<<<< HEAD
-			"111 Rue des fleurs, Limoges",
-=======
-			"53 Rue des fleurs, Brive",
->>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
+			"111 Rue des fleurs, Brive",
 	};
 
 	
