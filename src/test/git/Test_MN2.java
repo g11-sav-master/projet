@@ -10,10 +10,11 @@ public class Test_MN2 {
 	
 	
 	private String[] adresses = {
-			"99 Rue Mozart, Paris",
+
+			"14 Rue Mozart, Paris",
 			"77 Rue Picasso, Toulouse", 
-			"111 Rue des fleurs, Limoges",
-	};
+			"53 Rue des fleurs, Limoges",
+			};
 
 	
 	public String getAdresse( int i ) {
