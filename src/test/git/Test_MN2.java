@@ -5,6 +5,7 @@ public class Test_MN2 {
 	
 	public void bonjour() {
 		System.out.println( "YOSHI" );
+		System.out.println( "ça va ?");
 	}
 	
 	
