@@ -11,9 +11,9 @@ public class Test_MN2 {
 	
 	private String[] adresses = {
 
-			"14 Rue Mozart, Paris",
+			"99 Rue Mozart, Paris",
 			"77 Rue Picasso, Toulouse", 
-			"53 Rue des fleurs, Limoges",
+			"111 Rue des fleurs, Limoges",
 			};
 
 	
