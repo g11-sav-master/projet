@@ -1,10 +1,10 @@
 package test.git;
 
-public class Test_MN {
+public class Test_MN2 {
 	
 	
 	public void bonjour() {
-		System.out.println( "YOOOOOO" );
+		System.out.println( "YOSHI" );
 	}
 	
 	
