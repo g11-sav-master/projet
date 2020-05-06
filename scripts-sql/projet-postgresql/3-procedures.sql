@@ -31,12 +31,12 @@ CREATE FUNCTION compte_inserer(
 AS $ccode$
 DECLARE v_role VARCHAR;
 BEGIN
-	INSERT INTO compte ( pseudo, motdepasse, email )
+	INSERT INTO o_compte ( pseudo, motdepasse, email )
 	VALUES ( p_pseudo, p_motdepasse,p_email )
 	RETURNING idcompte INTO p_idcompte;
 	
 	FOREACH v_role IN ARRAY p_roles LOOP
-		INSERT INTO role ( idcompte, role )
+		INSERT INTO o_role ( idcompte, role )
 		VALUES ( p_idcompte, v_role );
 	END LOOP;
 END;
@@ -54,16 +54,16 @@ RETURNS VOID
 AS $ccode$
 DECLARE v_role VARCHAR;
 BEGIN
-	UPDATE compte 
+	UPDATE o_compte 
 	SET pseudo = p_pseudo, 
 		motdepasse = p_motdepasse, 
 		email = p_email 
 	WHERE idcompte =  p_idcompte;
 
-	DELETE FROM role WHERE idcompte = p_idcompte;
+	DELETE FROM o_role WHERE idcompte = p_idcompte;
 	
 	FOREACH v_role IN ARRAY p_roles LOOP
-		INSERT INTO role ( idcompte, role )
+		INSERT INTO o_role ( idcompte, role )
 		VALUES ( p_idcompte, v_role );
 	END LOOP;
 END;
@@ -74,8 +74,8 @@ CREATE FUNCTION compte_supprimer( p_idCompte INT )
 RETURNS VOID 
 AS $ccode$
 BEGIN
-	DELETE FROM role WHERE idcompte = p_idcompte;
-	DELETE FROM compte WHERE idcompte = p_idcompte;
+	DELETE FROM o_role WHERE idcompte = p_idcompte;
+	DELETE FROM o_compte WHERE idcompte = p_idcompte;
 END;
 $ccode$ LANGUAGE plpgsql;
 
@@ -101,24 +101,24 @@ $ccode$ LANGUAGE plpgsql;
 
 
 CREATE FUNCTION compte_retrouver( p_idCompte INT ) 
-RETURNS SETOF v_compte_avec_roles 
+RETURNS SETOF o_v_compte_avec_roles 
 AS $ccode$
 BEGIN
 	RETURN QUERY
 	SELECT * 
-	FROM v_compte_avec_roles
+	FROM o_v_compte_avec_roles
 	WHERE idcompte = p_idcompte;
 END;
 $ccode$ LANGUAGE plpgsql;
 
 
 CREATE FUNCTION compte_lister_tout() 
-RETURNS SETOF v_compte_avec_roles 
+RETURNS SETOF o_v_compte_avec_roles 
 AS $ccode$
 BEGIN
 	RETURN QUERY
 	SELECT * 
-	FROM v_compte_avec_roles 
+	FROM o_v_compte_avec_roles 
 	ORDER BY pseudo;
 END;
 $ccode$ LANGUAGE plpgsql;
@@ -146,11 +146,11 @@ $ccode$ LANGUAGE plpgsql;
 
 
 CREATE FUNCTION compte_valider_authentification( p_pseudo VARCHAR, p_motdepasse VARCHAR ) 
-RETURNS SETOF v_compte_avec_roles
+RETURNS SETOF o_v_compte_avec_roles
 AS $ccode$
 BEGIN
 	RETURN QUERY
-	SELECT * FROM v_compte_avec_roles
+	SELECT * FROM o_v_compte_avec_roles
 	WHERE pseudo = P_pseudo
 	  AND motdepasse = p_motdepasse;
 END;
@@ -165,7 +165,7 @@ CREATE FUNCTION compte_verifier_unicite_pseudo(
 AS $ccode$
 BEGIN
 	SELECT COUNT(*) = 0 INTO p_unicite
-	FROM compte
+	FROM o_compte
 	WHERE pseudo = p_pseudo
 	  AND idcompte <> P_idcompte;
 END;
