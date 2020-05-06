@@ -182,7 +182,7 @@ CREATE TABLE o_role (
 	role			VARCHAR(20)		NOT NULL,
 	CHECK( Role IN ('ADMINISTRATEUR','UTILISATEUR') ),	
 	PRIMARY KEY (idcompte, role),
-	FOREIGN KEY (idcompte) REFERENCES compte (idcompte)
+	FOREIGN KEY (idcompte) REFERENCES o_compte (idcompte)
 );
 
 CREATE TABLE o_categorie (
@@ -197,7 +197,7 @@ CREATE TABLE o_personne (
 	nom				VARCHAR(25)  	NOT NULL,
 	prenom			VARCHAR(25) 	NOT NULL,
 	PRIMARY KEY (idpersonne),
- 	FOREIGN KEY (idcategorie) REFERENCES categorie (idcategorie)
+ 	FOREIGN KEY (idcategorie) REFERENCES o_categorie (idcategorie)
 );
 
 CREATE TABLE o_telephone (
@@ -206,7 +206,7 @@ CREATE TABLE o_telephone (
 	Libelle			VARCHAR(25)		NOT NULL,
 	Numero			VARCHAR(25)		NOT NULL,
 	PRIMARY KEY (idtelephone),
-	FOREIGN KEY (idpersonne) REFERENCES personne (idpersonne)
+	FOREIGN KEY (idpersonne) REFERENCES o_personne (idpersonne)
 );
 
 CREATE TABLE o_memo (	
@@ -221,15 +221,15 @@ CREATE TABLE o_memo (
 	idcategorie		INT,
 	CHECK( statut BETWEEN 0 AND 2 ),	
 	PRIMARY KEY (idmemo),
- 	FOREIGN KEY (idcategorie) REFERENCES categorie (idcategorie)
+ 	FOREIGN KEY (idcategorie) REFERENCES o_categorie (idcategorie)
 );
 
 CREATE TABLE o_concerner (
 	idmemo		INT				NOT NULL,
 	idpersonne	INT				NOT NULL,
 	PRIMARY KEY (idmemo, idpersonne),
-	FOREIGN KEY (idmemo) REFERENCES memo (idmemo),
-	FOREIGN KEY (idpersonne) REFERENCES personne (idpersonne)
+	FOREIGN KEY (idmemo) REFERENCES o_memo (idmemo),
+	FOREIGN KEY (idpersonne) REFERENCES o_personne (idpersonne)
 );
 
 CREATE TABLE o_service (	
@@ -246,7 +246,7 @@ CREATE TABLE o_service (
 
 CREATE VIEW o_v_compte_avec_roles AS
 	SELECT c.*, ARRAY_AGG( r.role ) AS roles
-	FROM compte c 
-	LEFT JOIN ROLE r ON c.idcompte = r.idcompte
+	FROM o_compte c 
+	LEFT JOIN o_ROLE r ON c.idcompte = r.idcompte
 	GROUP BY c.idcompte;
 
