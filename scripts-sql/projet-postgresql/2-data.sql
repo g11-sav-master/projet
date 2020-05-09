@@ -2,101 +2,548 @@ SET search_path TO projet;
 
 
 -- Supprimer toutes les données
-DELETE FROM o_service;
-DELETE FROM o_concerner;
-DELETE FROM o_memo;
-DELETE FROM o_telephone;
-DELETE FROM o_personne;
-DELETE FROM o_categorie;
-DELETE FROM o_role;
-DELETE FROM o_compte;
+DELETE FROM utilisateur;
+DELETE FROM role_benevole;
+DELETE FROM benevole;
+DELETE FROM raid;
+DELETE FROM poste;
+DELETE FROM categorie_role;
+DELETE FROM action_benevole;
+DELETE FROM participant;
+DELETE FROM participe_organisation;
+DELETE FROM participant_duo;
+DELETE FROM forme_duo;
+DELETE FROM participer;
+DELETE FROM validation_medicale;
 
 
--- Compte
+--Utilisateurs
+INSERT INTO utilisateur VALUES ('1','Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob');
+INSERT INTO utilisateur VALUES ('2','Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45');
+INSERT INTO utilisateur VALUES ('3','Taner', 'Victor', 'VictTan65@gmail.com', '0715758725', '15/04/66', 'victan65', 'victanvapo45');
+INSERT INTO utilisateur VALUES ('4','Sapnz', 'Daurice', 'DauriceSz@gmail.com', '0799452410', '29/07/01', 'daudaudu01', 'duciva54');
+INSERT INTO utilisateur VALUES ('5','Jasp', 'Romain', 'RomJasp@gmail.com', '0764512101', '15/09/97', 'romtaxi81', 'vilayleckdu41');
+INSERT INTO utilisateur VALUES ('6','Grind', 'Pierrot', 'PiepieGri24@gmail.com', '0784546451', '21/06/02', 'PierrotGrigri21', 'rackvapta54');
+INSERT INTO utilisateur VALUES ('7','Hernandez', 'Sophia', 'SophiaHernandez54@gmail.com', '0777546941', '11/11/99', 'Sosodu54', 'jauspru54');
+INSERT INTO utilisateur VALUES (8,'Roth','Ishmael','neque@Curabitur.edu','0635222510','09/08/80','tincidunt,','sit');
+INSERT INTO utilisateur VALUES (9,'Frederick','Merrill','turpis@Classaptenttaciti.ca','0159654055','24/05/74','metus','mi');
+INSERT INTO utilisateur VALUES (10,'Montgomery','Thaddeus','ipsum@Vestibulumanteipsum.net','0898835858','22/11/60','magnis','ipsum');
+INSERT INTO utilisateur VALUES (11,'Rosa','Jasper','malesuada@Nullamscelerisque.com','0161315345','24/11/88','aliquet','purus');
+INSERT INTO utilisateur VALUES (12,'Manning','Bruno','neque@interdumliberodui.edu','0261467720','20/02/93','iaculis,','arcu');
+INSERT INTO utilisateur VALUES (13,'Holmes','Ignacia','cursus.luctus.ipsum@Donectemporest.edu','0162087802','15/09/05','erat','odio');
+INSERT INTO utilisateur VALUES (14,'Bates','Merritt','viverra.Maecenas@iaculis.net','0133651953','08/09/69','Mauris','risus.');
+INSERT INTO utilisateur VALUES (15,'Larsen','Melanie','Quisque.tincidunt.pede@placerategetvenenatis.co.uk','0557892784','23/04/04','nisl.','Aliquam');
+INSERT INTO utilisateur VALUES (16,'Heath','Ariel','diam.Duis.mi@eunequepellentesque.co.uk','0805898063','05/11/89','vel,','elit.');
+INSERT INTO utilisateur VALUES (17,'Freeman','Amity','feugiat.metus@magnaDuis.org','0629631611','04/12/69','purus.','mauris');
+INSERT INTO utilisateur VALUES (18,'Sykes','Serena','non@necdiam.co.uk','0123605988','18/12/00','lobortis','felis');
+INSERT INTO utilisateur VALUES (19,'Hammond','Gwendolyn','mi@infaucibusorci.edu','0913067373','01/05/85','Praesent','ornare');
+INSERT INTO utilisateur VALUES (20,'Lancaster','Francesca','dapibus.ligula.Aliquam@loremacrisus.net','0264923508','11/06/90','enim,','eu');
+INSERT INTO utilisateur VALUES (21,'England','Lacey','magna.Nam@purusac.net','0835116973','17/02/03','malesuada','dictum');
+INSERT INTO utilisateur VALUES (22,'Banks','Cameron','Suspendisse.commodo.tincidunt@auctor.ca','0489387390','25/06/71','scelerisque','ante');
+INSERT INTO utilisateur VALUES (23,'White','Raphael','turpis.Nulla.aliquet@quis.org','0498271552','14/04/88','auctor,','massa');
+INSERT INTO utilisateur VALUES (24,'Travis','Maxine','Morbi.metus.Vivamus@ultriciesligula.net','0466682711','21/07/77','vitae','augue');
+INSERT INTO utilisateur VALUES (25,'Lynch','Jeanette','mollis.lectus.pede@pretium.net','0956711650','19/02/08','quis,','arcu.');
+INSERT INTO utilisateur VALUES (26,'Hamilton','Gregory','felis.eget@ami.org','0976860245','21/08/80','sociis','eu,');
+INSERT INTO utilisateur VALUES (27,'Navarro','Shelley','feugiat.tellus.lorem@interdumligula.org','0287894183','24/02/02','amet','enim,');
+INSERT INTO utilisateur VALUES (28,'Merrill','Sheila','Cum@risusDonec.com','0279212419','04/06/95','mauris.','ipsum');
+INSERT INTO utilisateur VALUES (29,'Mcmahon','Christine','Phasellus.ornare@id.edu','0692431077','06/10/67','enim','quam,');
+INSERT INTO utilisateur VALUES (30,'Patterson','Audrey','cursus.et@Maecenasmi.net','0801206593','18/10/93','Vivamus','gravida');
+INSERT INTO utilisateur VALUES (31,'Alford','Ryder','dui@volutpat.ca','0283741243','14/09/03','in,','risus.');
+INSERT INTO utilisateur VALUES (32,'Kirk','Glenna','mi@cursusaenim.co.uk','0245398428','30/05/71','et,','non');
+INSERT INTO utilisateur VALUES (33,'Forbes','Emerald','fringilla.euismod@purussapien.co.uk','0690464773','25/03/89','purus,','non,');
+INSERT INTO utilisateur VALUES (34,'Kane','Basia','lacinia@sedturpisnec.com','0250433161','20/11/96','turpis','magna.');
+INSERT INTO utilisateur VALUES (35,'Soto','Tiger','Vivamus.non.lorem@posuereenim.ca','0295102074','26/02/09','dapibus','Proin');
+INSERT INTO utilisateur VALUES (36,'Solis','Edward','egestas@conubia.co.uk','0700555284','11/03/66','malesuada','suscipit');
+INSERT INTO utilisateur VALUES (37,'Leonard','Chava','ultricies.dignissim@dui.co.uk','0295968459','11/04/65','penatibus','lectus');
+INSERT INTO utilisateur VALUES (38,'Webb','Dieter','elit.elit@eu.com','0435279523','04/06/94','Vivamus','mauris,');
+INSERT INTO utilisateur VALUES (39,'Fox','Vielka','vulputate.risus.a@odio.ca','0588875864','03/12/87','Nunc','nulla.');
+INSERT INTO utilisateur VALUES (40,'Simpson','Elton','sit.amet.luctus@Nunccommodo.net','0318738791','24/09/80','consequat','tincidunt');
+INSERT INTO utilisateur VALUES (41,'Mckay','Nerea','ridiculus.mus@Vivamus.com','0602651948','22/02/02','augue','sem');
+INSERT INTO utilisateur VALUES (42,'Paul','Nelle','dolor.sit@turpisegestasFusce.edu','0268657285','20/07/01','Nulla','odio');
+INSERT INTO utilisateur VALUES (43,'Hood','Xavier','eleifend@Morbinequetellus.com','0628771886','12/05/08','mus.','arcu.');
+INSERT INTO utilisateur VALUES (44,'Love','Mason','egestas.urna.justo@fringillaDonecfeugiat.org','0237859835','20/04/08','mauris.','consequat,');
+INSERT INTO utilisateur VALUES (45,'George','Travis','ultrices.posuere.cubilia@dui.net','0252963036','13/01/68','ac','sollicitudin');
+INSERT INTO utilisateur VALUES (46,'Fowler','Dexter','molestie@loremauctorquis.com','0536824317','08/12/89','amet','leo.');
+INSERT INTO utilisateur VALUES (47,'Howard','Harriet','ut.eros.non@Aliquameratvolutpat.net','0466743274','10/12/67','vehicula','nec');
+INSERT INTO utilisateur VALUES (48,'Meadows','Ryan','lectus@semconsequatnec.org','0408789683','07/05/63','fermentum','amet,');
+INSERT INTO utilisateur VALUES (49,'Coffey','Samson','In@nisiCum.edu','0161410136','24/12/06','Duis','turpis');
+INSERT INTO utilisateur VALUES (50,'Cox','Chantale','magna@sitametmassa.com','0460345850','06/05/72','amet','risus.');
+INSERT INTO utilisateur VALUES (51,'Rivas','Yardley','tortor.nibh@Uttincidunt.co.uk','0893471364','17/11/80','Nullam','sit');
+INSERT INTO utilisateur VALUES (52,'Cervantes','Tamekah','Integer@orciDonec.co.uk','0385554743','20/10/10','ac','enim.');
+INSERT INTO utilisateur VALUES (53,'Valencia','Ori','justo.Proin@mieleifend.edu','0826792291','02/12/60','Quisque','a');
+INSERT INTO utilisateur VALUES (54,'Simpson','Sonya','eu@in.co.uk','0154186253','27/06/72','a,','mauris');
+INSERT INTO utilisateur VALUES (55,'Charles','Armand','sem.consequat@Morbi.edu','0299604921','07/11/60','in,','nec');
+INSERT INTO utilisateur VALUES (56,'Berg','Jason','iaculis.enim.sit@sed.com','0414864769','28/10/96','nisl','Cras');
+INSERT INTO utilisateur VALUES (57,'Dominguez','Alexa','eleifend.nec.malesuada@necmalesuada.edu','0489309113','29/08/69','nibh','Fusce');
+INSERT INTO utilisateur VALUES (58,'Slater','Micah','molestie@pedeNunc.com','0883662769','15/11/03','mollis','mauris');
+INSERT INTO utilisateur VALUES (59,'Gross','Jocelyn','cubilia@metusvitaevelit.net','0445057066','09/06/06','non','a,');
+INSERT INTO utilisateur VALUES (60,'Thomas','Holmes','diam.dictum@Sedpharetra.net','0993756894','18/08/82','enim','scelerisque');
+INSERT INTO utilisateur VALUES (61,'Barnett','Tasha','accumsan.sed.facilisis@Nullaaliquet.edu','0726808778','28/03/00','felis.','nec');
+INSERT INTO utilisateur VALUES (62,'Tucker','Odysseus','molestie.pharetra@cubiliaCuraePhasellus.ca','0362182193','26/03/86','nec,','lectus');
+INSERT INTO utilisateur VALUES (63,'Prince','Yoshio','tellus@urnaNuncquis.org','0999664638','09/03/63','Quisque','arcu');
+INSERT INTO utilisateur VALUES (64,'Watts','Cally','placerat@Nam.edu','0593638676','24/04/61','eget','nibh');
+INSERT INTO utilisateur VALUES (65,'Glass','Barclay','vitae.orci.Phasellus@vitae.com','0444244057','31/07/75','nascetur','dui.');
+INSERT INTO utilisateur VALUES (66,'Travis','Genevieve','commodo.auctor.velit@Cumsociis.org','0345111162','28/05/07','consectetuer','sed');
+INSERT INTO utilisateur VALUES (67,'Hubbard','Unity','lacus.vestibulum@justofaucibuslectus.net','0893051609','24/12/06','nascetur','porttitor');
+INSERT INTO utilisateur VALUES (68,'Velez','Minerva','sit.amet.diam@quistristiqueac.org','0290718944','08/04/07','ut,','blandit');
+INSERT INTO utilisateur VALUES (69,'Buck','Audrey','interdum.Curabitur.dictum@nasceturridiculus.org','0839868873','28/02/91','sociis','Proin');
+INSERT INTO utilisateur VALUES (70,'Austin','Tatyana','pede.Nunc.sed@adipiscingelit.ca','0354064165','23/05/94','dui,','aliquet,');
+INSERT INTO utilisateur VALUES (71,'Horn','Yvette','Morbi.metus@dapibusrutrum.edu','0951499673','04/09/78','tellus','aliquet');
+INSERT INTO utilisateur VALUES (72,'Juarez','Joshua','Curabitur.vel@Aliquam.edu','0728209999','17/04/05','Aliquam','Fusce');
+INSERT INTO utilisateur VALUES (73,'Gillespie','Abigail','dui.nec@ullamcorperDuis.co.uk','0976176519','17/07/02','id','turpis.');
+INSERT INTO utilisateur VALUES (74,'Todd','Donovan','nunc@liberolacus.edu','0156921588','23/08/80','mauris','tristique');
+INSERT INTO utilisateur VALUES (75,'Battle','Victoria','suscipit.nonummy.Fusce@porttitoreros.com','0363305509','26/04/62','pharetra,','erat');
+INSERT INTO utilisateur VALUES (76,'Cotton','Thor','Cum.sociis.natoque@Classaptent.edu','0619348250','30/01/71','nibh','sit');
+INSERT INTO utilisateur VALUES (77,'Monroe','Byron','mollis@ProindolorNulla.com','0288921816','23/02/92','vestibulum','pede.');
+INSERT INTO utilisateur VALUES (78,'Baker','Nevada','Nunc.lectus@tinciduntorciquis.ca','0928663674','12/04/94','Etiam','nec,');
+INSERT INTO utilisateur VALUES (79,'Lara','Martha','Aliquam@fermentummetus.com','0640773117','01/08/77','nisl.','egestas.');
+INSERT INTO utilisateur VALUES (80,'Bullock','Coby','Aenean@orci.co.uk','0433715921','20/04/86','ipsum','enim.');
+INSERT INTO utilisateur VALUES (81,'Lawrence','Shea','molestie.dapibus.ligula@Nunclectus.org','0321958654','26/03/85','Mauris','felis');
+INSERT INTO utilisateur VALUES (82,'Rasmussen','Adena','nec@dis.co.uk','0528158458','16/05/79','tristique','libero.');
+INSERT INTO utilisateur VALUES (83,'Pena','Igor','odio.auctor.vitae@fringillaDonec.edu','0834122349','18/12/72','Nunc','dictum');
+INSERT INTO utilisateur VALUES (84,'Obrien','Wade','turpis.Aliquam.adipiscing@consequat.edu','0319580592','13/08/62','Praesent','enim.');
+INSERT INTO utilisateur VALUES (85,'Lindsay','Raphael','mollis.non@vulputate.co.uk','0506660721','10/08/69','libero','turpis');
+INSERT INTO utilisateur VALUES (86,'Hester','Donna','vel.pede@euenimEtiam.com','0605832694','24/10/02','ultrices.','magnis');
+INSERT INTO utilisateur VALUES (87,'Jefferson','Martin','vitae@magnaUttincidunt.ca','0598698788','22/05/72','placerat,','felis');
+INSERT INTO utilisateur VALUES (88,'Bullock','Jason','elit.erat.vitae@adipiscing.co.uk','0874046446','29/08/65','amet,','nisi');
+INSERT INTO utilisateur VALUES (89,'Bass','Basia','lacus.Aliquam@vitae.net','0441600271','16/01/10','odio.','eu,');
+INSERT INTO utilisateur VALUES (90,'Petty','Sylvester','dignissim.lacus@arcu.co.uk','0926235060','27/09/88','auctor,','purus,');
+INSERT INTO utilisateur VALUES (91,'Mcpherson','Irene','Ut.tincidunt@tortoratrisus.org','0953454107','25/08/01','dignissim.','ipsum');
+INSERT INTO utilisateur VALUES (92,'Goff','Elliott','felis@Nunccommodoauctor.ca','0650919543','21/05/77','vitae','porttitor');
+INSERT INTO utilisateur VALUES (93,'Hogan','Abigail','diam.nunc@tinciduntorci.org','0668055948','11/08/88','parturient','a');
+INSERT INTO utilisateur VALUES (94,'Bray','Kameko','auctor.non@dictumultricies.org','0219187751','14/02/88','et,','hendrerit');
+INSERT INTO utilisateur VALUES (95,'Rollins','Ivor','a.magna.Lorem@etmagnaPraesent.co.uk','0161395013','08/09/67','lacus','nec,');
+INSERT INTO utilisateur VALUES (96,'Horne','Cally','in@sagittissemper.org','0130584123','03/10/65','Aenean','nec');
+INSERT INTO utilisateur VALUES (97,'Crosby','Karly','enim.gravida.sit@tellusAeneanegestas.org','0822706301','19/07/75','porttitor','litora');
+INSERT INTO utilisateur VALUES (98,'Fuentes','Ori','feugiat.Lorem.ipsum@sagittisNullamvitae.ca','0162144386','10/09/06','sit','vehicula');
+INSERT INTO utilisateur VALUES (99,'Richardson','Thomas','urna.Vivamus.molestie@Phasellusornare.com','0371332750','16/01/69','ac','quis');
+INSERT INTO utilisateur VALUES (100,'Moss','Jerome','Nunc.mauris.elit@liberolacus.org','0662634579','03/10/07','diam.','consequat');
 
-INSERT INTO o_compte (idcompte, pseudo, motdepasse, email ) VALUES 
-  (1, 'geek', 'geek', 'geek@3il.fr' ),
-  (2, 'chef', 'chef', 'chef@3il.fr' ),
-  (3, 'job', 'job', 'job@3il.fr' );
+--Rôles-Bénévole
+INSERT INTO role_benevole VALUES ('admin','droits admin');
+INSERT INTO role_benevole VALUES ('role1','droits1');
+INSERT INTO role_benevole VALUES ('role2','droits2');
+INSERT INTO role_benevole VALUES ('role3','droits3');
+INSERT INTO role_benevole VALUES ('role4','droits4');
 
-ALTER TABLE o_compte ALTER COLUMN idcompte RESTART WITH 4;
+--Bénévoles
 
+INSERT INTO benevole VALUES ('1','admin','true','Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob');
+INSERT INTO benevole VALUES ('2','role1','false','Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45');
+INSERT INTO benevole VALUES ('3','role2','true','Taner', 'Victor', 'VictTan65@gmail.com', '0715758725', '15/04/66', 'victan65', 'victanvapo45');
+INSERT INTO benevole VALUES ('4','role3','true','Sapnz', 'Daurice', 'DauriceSz@gmail.com', '0799452410', '29/07/01', 'daudaudu01', 'duciva54');
+INSERT INTO benevole VALUES ('5','role4','false','Jasp', 'Romain', 'RomJasp@gmail.com', '0764512101', '15/09/97', 'romtaxi81', 'vilayleckdu41');
+INSERT INTO benevole VALUES ('6','admin','true','Grind', 'Pierrot', 'PiepieGri24@gmail.com', '0784546451', '21/06/02', 'PierrotGrigri21', 'rackvapta54');
+INSERT INTO benevole VALUES ('7','role4','false','Hernandez', 'Sophia', 'SophiaHernandez54@gmail.com', '0777546941', '11/11/99', 'Sosodu54', 'jauspru54');
+INSERT INTO benevole VALUES ('8','role1','true','Roth','Ishmael','neque@Curabitur.edu','0635222510','09/08/80','tincidunt,','sit');
+INSERT INTO benevole VALUES ('9','role3','true','Frederick','Merrill','turpis@Classaptenttaciti.ca','0159654055','24/05/74','metus','mi');
+INSERT INTO benevole VALUES ('10','role2','true','Montgomery','Thaddeus','ipsum@Vestibulumanteipsum.net','0898835858','22/11/60','magnis','ipsum');
+INSERT INTO benevole VALUES ('11','role2','false','Rosa','Jasper','malesuada@Nullamscelerisque.com','0161315345','24/11/88','aliquet','purus');
+INSERT INTO benevole VALUES ('12','role4','true','Manning','Bruno','neque@interdumliberodui.edu','0261467720','20/02/93','iaculis,','arcu');
+INSERT INTO benevole VALUES ('13','role4','false','Holmes','Ignacia','cursus.luctus.ipsum@Donectemporest.edu','0162087802','15/09/05','erat','odio');
+INSERT INTO benevole VALUES ('14','role2','true','Bates','Merritt','viverra.Maecenas@iaculis.net','0133651953','08/09/69','Mauris','risus.');
+INSERT INTO benevole VALUES ('15','role2','true','Larsen','Melanie','Quisque.tincidunt.pede@placerategetvenenatis.co.uk','0557892784','23/04/04','nisl.','Aliquam');
+INSERT INTO benevole VALUES ('16','role3','true','Heath','Ariel','diam.Duis.mi@eunequepellentesque.co.uk','0805898063','05/11/89','vel,','elit.');
+INSERT INTO benevole VALUES ('17','role1','false','Freeman','Amity','feugiat.metus@magnaDuis.org','0629631611','04/12/69','purus.','mauris');
+INSERT INTO benevole VALUES ('18','role4','true','Sykes','Serena','non@necdiam.co.uk','0123605988','18/12/00','lobortis','felis');
+INSERT INTO benevole VALUES ('19','admin','true','Hammond','Gwendolyn','mi@infaucibusorci.edu','0913067373','01/05/85','Praesent','ornare');
+INSERT INTO benevole VALUES ('20','role2','true','Lancaster','Francesca','dapibus.ligula.Aliquam@loremacrisus.net','0264923508','11/06/90','enim,','eu');
+INSERT INTO benevole VALUES ('21','admin','true','England','Lacey','magna.Nam@purusac.net','0835116973','17/02/03','malesuada','dictum');
+INSERT INTO benevole VALUES ('22','role4','false','Banks','Cameron','Suspendisse.commodo.tincidunt@auctor.ca','0489387390','25/06/71','scelerisque','ante');
+INSERT INTO benevole VALUES ('23','role1','true','White','Raphael','turpis.Nulla.aliquet@quis.org','0498271552','14/04/88','auctor,','massa');
+INSERT INTO benevole VALUES ('24','role3','true','Travis','Maxine','Morbi.metus.Vivamus@ultriciesligula.net','0466682711','21/07/77','vitae','augue');
+INSERT INTO benevole VALUES ('25','role1','false','Lynch','Jeanette','mollis.lectus.pede@pretium.net','0956711650','19/02/08','quis,','arcu.');
+INSERT INTO benevole VALUES ('26','role1','true','Hamilton','Gregory','felis.eget@ami.org','0976860245','21/08/80','sociis','eu,');
+INSERT INTO benevole VALUES ('27','role3','true','Navarro','Shelley','feugiat.tellus.lorem@interdumligula.org','0287894183','24/02/02','amet','enim,');
+INSERT INTO benevole VALUES ('28','role1','false','Merrill','Sheila','Cum@risusDonec.com','0279212419','04/06/95','mauris.','ipsum');
+INSERT INTO benevole VALUES ('29','role2','true','Mcmahon','Christine','Phasellus.ornare@id.edu','0692431077','06/10/67','enim','quam,');
+INSERT INTO benevole VALUES ('30','role1','false','Patterson','Audrey','cursus.et@Maecenasmi.net','0801206593','18/10/93','Vivamus','gravida');
 
--- Role
+--Raids
 
-INSERT INTO o_role (idcompte, role) VALUES 
-  ( 1, 'ADMINISTRATEUR' ),
-  ( 1, 'UTILISATEUR' ),
-  ( 2, 'UTILISATEUR' ),
-  ( 3, 'UTILISATEUR' );
+INSERT INTO raid VALUES ('1', 'raid1', '20/08/2020', '25', '7');
+INSERT INTO raid VALUES ('2', 'raid2', '22/08/2020', '20', '7');
 
+--Postes
 
--- Categorie
-  
-INSERT INTO o_categorie (idcategorie, libelle ) VALUES 
-  (1, 'Employés' ),
-  (2, 'Partenaires' ),
-  (3, 'Clients' ),
-  (4, 'Fournisseurs' ),
-  (5, 'Dirigeants' );
+INSERT INTO poste VALUES ('1', '1', '3','3');
+INSERT INTO poste VALUES ('2', '1', '2','2');
+INSERT INTO poste VALUES ('3', '1', '2','2');
+INSERT INTO poste VALUES ('4', '1', '3','3');
+INSERT INTO poste VALUES ('5', '1', '2','2');
+INSERT INTO poste VALUES ('6', '1', '3','3');
+INSERT INTO poste VALUES ('7', '2', '3','3');
+INSERT INTO poste VALUES ('8', '2', '2','2');
+INSERT INTO poste VALUES ('9', '2', '2','2');
+INSERT INTO poste VALUES ('10', '2', '3','3');
+INSERT INTO poste VALUES ('11', '2', '2','2');
+INSERT INTO poste VALUES ('12', '2', '3','3');
 
-ALTER TABLE o_categorie ALTER COLUMN idcategorie RESTART WITH 6;
+--Catégories rôle
 
+INSERT INTO categorie_role VALUES ('1','catrole1');
+INSERT INTO categorie_role VALUES ('2','catrole2');
+INSERT INTO categorie_role VALUES ('3','catrole3');
+INSERT INTO categorie_role VALUES ('4','catrole4');
+INSERT INTO categorie_role VALUES ('5','catrole5');
 
--- Personne
+--Actions bénévole
 
-INSERT INTO o_personne (idpersonne, idcategorie, nom, prenom) VALUES 
-  ( 1, 1, 'GRASSET', 'Jérôme' ),
-  ( 2, 1, 'BOUBY', 'Claude' ),
-  ( 3, 1, 'AMBLARD', 'Emmanuel' );
+INSERT INTO action_benevole VALUES ('1','1','1','true','descr1','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('2','2','2','false','descr2','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('3','3','3','true','descr3','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('4','4','4','true','descr4','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('5','5','5','true','descr5','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('6','6','6','false','descr6','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('7','7','7','true','descr7','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('8','8','8','true','descr8','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('9','9','9','false','descr9','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('10','10','10','true','descr10','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('11','11','11','true','descr11','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('12','12','12','false','descr12','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('13','1','13','true','descr1','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('14','2','14','false','descr2','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('15','3','15','true','descr3','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('16','4','16','true','descr4','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('17','5','17','true','descr5','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('18','6','18','false','descr6','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('19','7','19','true','descr7','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('20','8','20','true','descr8','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('21','9','21','false','descr9','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('22','10','22','true','descr10','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('23','11','23','true','descr11','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('24','12','24','false','descr12','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('25','1','25','true','descr1','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('26','4','26','true','descr4','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('27','6','27','false','descr6','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('28','7','28','true','descr7','true','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('29','10','29','true','descr10','false','13:30:00','15:30:00');
+INSERT INTO action_benevole VALUES ('30','12','30','false','descr12','true','13:30:00','15:30:00');
 
-ALTER TABLE o_personne ALTER COLUMN idpersonne RESTART WITH 4;
+--Participants
 
+INSERT INTO participant VALUES (31,'club1','Alford','Ryder','dui@volutpat.ca','0283741243','14/09/03','in,','risus.','true');
+INSERT INTO participant VALUES (32,'club1','Kirk','Glenna','mi@cursusaenim.co.uk','0245398428','30/05/71','et,','non','false');
+INSERT INTO participant VALUES (33,'club2','Forbes','Emerald','fringilla.euismod@purussapien.co.uk','0690464773','25/03/89','purus,','non,','false');
+INSERT INTO participant VALUES (34,'club2','Kane','Basia','lacinia@sedturpisnec.com','0250433161','20/11/96','turpis','magna.','false');
+INSERT INTO participant VALUES (35,'club3','Soto','Tiger','Vivamus.non.lorem@posuereenim.ca','0295102074','26/02/09','dapibus','Proin','true');
+INSERT INTO participant VALUES (36,'club3','Solis','Edward','egestas@conubia.co.uk','0700555284','11/03/66','malesuada','suscipit','false');
+INSERT INTO participant VALUES (37,'club4','Leonard','Chava','ultricies.dignissim@dui.co.uk','0295968459','11/04/65','penatibus','lectus','false');
+INSERT INTO participant VALUES (38,'club4','Webb','Dieter','elit.elit@eu.com','0435279523','04/06/94','Vivamus','mauris,','false');
+INSERT INTO participant VALUES (39,'club1','Fox','Vielka','vulputate.risus.a@odio.ca','0588875864','03/12/87','Nunc','nulla.','false');
+INSERT INTO participant VALUES (40,'club1','Simpson','Elton','sit.amet.luctus@Nunccommodo.net','0318738791','24/09/80','consequat','tincidunt','false');
+INSERT INTO participant VALUES (41,'club1','Mckay','Nerea','ridiculus.mus@Vivamus.com','0602651948','22/02/02','augue','sem','false');
+INSERT INTO participant VALUES (42,'club1','Paul','Nelle','dolor.sit@turpisegestasFusce.edu','0268657285','20/07/01','Nulla','odio','false');
+INSERT INTO participant VALUES (43,'club2','Hood','Xavier','eleifend@Morbinequetellus.com','0628771886','12/05/08','mus.','arcu.','false');
+INSERT INTO participant VALUES (44,'club2','Love','Mason','egestas.urna.justo@fringillaDonecfeugiat.org','0237859835','20/04/08','mauris.','consequat,','true');
+INSERT INTO participant VALUES (45,'club2','George','Travis','ultrices.posuere.cubilia@dui.net','0252963036','13/01/68','ac','sollicitudin','false');
+INSERT INTO participant VALUES (46,'club2','Fowler','Dexter','molestie@loremauctorquis.com','0536824317','08/12/89','amet','leo.','false');
+INSERT INTO participant VALUES (47,'club3','Howard','Harriet','ut.eros.non@Aliquameratvolutpat.net','0466743274','10/12/67','vehicula','nec','false');
+INSERT INTO participant VALUES (48,'club3','Meadows','Ryan','lectus@semconsequatnec.org','0408789683','07/05/63','fermentum','amet,','false');
+INSERT INTO participant VALUES (49,'club4','Coffey','Samson','In@nisiCum.edu','0161410136','24/12/06','Duis','turpis','true');
+INSERT INTO participant VALUES (50,'club4','Cox','Chantale','magna@sitametmassa.com','0460345850','06/05/72','amet','risus.','false');
+INSERT INTO participant VALUES (51,'club4','Rivas','Yardley','tortor.nibh@Uttincidunt.co.uk','0893471364','17/11/80','Nullam','sit','false');
+INSERT INTO participant VALUES (52,'club4','Cervantes','Tamekah','Integer@orciDonec.co.uk','0385554743','20/10/10','ac','enim.','true');
+INSERT INTO participant VALUES (53,'club2','Valencia','Ori','justo.Proin@mieleifend.edu','0826792291','02/12/60','Quisque','a','false');
+INSERT INTO participant VALUES (54,'club2','Simpson','Sonya','eu@in.co.uk','0154186253','27/06/72','a,','mauris','false');
+INSERT INTO participant VALUES (55,'club1','Charles','Armand','sem.consequat@Morbi.edu','0299604921','07/11/60','in,','nec','false');
+INSERT INTO participant VALUES (56,'club1','Berg','Jason','iaculis.enim.sit@sed.com','0414864769','28/10/96','nisl','Cras','false');
+INSERT INTO participant VALUES (57,'club2','Dominguez','Alexa','eleifend.nec.malesuada@necmalesuada.edu','0489309113','29/08/69','nibh','Fusce','false');
+INSERT INTO participant VALUES (58,'club2','Slater','Micah','molestie@pedeNunc.com','0883662769','15/11/03','mollis','mauris','true');
+INSERT INTO participant VALUES (59,'club3','Gross','Jocelyn','cubilia@metusvitaevelit.net','0445057066','09/06/06','non','a,','true');
+INSERT INTO participant VALUES (60,'club3','Thomas','Holmes','diam.dictum@Sedpharetra.net','0993756894','18/08/82','enim','scelerisque','false');
+INSERT INTO participant VALUES (61,'club3','Barnett','Tasha','accumsan.sed.facilisis@Nullaaliquet.edu','0726808778','28/03/00','felis.','nec','false');
+INSERT INTO participant VALUES (62,'club3','Tucker','Odysseus','molestie.pharetra@cubiliaCuraePhasellus.ca','0362182193','26/03/86','nec,','lectus','false');
+INSERT INTO participant VALUES (63,'club4','Prince','Yoshio','tellus@urnaNuncquis.org','0999664638','09/03/63','Quisque','arcu','false');
+INSERT INTO participant VALUES (64,'club4','Watts','Cally','placerat@Nam.edu','0593638676','24/04/61','eget','nibh','false');
+INSERT INTO participant VALUES (65,'club2','Glass','Barclay','vitae.orci.Phasellus@vitae.com','0444244057','31/07/75','nascetur','dui.','false');
+INSERT INTO participant VALUES (66,'club2','Travis','Genevieve','commodo.auctor.velit@Cumsociis.org','0345111162','28/05/07','consectetuer','sed','true');
+INSERT INTO participant VALUES (67,'club1','Hubbard','Unity','lacus.vestibulum@justofaucibuslectus.net','0893051609','24/12/06','nascetur','porttitor','true');
+INSERT INTO participant VALUES (68,'club1','Velez','Minerva','sit.amet.diam@quistristiqueac.org','0290718944','08/04/07','ut,','blandit','true');
+INSERT INTO participant VALUES (69,'club4','Buck','Audrey','interdum.Curabitur.dictum@nasceturridiculus.org','0839868873','28/02/91','sociis','Proin','false');
+INSERT INTO participant VALUES (70,'club4','Austin','Tatyana','pede.Nunc.sed@adipiscingelit.ca','0354064165','23/05/94','dui,','aliquet,','false');
+INSERT INTO participant VALUES (71,'club2','Horn','Yvette','Morbi.metus@dapibusrutrum.edu','0951499673','04/09/78','tellus','aliquet','false');
+INSERT INTO participant VALUES (72,'club2','Juarez','Joshua','Curabitur.vel@Aliquam.edu','0728209999','17/04/05','Aliquam','Fusce','true');
+INSERT INTO participant VALUES (73,'club3','Gillespie','Abigail','dui.nec@ullamcorperDuis.co.uk','0976176519','17/07/02','id','turpis.','false');
+INSERT INTO participant VALUES (74,'club3','Todd','Donovan','nunc@liberolacus.edu','0156921588','23/08/80','mauris','tristique','false');
+INSERT INTO participant VALUES (75,'club1','Battle','Victoria','suscipit.nonummy.Fusce@porttitoreros.com','0363305509','26/04/62','pharetra,','erat','false');
+INSERT INTO participant VALUES (76,'club1','Cotton','Thor','Cum.sociis.natoque@Classaptent.edu','0619348250','30/01/71','nibh','sit','false');
+INSERT INTO participant VALUES (77,'club2','Monroe','Byron','mollis@ProindolorNulla.com','0288921816','23/02/92','vestibulum','pede.','false');
+INSERT INTO participant VALUES (78,'club2','Baker','Nevada','Nunc.lectus@tinciduntorciquis.ca','0928663674','12/04/94','Etiam','nec,','false');
+INSERT INTO participant VALUES (79,'club3','Lara','Martha','Aliquam@fermentummetus.com','0640773117','01/08/77','nisl.','egestas.','false');
+INSERT INTO participant VALUES (80,'club3','Bullock','Coby','Aenean@orci.co.uk','0433715921','20/04/86','ipsum','enim.','false');
+INSERT INTO participant VALUES (81,'club4','Lawrence','Shea','molestie.dapibus.ligula@Nunclectus.org','0321958654','26/03/85','Mauris','felis','false');
+INSERT INTO participant VALUES (82,'club4','Rasmussen','Adena','nec@dis.co.uk','0528158458','16/05/79','tristique','libero.','false');
+INSERT INTO participant VALUES (83,'club2','Pena','Igor','odio.auctor.vitae@fringillaDonec.edu','0834122349','18/12/72','Nunc','dictum','false');
+INSERT INTO participant VALUES (84,'club2','Obrien','Wade','turpis.Aliquam.adipiscing@consequat.edu','0319580592','13/08/62','Praesent','enim.','false');
+INSERT INTO participant VALUES (85,'club3','Lindsay','Raphael','mollis.non@vulputate.co.uk','0506660721','10/08/69','libero','turpis','false');
+INSERT INTO participant VALUES (86,'club3','Hester','Donna','vel.pede@euenimEtiam.com','0605832694','24/10/02','ultrices.','magnis','false');
+INSERT INTO participant VALUES (87,'club1','Jefferson','Martin','vitae@magnaUttincidunt.ca','0598698788','22/05/72','placerat,','felis','false');
+INSERT INTO participant VALUES (88,'club1','Bullock','Jason','elit.erat.vitae@adipiscing.co.uk','0874046446','29/08/65','amet,','nisi','false');
+INSERT INTO participant VALUES (89,'club4','Bass','Basia','lacus.Aliquam@vitae.net','0441600271','16/01/10','odio.','eu,','true');
+INSERT INTO participant VALUES (90,'club4','Petty','Sylvester','dignissim.lacus@arcu.co.uk','0926235060','27/09/88','auctor,','purus,','false');
+INSERT INTO participant VALUES (91,'club3','Mcpherson','Irene','Ut.tincidunt@tortoratrisus.org','0953454107','25/08/01','dignissim.','ipsum','false');
+INSERT INTO participant VALUES (92,'club3','Goff','Elliott','felis@Nunccommodoauctor.ca','0650919543','21/05/77','vitae','porttitor','false');
+INSERT INTO participant VALUES (93,'club1','Hogan','Abigail','diam.nunc@tinciduntorci.org','0668055948','11/08/88','parturient','a','false');
+INSERT INTO participant VALUES (94,'club1','Bray','Kameko','auctor.non@dictumultricies.org','0219187751','14/02/88','et,','hendrerit','false');
+INSERT INTO participant VALUES (95,'club1','Rollins','Ivor','a.magna.Lorem@etmagnaPraesent.co.uk','0161395013','08/09/67','lacus','nec,','false');
+INSERT INTO participant VALUES (96,'club1','Horne','Cally','in@sagittissemper.org','0130584123','03/10/65','Aenean','nec','false');
+INSERT INTO participant VALUES (97,'club2','Crosby','Karly','enim.gravida.sit@tellusAeneanegestas.org','0822706301','19/07/75','porttitor','litora','false');
+INSERT INTO participant VALUES (98,'club2','Fuentes','Ori','feugiat.Lorem.ipsum@sagittisNullamvitae.ca','0162144386','10/09/06','sit','vehicula','true');
+INSERT INTO participant VALUES (99,'club4','Richardson','Thomas','urna.Vivamus.molestie@Phasellusornare.com','0371332750','16/01/69','ac','quis','false');
+INSERT INTO participant VALUES (100,'club4','Moss','Jerome','Nunc.mauris.elit@liberolacus.org','0662634579','03/10/07','diam.','consequat','true');
 
--- Telephone
+--Participe organisation
 
-INSERT INTO o_telephone (idtelephone, idpersonne, libelle, numero ) VALUES 
-  ( 11, 1, 'Portable', '06 11 11 11 11' ),
-  ( 12, 1, 'Fax', '05 55 99 11 11' ),
-  ( 13, 1, 'Bureau', '05 55 11 11 11' ),
-  ( 21, 2, 'Portable', '06 22 22 22 22' ),
-  ( 22, 2, 'Fax', '05 55 99 22 22' ),
-  ( 23, 2, 'Bureau', '05 55 22 22 22' ),
-  ( 31, 3, 'Portable', '06 33 33 33 33' ),
-  ( 32, 3, 'Fax', '05 55 99 33 33' ),
-  ( 33, 3, 'Bureau', '05 55 33 33 33' );
+INSERT INTO participe_organisation VALUES ('1','1','2');
+INSERT INTO participe_organisation VALUES ('1','2','1');
+INSERT INTO participe_organisation VALUES ('1','3','3');
+INSERT INTO participe_organisation VALUES ('1','4','2');
+INSERT INTO participe_organisation VALUES ('1','5','4');
+INSERT INTO participe_organisation VALUES ('1','6','1');
+INSERT INTO participe_organisation VALUES ('1','7','1');
+INSERT INTO participe_organisation VALUES ('1','8','3');
+INSERT INTO participe_organisation VALUES ('1','9','1');
+INSERT INTO participe_organisation VALUES ('1','10','2');
+INSERT INTO participe_organisation VALUES ('1','11','1');
+INSERT INTO participe_organisation VALUES ('1','12','1');
+INSERT INTO participe_organisation VALUES ('1','13','1');
+INSERT INTO participe_organisation VALUES ('1','14','1');
+INSERT INTO participe_organisation VALUES ('1','15','1');
+INSERT INTO participe_organisation VALUES ('2','16','3');
+INSERT INTO participe_organisation VALUES ('2','17','2');
+INSERT INTO participe_organisation VALUES ('2','18','2');
+INSERT INTO participe_organisation VALUES ('2','19','2');
+INSERT INTO participe_organisation VALUES ('2','20','1');
+INSERT INTO participe_organisation VALUES ('2','21','2');
+INSERT INTO participe_organisation VALUES ('2','22','1');
+INSERT INTO participe_organisation VALUES ('2','23','4');
+INSERT INTO participe_organisation VALUES ('2','24','2');
+INSERT INTO participe_organisation VALUES ('2','25','2');
+INSERT INTO participe_organisation VALUES ('2','26','1');
+INSERT INTO participe_organisation VALUES ('2','27','1');
+INSERT INTO participe_organisation VALUES ('2','28','1');
+INSERT INTO participe_organisation VALUES ('2','29','1');
+INSERT INTO participe_organisation VALUES ('2','30','2');
 
-ALTER TABLE o_telephone ALTER COLUMN idtelephone RESTART WITH 100;
+--Participant duo
 
+INSERT INTO participant_duo VALUES ('1', '1', 'true', '1', '2');
+INSERT INTO participant_duo VALUES ('2', '2', 'true', '2', '3');
+INSERT INTO participant_duo VALUES ('3', '3', 'true', '3', '2');
+INSERT INTO participant_duo VALUES ('4', '4', 'true', '4', '2');
+INSERT INTO participant_duo VALUES ('5', '5', 'false', '5', '4');
+INSERT INTO participant_duo VALUES ('6', '1', 'true', '6', '2');
+INSERT INTO participant_duo VALUES ('7', '2', 'true', '7', '2');
+INSERT INTO participant_duo VALUES ('8', '3', 'true', '8', '3');
+INSERT INTO participant_duo VALUES ('9', '4', 'true', '9', '2');
+INSERT INTO participant_duo VALUES ('10', '5', 'true', '10', '2');
+INSERT INTO participant_duo VALUES ('11', '1', 'true', '11', '2');
+INSERT INTO participant_duo VALUES ('12', '2', 'true', '12', '4');
+INSERT INTO participant_duo VALUES ('13', '3', 'true', '13', '4');
+INSERT INTO participant_duo VALUES ('14', '4', 'true', '14', '4');
+INSERT INTO participant_duo VALUES ('15', '5', 'true', '15', '2');
+INSERT INTO participant_duo VALUES ('16', '1', 'true', '16', '2');
+INSERT INTO participant_duo VALUES ('17', '2', 'false', '17', '2');
+INSERT INTO participant_duo VALUES ('18', '3', 'true', '18', '2');
+INSERT INTO participant_duo VALUES ('19', '4', 'true', '19', '4');
+INSERT INTO participant_duo VALUES ('20', '5', 'true', '20', '2');
+INSERT INTO participant_duo VALUES ('21', '1', 'true', '21', '2');
+INSERT INTO participant_duo VALUES ('22', '2', 'true', '22', '3');
+INSERT INTO participant_duo VALUES ('23', '3', 'true', '23', '2');
+INSERT INTO participant_duo VALUES ('24', '4', 'false', '24', '2');
+INSERT INTO participant_duo VALUES ('25', '5', 'true', '25', '2');
+INSERT INTO participant_duo VALUES ('26', '1', 'true', '26', '2');
+INSERT INTO participant_duo VALUES ('27', '2', 'true', '27', '2');
+INSERT INTO participant_duo VALUES ('28', '3', 'true', '28', '2');
+INSERT INTO participant_duo VALUES ('29', '4', 'true', '29', '4');
+INSERT INTO participant_duo VALUES ('30', '5', 'true', '30', '2');
+INSERT INTO participant_duo VALUES ('31', '1', 'false', '31', '2');
+INSERT INTO participant_duo VALUES ('32', '2', 'true', '32', '2');
+INSERT INTO participant_duo VALUES ('33', '3', 'true', '33', '2');
+INSERT INTO participant_duo VALUES ('34', '4', 'true', '34', '2');
+INSERT INTO participant_duo VALUES ('35', '5', 'false', '35', '2');
 
--- Memo
+--Forme duo
 
-INSERT INTO o_memo (idmemo, titre, description, flagurgent, statut, effectif, budget, echeance, idcategorie ) VALUES 
-  ( 1, 'Mémo n°1', 'Texte du mémo n°1', TRUE,  2,   2,   1234.56,   {d  '2020-02-25' }, 1 ),
-  ( 2, 'Mémo n°2', 'Texte du mémo n°2', FALSE, 1,   4,   5000.00,   {d  '2020-05-18' }, 2 ),
-  ( 3, 'Mémo n°3', NULL, TRUE, 0, NULL, NULL, NULL, NULL );
+INSERT INTO forme_duo VALUES ('1','31','false');
+INSERT INTO forme_duo VALUES ('1','32','true');
+INSERT INTO forme_duo VALUES ('2','33','false');
+INSERT INTO forme_duo VALUES ('2','34','true');
+INSERT INTO forme_duo VALUES ('3','35','false');
+INSERT INTO forme_duo VALUES ('3','36','true');
+INSERT INTO forme_duo VALUES ('4','37','true');
+INSERT INTO forme_duo VALUES ('4','38','false');
+INSERT INTO forme_duo VALUES ('5','39','true');
+INSERT INTO forme_duo VALUES ('5','40','false');
+INSERT INTO forme_duo VALUES ('6','41','false');
+INSERT INTO forme_duo VALUES ('6','42','true');
+INSERT INTO forme_duo VALUES ('7','43','true');
+INSERT INTO forme_duo VALUES ('7','44','false');
+INSERT INTO forme_duo VALUES ('8','45','false');
+INSERT INTO forme_duo VALUES ('8','46','true');
+INSERT INTO forme_duo VALUES ('9','47','false');
+INSERT INTO forme_duo VALUES ('9','48','true');
+INSERT INTO forme_duo VALUES ('10','49','false');
+INSERT INTO forme_duo VALUES ('10','50','true');
+INSERT INTO forme_duo VALUES ('11','51','true');
+INSERT INTO forme_duo VALUES ('11','52','false');
+INSERT INTO forme_duo VALUES ('12','53','false');
+INSERT INTO forme_duo VALUES ('12','54','true');
+INSERT INTO forme_duo VALUES ('13','55','false');
+INSERT INTO forme_duo VALUES ('13','56','true');
+INSERT INTO forme_duo VALUES ('14','57','true');
+INSERT INTO forme_duo VALUES ('14','58','false');
+INSERT INTO forme_duo VALUES ('15','59','false');
+INSERT INTO forme_duo VALUES ('15','60','true');
+INSERT INTO forme_duo VALUES ('16','61','false');
+INSERT INTO forme_duo VALUES ('16','62','true');
+INSERT INTO forme_duo VALUES ('17','63','false');
+INSERT INTO forme_duo VALUES ('17','64','true');
+INSERT INTO forme_duo VALUES ('18','65','false');
+INSERT INTO forme_duo VALUES ('18','66','true');
+INSERT INTO forme_duo VALUES ('19','67','true');
+INSERT INTO forme_duo VALUES ('19','68','false');
+INSERT INTO forme_duo VALUES ('20','69','false');
+INSERT INTO forme_duo VALUES ('20','70','true');
+INSERT INTO forme_duo VALUES ('21','71','true');
+INSERT INTO forme_duo VALUES ('21','72','false');
+INSERT INTO forme_duo VALUES ('22','73','false');
+INSERT INTO forme_duo VALUES ('22','74','true');
+INSERT INTO forme_duo VALUES ('23','75','false');
+INSERT INTO forme_duo VALUES ('23','76','true');
+INSERT INTO forme_duo VALUES ('24','77','true');
+INSERT INTO forme_duo VALUES ('24','78','false');
+INSERT INTO forme_duo VALUES ('25','79','true');
+INSERT INTO forme_duo VALUES ('25','80','false');
+INSERT INTO forme_duo VALUES ('26','81','false');
+INSERT INTO forme_duo VALUES ('26','82','true');
+INSERT INTO forme_duo VALUES ('27','83','false');
+INSERT INTO forme_duo VALUES ('27','84','true');
+INSERT INTO forme_duo VALUES ('28','85','true');
+INSERT INTO forme_duo VALUES ('28','86','false');
+INSERT INTO forme_duo VALUES ('29','87','false');
+INSERT INTO forme_duo VALUES ('29','88','true');
+INSERT INTO forme_duo VALUES ('30','89','false');
+INSERT INTO forme_duo VALUES ('30','90','true');
+INSERT INTO forme_duo VALUES ('31','91','false');
+INSERT INTO forme_duo VALUES ('31','92','true');
+INSERT INTO forme_duo VALUES ('32','93','true');
+INSERT INTO forme_duo VALUES ('32','94','false');
+INSERT INTO forme_duo VALUES ('33','95','true');
+INSERT INTO forme_duo VALUES ('33','96','false');
+INSERT INTO forme_duo VALUES ('34','97','true');
+INSERT INTO forme_duo VALUES ('34','98','false');
+INSERT INTO forme_duo VALUES ('35','99','false');
+INSERT INTO forme_duo VALUES ('35','100','true');
 
-ALTER TABLE o_memo ALTER COLUMN idmemo RESTART WITH 4;
+--participer
 
+INSERT INTO participer VALUES ('1','1','2');
+INSERT INTO participer VALUES ('2','2','3');
+INSERT INTO participer VALUES ('3','1','2');
+INSERT INTO participer VALUES ('4','2','2');
+INSERT INTO participer VALUES ('5','1','4');
+INSERT INTO participer VALUES ('6','1','2');
+INSERT INTO participer VALUES ('7','1','2');
+INSERT INTO participer VALUES ('8','2','3');
+INSERT INTO participer VALUES ('9','2','2');
+INSERT INTO participer VALUES ('10','1','2');
+INSERT INTO participer VALUES ('11','1','2');
+INSERT INTO participer VALUES ('12','1','4');
+INSERT INTO participer VALUES ('13','2','4');
+INSERT INTO participer VALUES ('14','2','4');
+INSERT INTO participer VALUES ('15','2','2');
+INSERT INTO participer VALUES ('16','2','2');
+INSERT INTO participer VALUES ('17','1','2');
+INSERT INTO participer VALUES ('18','1','2');
+INSERT INTO participer VALUES ('19','2','4');
+INSERT INTO participer VALUES ('20','2','2');
+INSERT INTO participer VALUES ('21','1','2');
+INSERT INTO participer VALUES ('22','1','3');
+INSERT INTO participer VALUES ('23','2','2');
+INSERT INTO participer VALUES ('24','1','2');
+INSERT INTO participer VALUES ('25','1','2');
+INSERT INTO participer VALUES ('26','2','2');
+INSERT INTO participer VALUES ('27','1','2');
+INSERT INTO participer VALUES ('28','1','2');
+INSERT INTO participer VALUES ('29','1','4');
+INSERT INTO participer VALUES ('30','2','2');
+INSERT INTO participer VALUES ('31','2','2');
+INSERT INTO participer VALUES ('32','1','2');
+INSERT INTO participer VALUES ('33','1','2');
+INSERT INTO participer VALUES ('34','1','2');
+INSERT INTO participer VALUES ('35','2','2');
 
--- Concerner
+--validation médicale
 
-INSERT INTO o_concerner (idmemo, idPersonne) VALUES 
-  ( 1, 1 ),
-  ( 1, 2 ),
-  ( 1, 3 ),
-  ( 2, 1 ),
-  ( 2, 2 );
-
-
--- Service
-
-INSERT INTO o_service ( idservice, nom, anneecreation, flagsiege ) VALUES 
-  ( 1, 'Direction', 2007, TRUE ),
-  ( 2, 'Comptabilité', NULL, TRUE ),
-  ( 3, 'Agence Limoges', 2008, FALSE ),
-  ( 4, 'Agence Brive', 2014, FALSE );
-
-
-ALTER TABLE o_service ALTER COLUMN idservice RESTART WITH 5;
-
+INSERT INTO validation_medicale VALUES ('1','31', 'true');
+INSERT INTO validation_medicale VALUES ('2','32', 'false');
+INSERT INTO validation_medicale VALUES ('3','33', 'true');
+INSERT INTO validation_medicale VALUES ('4','34', 'true');
+INSERT INTO validation_medicale VALUES ('5','35', 'true');
+INSERT INTO validation_medicale VALUES ('6','36', 'true');
+INSERT INTO validation_medicale VALUES ('7','37', 'false');
+INSERT INTO validation_medicale VALUES ('8','38', 'true');
+INSERT INTO validation_medicale VALUES ('9','39', 'true');
+INSERT INTO validation_medicale VALUES ('10','40', 'true');
+INSERT INTO validation_medicale VALUES ('11','41', 'true');
+INSERT INTO validation_medicale VALUES ('12','42', 'false');
+INSERT INTO validation_medicale VALUES ('13','43', 'true');
+INSERT INTO validation_medicale VALUES ('14','44', 'true');
+INSERT INTO validation_medicale VALUES ('15','45', 'true');
+INSERT INTO validation_medicale VALUES ('16','46', 'true');
+INSERT INTO validation_medicale VALUES ('17','47', 'true');
+INSERT INTO validation_medicale VALUES ('18','48', 'true');
+INSERT INTO validation_medicale VALUES ('19','49', 'true');
+INSERT INTO validation_medicale VALUES ('20','50', 'true');
+INSERT INTO validation_medicale VALUES ('21','51', 'true');
+INSERT INTO validation_medicale VALUES ('22','52', 'true');
+INSERT INTO validation_medicale VALUES ('23','53', 'true');
+INSERT INTO validation_medicale VALUES ('24','54', 'true');
+INSERT INTO validation_medicale VALUES ('25','55', 'true');
+INSERT INTO validation_medicale VALUES ('26','56', 'true');
+INSERT INTO validation_medicale VALUES ('27','57', 'true');
+INSERT INTO validation_medicale VALUES ('28','58', 'true');
+INSERT INTO validation_medicale VALUES ('29','59', 'true');
+INSERT INTO validation_medicale VALUES ('30','60', 'true');
+INSERT INTO validation_medicale VALUES ('31','61', 'true');
+INSERT INTO validation_medicale VALUES ('32','62', 'true');
+INSERT INTO validation_medicale VALUES ('33','63', 'true');
+INSERT INTO validation_medicale VALUES ('34','64', 'false');
+INSERT INTO validation_medicale VALUES ('35','65', 'true');
+INSERT INTO validation_medicale VALUES ('36','66', 'true');
+INSERT INTO validation_medicale VALUES ('37','67', 'true');
+INSERT INTO validation_medicale VALUES ('38','68', 'true');
+INSERT INTO validation_medicale VALUES ('39','69', 'true');
+INSERT INTO validation_medicale VALUES ('40','70', 'true');
+INSERT INTO validation_medicale VALUES ('41','71', 'true');
+INSERT INTO validation_medicale VALUES ('42','72', 'true');
+INSERT INTO validation_medicale VALUES ('43','73', 'true');
+INSERT INTO validation_medicale VALUES ('44','74', 'true');
+INSERT INTO validation_medicale VALUES ('45','75', 'true');
+INSERT INTO validation_medicale VALUES ('46','76', 'true');
+INSERT INTO validation_medicale VALUES ('47','77', 'true');
+INSERT INTO validation_medicale VALUES ('48','78', 'true');
+INSERT INTO validation_medicale VALUES ('49','79', 'true');
+INSERT INTO validation_medicale VALUES ('50','80', 'true');
+INSERT INTO validation_medicale VALUES ('51','81', 'true');
+INSERT INTO validation_medicale VALUES ('52','82', 'true');
+INSERT INTO validation_medicale VALUES ('53','83', 'true');
+INSERT INTO validation_medicale VALUES ('54','84', 'true');
+INSERT INTO validation_medicale VALUES ('55','85', 'true');
+INSERT INTO validation_medicale VALUES ('56','86', 'true');
+INSERT INTO validation_medicale VALUES ('57','87', 'true');
+INSERT INTO validation_medicale VALUES ('58','88', 'true');
+INSERT INTO validation_medicale VALUES ('59','89', 'true');
+INSERT INTO validation_medicale VALUES ('60','90', 'false');
+INSERT INTO validation_medicale VALUES ('61','91', 'true');
+INSERT INTO validation_medicale VALUES ('62','92', 'true');
+INSERT INTO validation_medicale VALUES ('63','93', 'true');
+INSERT INTO validation_medicale VALUES ('64','94', 'true');
+INSERT INTO validation_medicale VALUES ('65','95', 'true');
+INSERT INTO validation_medicale VALUES ('66','96', 'true');
+INSERT INTO validation_medicale VALUES ('67','97', 'false');
+INSERT INTO validation_medicale VALUES ('68','98', 'true');
+INSERT INTO validation_medicale VALUES ('69','99', 'true');
+INSERT INTO validation_medicale VALUES ('70','100', 'true');
