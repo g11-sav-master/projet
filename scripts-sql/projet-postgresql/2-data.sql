@@ -17,7 +17,6 @@ DELETE FROM validation_medicale;
 
 
 --Utilisateurs
-<<<<<<< HEAD
 INSERT INTO utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_passe) 
 		VALUES ('Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob'),
 		('Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45'),
