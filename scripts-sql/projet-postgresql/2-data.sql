@@ -1,4 +1,4 @@
-SET search_path TO projet, public;
+SET search_path TO projet;
 
 
 -- Supprimer toutes les données
@@ -17,6 +17,7 @@ DELETE FROM validation_medicale;
 
 
 --Utilisateurs
+<<<<<<< HEAD
 INSERT INTO utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_passe) 
 		VALUES ('Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob'),
 		('Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45'),
@@ -118,6 +119,7 @@ INSERT INTO utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_pass
 		 ('Fuentes','Ori','feugiat.Lorem.ipsum@sagittisNullamvitae.ca','0162144386','10/09/06','sit','vehicula'),
 		 ('Richardson','Thomas','urna.Vivamus.molestie@Phasellusornare.com','0371332750','16/01/69','ac','quis'),
 		 ('Moss','Jerome','Nunc.mauris.elit@liberolacus.org','0662634579','03/10/07','diam.','consequat');
+
 
 --Rôles-Bénévole
 INSERT INTO role_benevole (nom_role)
