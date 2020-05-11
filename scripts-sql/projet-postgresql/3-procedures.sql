@@ -145,14 +145,19 @@ $ccode$ LANGUAGE plpgsql;
 --$ccode$ LANGUAGE plpgsql;
 
 
-CREATE FUNCTION compte_valider_authentification( p_pseudo VARCHAR, p_motdepasse VARCHAR ) 
-RETURNS SETOF o_v_compte_avec_roles
+--
+-- p_login 			VARCHAR : login de l'utilisateur
+-- p_mot_passe		VARCHAR : mot de passe de l'utilisateur
+--
+CREATE FUNCTION compte_valider_authentification( p_login VARCHAR, p_motdepasse VARCHAR ) 
+RETURNS SETOF v_utilisateur_avec_roles
 AS $ccode$
 BEGIN
 	RETURN QUERY
-	SELECT * FROM o_v_compte_avec_roles
-	WHERE pseudo = P_pseudo
-	  AND motdepasse = p_motdepasse;
+	SELECT * 
+	FROM v_utilisateur_avec_roles
+	WHERE login = p_login
+		AND mot_passe = p_motdepasse;
 END;
 $ccode$ LANGUAGE plpgsql;
 
