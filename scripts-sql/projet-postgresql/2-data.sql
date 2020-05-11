@@ -1,4 +1,4 @@
-SET search_path TO projet, public;
+SET search_path TO projet;
 
 
 -- Supprimer toutes les données
@@ -17,13 +17,13 @@ DELETE FROM validation_medicale;
 
 
 --Utilisateurs
-INSERT INTO utilisateur VALUES ('1','Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob');
-INSERT INTO utilisateur VALUES ('2','Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45');
-INSERT INTO utilisateur VALUES ('3','Taner', 'Victor', 'VictTan65@gmail.com', '0715758725', '15/04/66', 'victan65', 'victanvapo45');
-INSERT INTO utilisateur VALUES ('4','Sapnz', 'Daurice', 'DauriceSz@gmail.com', '0799452410', '29/07/01', 'daudaudu01', 'duciva54');
-INSERT INTO utilisateur VALUES ('5','Jasp', 'Romain', 'RomJasp@gmail.com', '0764512101', '15/09/97', 'romtaxi81', 'vilayleckdu41');
-INSERT INTO utilisateur VALUES ('6','Grind', 'Pierrot', 'PiepieGri24@gmail.com', '0784546451', '21/06/02', 'PierrotGrigri21', 'rackvapta54');
-INSERT INTO utilisateur VALUES ('7','Hernandez', 'Sophia', 'SophiaHernandez54@gmail.com', '0777546941', '11/11/99', 'Sosodu54', 'jauspru54');
+INSERT INTO utilisateur VALUES (1,'Robert', 'Isidore', 'robertisidore25@gmail.com', '0615252521', '15/02/82', 'isidu25', '2525isirob');
+INSERT INTO utilisateur VALUES (2,'Taner', 'Angie', 'AngTan65@gmail.com', '0615658525', '15/02/65', 'angietan65', 'angtanvapo45');
+INSERT INTO utilisateur VALUES (3,'Taner', 'Victor', 'VictTan65@gmail.com', '0715758725', '15/04/66', 'victan65', 'victanvapo45');
+INSERT INTO utilisateur VALUES (4,'Sapnz', 'Daurice', 'DauriceSz@gmail.com', '0799452410', '29/07/01', 'daudaudu01', 'duciva54');
+INSERT INTO utilisateur VALUES (5,'Jasp', 'Romain', 'RomJasp@gmail.com', '0764512101', '15/09/97', 'romtaxi81', 'vilayleckdu41');
+INSERT INTO utilisateur VALUES (6,'Grind', 'Pierrot', 'PiepieGri24@gmail.com', '0784546451', '21/06/02', 'PierrotGrigri21', 'rackvapta54');
+INSERT INTO utilisateur VALUES (7,'Hernandez', 'Sophia', 'SophiaHernandez54@gmail.com', '0777546941', '11/11/99', 'Sosodu54', 'jauspru54');
 INSERT INTO utilisateur VALUES (8,'Roth','Ishmael','neque@Curabitur.edu','0635222510','09/08/80','tincidunt,','sit');
 INSERT INTO utilisateur VALUES (9,'Frederick','Merrill','turpis@Classaptenttaciti.ca','0159654055','24/05/74','metus','mi');
 INSERT INTO utilisateur VALUES (10,'Montgomery','Thaddeus','ipsum@Vestibulumanteipsum.net','0898835858','22/11/60','magnis','ipsum');
