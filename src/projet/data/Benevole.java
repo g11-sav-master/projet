@@ -17,8 +17,11 @@ public class Benevole extends Utilisateur {
 	
 	// Constructeurs
 
-	public Benevole( int idUtilisateur, String nom, String prenom, String mail, String numTel, LocalDate dateNaissance, boolean possedePermis) {
-		super(idUtilisateur, nom, prenom, mail, numTel, dateNaissance);
+	public Benevole() {
+	}
+	
+	public Benevole( int idUtilisateur, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance, boolean possedePermis) {
+		super(idUtilisateur, nom, prenom, e_mail, numTel, dateNaissance);
 		setPossedePermis(possedePermis);
 	}
 	

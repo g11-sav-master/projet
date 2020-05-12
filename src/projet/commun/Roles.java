@@ -9,7 +9,7 @@ public final class Roles {
 	
 	// Champs statiques
 	
-	public static final String ADMINISTRATEUR	= "ADMINISTRATEUR";
+	public static final String ADMINISTRATEUR	= "admin";
 	public static final String UTILISATEUR		= "UTILISATEUR";
 	
 	

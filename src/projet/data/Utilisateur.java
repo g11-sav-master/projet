@@ -17,21 +17,23 @@ public class Utilisateur {
 	protected final Property<Integer>	idUtilisateur	= new SimpleObjectProperty<>();
 	protected final StringProperty		nom	 			= new SimpleStringProperty();
 	protected final StringProperty		prenom			= new SimpleStringProperty();
-	protected final StringProperty		mail			= new SimpleStringProperty();
+	protected final StringProperty		e_mail			= new SimpleStringProperty();
 	protected final StringProperty		numTel			= new SimpleStringProperty();
 	protected final Property<LocalDate>	dateNaissance	= new SimpleObjectProperty<>();
+	protected final StringProperty		login			= new SimpleStringProperty();
 	
 	
 	
 	// Constructeurs
 	
-	
+	public Utilisateur() {
+	}
 
-	public Utilisateur( int id, String nom, String prenom, String mail, String numTel, LocalDate dateNaissance) {
+	public Utilisateur( int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance) {
 		setId(id);
 		setNom(nom);
 		setPrenom(prenom);
-		setMail(mail);
+		setE_Mail(e_mail);
 		setNumTel(numTel);
 		setDateNaissance(dateNaissance);
 	}
@@ -75,16 +77,16 @@ public class Utilisateur {
 		this.prenomProperty().setValue(prenom);
 	}
 	
-	public final StringProperty mailProperty() {
-		return this.mail;
+	public final StringProperty e_mailProperty() {
+		return this.e_mail;
 	}
 	
-	public final String getMail() {
-		return this.mailProperty().get();
+	public final String getE_Mail() {
+		return this.e_mailProperty().get();
 	}
 	
-	public final void setMail(final String mail) {
-		this.mailProperty().set(mail);
+	public final void setE_Mail(final String e_mail) {
+		this.e_mailProperty().set(e_mail);
 	}
 
 	public final StringProperty numTelProperty() {
@@ -109,6 +111,30 @@ public class Utilisateur {
 	
 	public final void setDateNaissance(final LocalDate dateNaissance) {
 		this.dateNaissanceProperty().setValue(dateNaissance);
+	}
+	
+	public final Property<Integer> idUtilisateurProperty() {
+		return this.idUtilisateur;
+	}
+	
+	public final Integer getIdUtilisateur() {
+		return this.idUtilisateurProperty().getValue();
+	}
+	
+	public final void setIdUtilisateur(final Integer idUtilisateur) {
+		this.idUtilisateurProperty().setValue(idUtilisateur);
+	}
+	
+	public final StringProperty loginProperty() {
+		return this.login;
+	}
+	
+	public final String getLogin() {
+		return this.loginProperty().get();
+	}
+
+	public final void setLogin(final String login) {
+		this.loginProperty().set(login);
 	}
 	
 	// toString()
@@ -136,4 +162,5 @@ public class Utilisateur {
 		Utilisateur other = (Utilisateur) obj;
 		return Objects.equals(idUtilisateur.getValue(), other.idUtilisateur.getValue() );
 	}
+	
 }
