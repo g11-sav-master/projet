@@ -30,7 +30,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur( int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance) {
-		setId(id);
+		setIdUtilisateur(id);
 		setNom(nom);
 		setPrenom(prenom);
 		setE_Mail(e_mail);
@@ -41,17 +41,7 @@ public class Utilisateur {
 	
 	// Getters & setters
 
-	public final Property<Integer> idProperty() {
-		return this.idUtilisateur;
-	}
-
-	public final Integer getId() {
-		return this.idProperty().getValue();
-	}
-
-	public final void setId(final Integer id) {
-		this.idProperty().setValue(id);
-	}
+	
 	
 	public final StringProperty nomProperty() {
 		return this.nom;

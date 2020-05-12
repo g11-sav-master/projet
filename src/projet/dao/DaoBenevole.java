@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,38 +20,29 @@ public class DaoBenevole {
 
 	@Inject
 	private DataSource		dataSource;
+	
+	@Inject
+	private DaoUtilisateur  daoUtilisateur;
 
 	
 	// Actions
 
 	public int inserer(Benevole benevole)  {
-
+		benevole.setIdUtilisateur(daoUtilisateur.inserer(benevole)); 
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
 		String				sql;
 
 		try {
 			cn = dataSource.getConnection();
 
 			// Insère le Benevole
-			sql = "INSERT INTO benevole ( nom, prenom, e_mail, num_tel, date_naissance, login, mot_passe, possede_permis) VALUES ( ?, ?, ?, ?, ?, ?, ? )";
-			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-			stmt.setString(	1, benevole.getNom() );
-			stmt.setString(	2, benevole.getPrenom() );
-			stmt.setString(	3, benevole.getE_Mail() );
-			stmt.setString(	4, benevole.getNumTel() );
-			stmt.setObject(	5, benevole.getDateNaissance() );
-			stmt.setString(	6, benevole.getLogin());
-			stmt.setString(	7, "Mot de passe à changer rapidement" );
-			// Il faudrait envoyer un mail dès la création afin d'obliger à se connecter pour changer le mot de passe
-			stmt.setObject(	8, benevole.getPossedePermis());
+			sql = "INSERT INTO benevole ( id_utilisateur, id_role, possede_permis) VALUES ( ?, ?, ?)";
+			stmt = cn.prepareStatement( sql );
+			stmt.setInt(1, benevole.getIdUtilisateur() );
+			stmt.setInt(2, benevole.getId_role() );
+			stmt.setBoolean(3, benevole.getPossedePermis());
 			stmt.executeUpdate();
-
-			// Récupère l'identifiant généré par le SGBD
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			benevole.setId( rs.getObject( 1, Integer.class ) );
 	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -64,12 +53,12 @@ public class DaoBenevole {
 
 		
 		// Retourne l'identifiant
-		return benevole.getId();
+		return benevole.getIdUtilisateur();
 	}
 
 	
 	public void modifier(Benevole benevole)  {
-
+		daoUtilisateur.modifier(benevole);
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		String 				sql;
@@ -78,16 +67,11 @@ public class DaoBenevole {
 			cn = dataSource.getConnection();
 
 			// Modifie le Benevole
-			sql = "UPDATE benevole SET nom = ?, prenom = ?, e_mail = ?, num_tel = ?, date_naissance = ?, login = ?, possede_permis = ? WHERE id_utilisateur  =  ?";
+			sql = "UPDATE benevole SET id_role = ?, possede_permis = ? WHERE id_utilisateur  =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, benevole.getNom() );
-			stmt.setObject( 2, benevole.getPrenom() );
-			stmt.setObject( 3, benevole.getE_Mail() );
-			stmt.setObject( 4, benevole.getNumTel() );
-			stmt.setObject( 5, benevole.getDateNaissance() );
-			stmt.setObject( 6, benevole.getLogin() );
-			stmt.setObject( 7, benevole.getPossedePermis() );
-			stmt.setObject( 8, benevole.getId() );
+			stmt.setObject( 1, benevole.getId_role() );
+			stmt.setObject( 2, benevole.getPossedePermis() );
+			stmt.setObject( 3, benevole.getIdUtilisateur() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -101,7 +85,6 @@ public class DaoBenevole {
 
 	
 	public void supprimer(int idBenevole)  {
-
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		String 				sql;
@@ -120,11 +103,12 @@ public class DaoBenevole {
 		} finally {
 			UtilJdbc.close( stmt, cn );
 		}
+		daoUtilisateur.supprimer(idBenevole);
 	}
 
 	
 	public Benevole retrouver(int idBenevole)  {
-
+		Benevole benevole = new Benevole( daoUtilisateur.retrouver(idBenevole));
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		ResultSet 			rs 		= null;
@@ -139,7 +123,7 @@ public class DaoBenevole {
             rs = stmt.executeQuery();
 
             if ( rs.next() ) {
-                return construireBenevole(rs );
+                return construireBenevole(rs, benevole );
             } else {
             	return null;
             }
@@ -161,15 +145,16 @@ public class DaoBenevole {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM benevole ORDER BY nom, prenom";
+			sql = "SELECT * FROM benevole";
 			stmt = cn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			
-			List<Benevole> benevole = new ArrayList<>();
+			List<Benevole> benevoleLst = new ArrayList<>();
 			while (rs.next()) {
-				benevole.add( construireBenevole(rs) );
+				Benevole benevole = new Benevole( daoUtilisateur.retrouver(rs.getObject( "id_utilisateur", Integer.class )));
+				benevoleLst.add( construireBenevole(rs, benevole) );
 			}
-			return benevole;
+			return benevoleLst;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -181,16 +166,9 @@ public class DaoBenevole {
 	
 	// Méthodes auxiliaires
 	
-	private Benevole construireBenevole( ResultSet rs ) throws SQLException {
+	private Benevole construireBenevole( ResultSet rs, Benevole benevole ) throws SQLException {
 
-		Benevole benevole = new Benevole();
-		benevole.setId(rs.getObject( "idBenevole", Integer.class ));
-		benevole.setNom(rs.getObject( "nom", String.class ));
-		benevole.setPrenom(rs.getObject( "prenom", String.class ));
-		benevole.setE_Mail(rs.getObject( "e_mail", String.class ));
-		benevole.setNumTel(rs.getObject( "num_tel", String.class ));
-		benevole.setDateNaissance(rs.getObject("date_naissance", LocalDate.class));
-		benevole.setLogin(rs.getObject( "login", String.class ));
+		benevole.setId_role(rs.getObject( "id_role", Integer.class ));
 		benevole.setPossedePermis(rs.getObject( "possede_permis", Boolean.class ));
 
 		return benevole;

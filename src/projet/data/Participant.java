@@ -3,43 +3,44 @@ package projet.data;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Participant extends Utilisateur {
 
-
 	// Données observables
-	private final StringProperty	club			= new SimpleStringProperty();
-	
-	
+	private final StringProperty club = new SimpleStringProperty();
+
 	// Constructeurs
 
 	public Participant() {
 	}
-	
-	public Participant( int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance, int idParticipant, String club) {
+
+	public Participant(int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance,
+			int idParticipant, String club) {
 		super(id, nom, prenom, e_mail, numTel, dateNaissance);
 		setClub(club);
 	}
-	
+
+	public Participant(Utilisateur utilisateur) {
+		super(utilisateur.getIdUtilisateur(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getE_Mail(),
+				utilisateur.getNumTel(), utilisateur.getDateNaissance());
+	}
+
 	// Getters & setters
-	
-	
-	
+
 	public final StringProperty clubProperty() {
 		return this.club;
 	}
-	
+
 	public final String getClub() {
 		return this.clubProperty().get();
 	}
-	
+
 	public final void setClub(final String club) {
 		this.clubProperty().set(club);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,6 +50,6 @@ public class Participant extends Utilisateur {
 		if (getClass() != obj.getClass())
 			return false;
 		Participant other = (Participant) obj;
-		return Objects.equals(idUtilisateur.getValue(), other.idUtilisateur.getValue() );
+		return Objects.equals(idUtilisateur.getValue(), other.idUtilisateur.getValue());
 	}
 }

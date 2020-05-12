@@ -1,11 +1,9 @@
 package projet.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,38 +19,27 @@ public class DaoParticipant {
 
 	@Inject
 	private DataSource		dataSource;
+	@Inject
+	private DaoUtilisateur daoUtilisateur;
 
 	
 	// Actions
 
 	public int inserer(Participant participant)  {
-
+		participant.setIdUtilisateur(daoUtilisateur.inserer(participant));
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
-		ResultSet 			rs 		= null;
 		String				sql;
 
 		try {
 			cn = dataSource.getConnection();
 
 			// Insère le Participant
-			sql = "INSERT INTO participant ( nom, prenom, e_mail, num_tel, date_naissance, login, mot_passe, club) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+			sql = "INSERT INTO participant ( id_utilisateur, club) VALUES ( ?, ? )";
 			stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
-			stmt.setString(	1, participant.getNom() );
-			stmt.setString(	2, participant.getPrenom() );
-			stmt.setString(	3, participant.getE_Mail() );
-			stmt.setString(	4, participant.getNumTel() );
-			stmt.setObject(	5, participant.getDateNaissance() );
-			stmt.setString(	6, participant.getLogin());
-			stmt.setString(	7, "Mot de passe à changer rapidement" );
-			// Il faudrait envoyer un mail dès la création afin d'obliger à se connecter pour changer le mot de passe
-			stmt.setString(8,  participant.getClub());
+			stmt.setInt( 1, participant.getIdUtilisateur() );
+			stmt.setString(2,  participant.getClub());
 			stmt.executeUpdate();
-
-			// Récupère l'identifiant généré par le SGBD
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			participant.setId( rs.getObject( "id_utilisateur", Integer.class ) );
 	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -63,12 +50,12 @@ public class DaoParticipant {
 
 		
 		// Retourne l'identifiant
-		return participant.getId();
+		return participant.getIdUtilisateur();
 	}
 
 	
 	public void modifier(Participant participant)  {
-
+		daoUtilisateur.modifier(participant);
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		String 				sql;
@@ -77,15 +64,10 @@ public class DaoParticipant {
 			cn = dataSource.getConnection();
 
 			// Modifie le Participant
-			sql = "UPDATE participant SET nom = ?, prenom = ?, e_mail = ?, num_tel = ?, date_naissance = ?, login = ? WHERE id_utilisateur  =  ?";
+			sql = "UPDATE participant SET club = ?  WHERE id_utilisateur  =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setObject( 1, participant.getNom() );
-			stmt.setObject( 2, participant.getPrenom() );
-			stmt.setObject( 3, participant.getE_Mail() );
-			stmt.setObject( 4, participant.getNumTel() );
-			stmt.setObject( 5, participant.getDateNaissance() );
-			stmt.setObject( 6, participant.getLogin() );
-			stmt.setObject( 7, participant.getId() );
+			stmt.setObject( 1, participant.getClub() );
+			stmt.setObject( 2, participant.getIdUtilisateur() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -118,11 +100,12 @@ public class DaoParticipant {
 		} finally {
 			UtilJdbc.close( stmt, cn );
 		}
+		daoUtilisateur.supprimer(idParticipant);
 	}
 
 	
 	public Participant retrouver(int idParticipant)  {
-
+		Participant participant = new Participant( daoUtilisateur.retrouver(idParticipant));
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		ResultSet 			rs 		= null;
@@ -137,7 +120,7 @@ public class DaoParticipant {
             rs = stmt.executeQuery();
 
             if ( rs.next() ) {
-                return construireParticipant(rs );
+                return construireParticipant(rs, participant );
             } else {
             	return null;
             }
@@ -159,15 +142,16 @@ public class DaoParticipant {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM participant ORDER BY nom, prenom";
+			sql = "SELECT * FROM participant";
 			stmt = cn.prepareStatement(sql);
 			rs = stmt.executeQuery();
 			
-			List<Participant> participant = new ArrayList<>();
+			List<Participant> participantLst = new ArrayList<>();
 			while (rs.next()) {
-				participant.add( construireParticipant(rs) );
+				Participant participant = new Participant( daoUtilisateur.retrouver(rs.getObject( "id_utilisateur", Integer.class )));
+				participantLst.add( construireParticipant(rs, participant) );
 			}
-			return participant;
+			return participantLst;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -179,16 +163,9 @@ public class DaoParticipant {
 	
 	// Méthodes auxiliaires
 	
-	private Participant construireParticipant( ResultSet rs ) throws SQLException {
+	private Participant construireParticipant( ResultSet rs, Participant participant ) throws SQLException {
 
-		Participant participant = new Participant();
-		participant.setId(rs.getObject( "id_utilisateur", Integer.class ));
-		participant.setNom(rs.getObject( "nom", String.class ));
-		participant.setPrenom(rs.getObject( "prenom", String.class ));
-		participant.setE_Mail(rs.getObject( "e_mail", String.class ));
-		participant.setNumTel(rs.getObject( "num_tel", String.class ));
-		participant.setDateNaissance(rs.getObject("date_naissance", LocalDate.class));
-		participant.setLogin(rs.getObject( "login", String.class ));
+		participant.setClub(rs.getObject( "club", String.class ));
 
 		return participant;
 	}

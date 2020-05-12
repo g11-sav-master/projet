@@ -53,7 +53,7 @@ public class DaoUtilisateur {
 			// Récupère l'identifiant généré par le SGBD
 			rs = stmt.getGeneratedKeys();
 			rs.next();
-			utilisateur.setId( rs.getObject( 1, Integer.class ) );
+			utilisateur.setIdUtilisateur( rs.getObject( 1, Integer.class ) );
 	
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -64,7 +64,7 @@ public class DaoUtilisateur {
 
 		
 		// Retourne l'identifiant
-		return utilisateur.getId();
+		return utilisateur.getIdUtilisateur();
 	}
 
 	
@@ -86,7 +86,7 @@ public class DaoUtilisateur {
 			stmt.setObject( 4, utilisateur.getNumTel() );
 			stmt.setObject( 5, utilisateur.getDateNaissance() );
 			stmt.setObject( 6, utilisateur.getLogin() );
-			stmt.setObject( 7,  utilisateur.getId() );
+			stmt.setObject( 7,  utilisateur.getIdUtilisateur() );
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -183,7 +183,7 @@ public class DaoUtilisateur {
 	private Utilisateur construireUtilisateur( ResultSet rs ) throws SQLException {
 
 		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setId(rs.getObject( "id_utilisateur", Integer.class ));
+		utilisateur.setIdUtilisateur(rs.getObject( "id_utilisateur", Integer.class ));
 		utilisateur.setNom(rs.getObject( "nom", String.class ));
 		utilisateur.setPrenom(rs.getObject( "prenom", String.class ));
 		utilisateur.setE_Mail(rs.getObject( "e_mail", String.class ));

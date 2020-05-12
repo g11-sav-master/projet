@@ -5,10 +5,10 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import jfox.javafx.util.UtilFX;
-import projet.dao.DaoUtilisateur;
+import projet.dao.DaoBenevole;
 
 
-public class ControllerTestDaoUtilisateur {
+public class ControllerTestDaoBenevole {
 	
 	
 	// Composants visuales
@@ -20,7 +20,7 @@ public class ControllerTestDaoUtilisateur {
 	// Autres champs
 	
 	@Inject
-	private DaoUtilisateur	dao;
+	private DaoBenevole	dao;
 	
 	private final int		id = 10;	
 	
@@ -31,7 +31,10 @@ public class ControllerTestDaoUtilisateur {
 	private void doLister() {
 		textArea.clear();
 		for (Object item : dao.listerTout() ) {
-			textArea.appendText( UtilFX.objectToString( item ) );
+//			textArea.appendText( UtilFX.objectToString( item ) );
+			textArea.appendText(item.toString()); 
+			// autrement cela n'affiche que les champs nouveau dans bénévole et pas ceux d'utilisateur
+			
 			textArea.appendText( "\n"  );
 		}
 		textArea.appendText( "\n"  );
