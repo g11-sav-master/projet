@@ -179,7 +179,6 @@ public class DaoCompte {
 
 
 	public Compte validerAuthentification( String pseudo, String motDePasse )  {
-		
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
 		ResultSet 			rs 		= null;
@@ -188,7 +187,7 @@ public class DaoCompte {
 		try {
 			cn = dataSource.getConnection();
 
-			sql = "SELECT * FROM compte WHERE pseudo = ? AND motdepasse = ?";
+			sql = "SELECT * FROM utilisateur WHERE login = ? AND mot_passe = ?";
 			stmt = cn.prepareStatement( sql );
 			stmt.setObject( 1, pseudo );
 			stmt.setObject( 2, motDePasse );
@@ -241,11 +240,35 @@ public class DaoCompte {
 	
 	private Compte construireCompte( ResultSet rs ) throws SQLException {
 		Compte compte = new Compte();
-		compte.setId( rs.getObject( "idcompte", Integer.class ) );
-		compte.setPseudo( rs.getObject( "pseudo", String.class ) );
-		compte.setMotDePasse( rs.getObject( "motdepasse", String.class ) );
-		compte.setEmail( rs.getObject( "email", String.class ) );
-		compte.getRoles().setAll( daoRole.listerPourCompte( compte ) );
+		compte.setId( rs.getObject( "id_utilisateur", Integer.class ) );
+		compte.setPseudo( rs.getObject( "login", String.class ) );
+		compte.setMotDePasse( rs.getObject( "mot_passe", String.class ) );
+		compte.setEmail( rs.getObject( "e_mail", String.class ) );
+		
+		
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs2 		= null;
+		String				sql;
+		
+		try {
+			cn = dataSource.getConnection();
+			sql = "SELECT * FROM role_benevole WHERE id_role = (SELECT id_role FROM benevole WHERE id_utilisateur = ? ) ";
+			stmt = cn.prepareStatement( sql );
+			stmt.setObject( 1, compte.getId().intValue() );
+			rs2 = stmt.executeQuery();
+
+			if ( rs2.next() ) {
+				compte.getRoles().setAll( rs2.getObject( "nom_role", String.class ) );
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs2, stmt, cn );
+		}
+		
 		return compte;
 	}
 	

@@ -40,6 +40,7 @@ public class MainProjet {
 			JOptionPane.showMessageDialog(null, "Impossible de démarrer l'application.", "", JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
+		
 		System.exit(0);
     }
   

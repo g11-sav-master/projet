@@ -176,7 +176,6 @@ public class DaoCompte2 {
 
 
 	public Compte validerAuthentification( String pseudo, String motDePasse )  {
-		
 		Connection			cn		= null;
 		CallableStatement	stmt	= null;
 		ResultSet 			rs 		= null;

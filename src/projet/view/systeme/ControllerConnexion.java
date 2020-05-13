@@ -41,7 +41,6 @@ public class ControllerConnexion {
 		Compte courant = modelConnexion.getCourant();
 		fieldPseudo.textProperty().bindBidirectional( courant.pseudoProperty() );
 		fieldMotDePasse.textProperty().bindBidirectional( courant.motDePasseProperty() );
-
 	}
 	
 	
