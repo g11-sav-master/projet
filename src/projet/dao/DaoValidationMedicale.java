@@ -36,10 +36,9 @@ public class DaoValidationMedicale {
 			cn = dataSource.getConnection();
 
 			// Insère la validation médicale
-			sql = "INSERT INTO validation_medicale ( id_utilisateur, est_valide, date_expiration) VALUES ( ?, ?, ?)";
-			// Vérif
 			if (daoParticipant.retrouver(validation.getIdUtilisateur()) != null) {
-
+				sql = "INSERT INTO validation_medicale ( id_utilisateur, est_valide, date_expiration) VALUES ( ?, ?, ?)";
+				// Vérif
 				stmt = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setInt(1, validation.getIdUtilisateur());
 				stmt.setBoolean(2, validation.getEst_valide());
@@ -69,11 +68,10 @@ public class DaoValidationMedicale {
 		String sql;
 
 		try {
-			cn = dataSource.getConnection();
-
-			// Modifie la validation
-			sql = "UPDATE validation_medicale SET est_valide = ?, date_expiration = ? WHERE id_validation  =  ? AND id_utilisateur = ?";
 			if (daoParticipant.retrouver(validation.getIdUtilisateur()) != null) {
+				cn = dataSource.getConnection();
+				// Modifie la validation
+				sql = "UPDATE validation_medicale SET est_valide = ?, date_expiration = ? WHERE id_validation  =  ? id_utilisateur = ?";
 				stmt = cn.prepareStatement(sql);
 				stmt.setObject(1, validation.getEst_valide());
 				stmt.setObject(2, validation.getDate_expiration());
@@ -112,7 +110,7 @@ public class DaoValidationMedicale {
 	}
 
 	public ValidationMedicale retrouver(int idValidation) {
-		
+
 		Connection cn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -170,9 +168,9 @@ public class DaoValidationMedicale {
 	private ValidationMedicale construireValidationMedicale(ResultSet rs) throws SQLException {
 
 		ValidationMedicale validation = new ValidationMedicale();
-		validation.setId_validation(rs.getObject( "id_validation", Integer.class ));
-		validation.setIdUtilisateur(rs.getObject( "id_utilisateur", Integer.class ));
-		validation.setEst_valide(rs.getObject( "est_valide", Boolean.class ));
+		validation.setId_validation(rs.getObject("id_validation", Integer.class));
+		validation.setIdUtilisateur(rs.getObject("id_utilisateur", Integer.class));
+		validation.setEst_valide(rs.getObject("est_valide", Boolean.class));
 		validation.setDate_expiration(rs.getObject("date_expiration", LocalDate.class));
 		return validation;
 	}

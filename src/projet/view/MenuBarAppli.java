@@ -157,6 +157,8 @@ public class MenuBarAppli extends MenuBar {
 		
 		item = new MenuItem( "DaoRaid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRaid )  );
+		menu.getItems().add( item );
+		
 		item = new MenuItem( "DaoRoleBenevole" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRoleBenevole )  );
 		menu.getItems().add( item );
@@ -167,6 +169,10 @@ public class MenuBarAppli extends MenuBar {
 		
 		item = new MenuItem( "DaoCategorieRaid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorieRaid )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoParticipantDuo" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoParticipantDuo )  );
 		menu.getItems().add( item );
 
 
