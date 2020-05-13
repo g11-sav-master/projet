@@ -27,8 +27,15 @@ public enum EnumView implements IEnumView {
 	TestDaoService		( "test/ViewTestDaoService.fxml" ),
 	TestDaoUtilisateur	( "test/ViewTestDaoUtilisateur.fxml" ),
 	TestDaoBenevole		( "test/ViewTestDaoBenevole.fxml" ),
+<<<<<<< HEAD
 	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),
 	TestDaoRaid			( "test/ViewTestDaoRaid.fxml"),
+=======
+	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),
+	TestDaoRoleBenevole ("test/ViewTestDaoRoleBenevole.fxml"),
+	TestDaoValidationMedicale ("test/ViewTestDaoValidation.fxml"),
+	TestDaoCategorieRaid ( "test/ViewTestDaoCategorieRaid.fxml" ),
+>>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
 	EtatPersonnesParCateogire1	( "personne/ViewEtatPersonnesParCategorie1.fxml" ),
 	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" ),
 	;

@@ -155,8 +155,21 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoParticipant )  );
 		menu.getItems().add( item );
 		
+<<<<<<< HEAD
 		item = new MenuItem( "DaoRaid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRaid )  );
+=======
+		item = new MenuItem( "DaoRoleBenevole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRoleBenevole )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoValidationMedicale" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoValidationMedicale )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoCategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorieRaid )  );
+>>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
 		menu.getItems().add( item );
 
 

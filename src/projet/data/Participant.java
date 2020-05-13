@@ -17,14 +17,14 @@ public class Participant extends Utilisateur {
 	}
 
 	public Participant(int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance,
-			int idParticipant, String club) {
-		super(id, nom, prenom, e_mail, numTel, dateNaissance);
+			int idParticipant, String club, String login) {
+		super(id, nom, prenom, e_mail, numTel, dateNaissance, login);
 		setClub(club);
 	}
 
 	public Participant(Utilisateur utilisateur) {
 		super(utilisateur.getIdUtilisateur(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getE_Mail(),
-				utilisateur.getNumTel(), utilisateur.getDateNaissance());
+				utilisateur.getNumTel(), utilisateur.getDateNaissance(), utilisateur.getLogin());
 	}
 
 	// Getters & setters
