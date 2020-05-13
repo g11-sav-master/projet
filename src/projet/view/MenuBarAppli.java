@@ -162,6 +162,10 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "DaoValidationMedicale" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoValidationMedicale )  );
 		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoCategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorieRaid )  );
+		menu.getItems().add( item );
 
 
 		// Configuration initiale du menu
