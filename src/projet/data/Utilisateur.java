@@ -29,13 +29,14 @@ public class Utilisateur {
 	public Utilisateur() {
 	}
 
-	public Utilisateur( int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance) {
+	public Utilisateur( int id, String nom, String prenom, String e_mail, String numTel, LocalDate dateNaissance, String login) {
 		setIdUtilisateur(id);
 		setNom(nom);
 		setPrenom(prenom);
 		setE_Mail(e_mail);
 		setNumTel(numTel);
 		setDateNaissance(dateNaissance);
+		setLogin(login);
 	}
 	
 	
