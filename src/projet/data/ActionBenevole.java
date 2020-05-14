@@ -33,7 +33,7 @@ public class ActionBenevole {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "action :"+this.getId_action();
+		return "action :"+this.getId_action()+" - "+this.getHoraire_debut()+" - "+this.getHoraire_fin();
 	}
 	
 	//getter & setter
