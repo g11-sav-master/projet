@@ -159,6 +159,42 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "DaoParticipant" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoParticipant )  );
 		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRaid )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoRoleBenevole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoRoleBenevole )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoValidationMedicale" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoValidationMedicale )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoCategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorieRaid )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoParticipantDuo" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoParticipantDuo )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoFormeDuo" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoFormeDuo )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoParticipeOrganisation" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoParticipeOrganisation )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoPoste" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoPoste )  );
+		menu.getItems().add( item );
+		
+		item = new MenuItem( "DaoActionBenevole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoActionBenevole )  );
+		menu.getItems().add( item );
 
 
 		// Configuration initiale du menu
