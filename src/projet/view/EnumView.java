@@ -13,6 +13,8 @@ public enum EnumView implements IEnumView {
 	Connexion			( "systeme/ViewConnexion.fxml" ),
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
 	BenevoleForm		( "benevole/ViewBenevoleForm.fxml" ),
+	CategorieListe		( "personne/ViewCategorieListe.fxml" ),
+	CategorieForm		( "personne/ViewCategorieForm.fxml" ),
 	TestDaoUtilisateur	( "test/ViewTestDaoUtilisateur.fxml" ),
 	TestDaoBenevole		( "test/ViewTestDaoBenevole.fxml" ),
 	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),
