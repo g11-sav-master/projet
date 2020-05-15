@@ -27,11 +27,8 @@ public enum EnumView implements IEnumView {
 	TestDaoParticipeOrganisation ( "test/ViewTestDaoParticipeOrganisation.fxml" ),
 	TestDaoPoste ("test/ViewTestDaoPoste.fxml"),
 	TestDaoActionBenevole ("test/ViewTestDaoActionBenevole.fxml"),
-<<<<<<< HEAD
 	EtatPersonnesParCateogire1	( "personne/ViewEtatPersonnesParCategorie1.fxml" ),
 	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" ),
-=======
->>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
 	;
 
 	
