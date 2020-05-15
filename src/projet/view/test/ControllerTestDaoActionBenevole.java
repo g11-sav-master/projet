@@ -22,7 +22,11 @@ public class ControllerTestDaoActionBenevole {
 	@Inject
 	private DaoActionBenevole	dao;
 	
+<<<<<<< HEAD
 	private final int		id = 1;	
+=======
+	private final int		id = 10;	
+>>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
 	
 	
 	// Actions

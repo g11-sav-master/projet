@@ -41,7 +41,7 @@ public class DaoBenevole {
 			stmt = cn.prepareStatement( sql );
 			stmt.setInt(1, benevole.getIdUtilisateur() );
 			stmt.setInt(2, benevole.getId_role() );
-			stmt.setBoolean(3, benevole.getPossedePermis());
+			stmt.setObject(3, benevole.getPossedePermis());
 			stmt.executeUpdate();
 	
 		} catch (SQLException e) {

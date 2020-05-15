@@ -1,8 +1,7 @@
-package projet.view.personne;
+package projet.view.participant;
 
 import javax.inject.Inject;
 
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -10,73 +9,87 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Personne;
+import projet.data.Participant;
 import projet.view.EnumView;
 
 
-public class ControllerPersonneListe  {
+public class ControllerParticipantListe {
 	
 	
 	// Composants de la vue
-	
+
 	@FXML
-	private ListView<Personne>	listView;
+	private ListView<Participant>	listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
 	private Button				buttonSupprimer;
-	
-	
+
+
 	// Autres champs
 	
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelPersonne		modelPersonne;
+	private ModelParticipant	modelparticipant;
 	
 	
-	// Initialisation du controller
+	// Initialisation du Controller
 
 	@FXML
 	private void initialize() {
-		
+
 		// Data binding
-		listView.setItems( modelPersonne.getListe() );
+		listView.setItems( modelparticipant.getListe() );
+		
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() ));
 		
 		// Configuraiton des boutons
-		listView.getSelectionModel().getSelectedItems().addListener( 
-		        (ListChangeListener<Personne>) (c) -> {
-		        	configurerBoutons();
+		listView.getSelectionModel().selectedItemProperty().addListener(
+				(obs, oldVal, newVal) -> {
+					configurerBoutons();
 		});
-    	configurerBoutons();
+		configurerBoutons();
+
 	}
 	
 	public void refresh() {
-		modelPersonne.actualiserListe();
-		UtilFX.selectInListView(listView, modelPersonne.getCourant() );
+		modelparticipant.actualiserListe();
+		UtilFX.selectInListView( listView, modelparticipant.getCourant() );
 		listView.requestFocus();
 	}
-	
+
 	
 	// Actions
 	
 	@FXML
 	private void doAjouter() {
-		modelPersonne.preparerAjouter();
-		managerGui.showView( EnumView.PersonneForm );
+		modelparticipant.preparerAjouter();;
+		managerGui.showView( EnumView.ParticipantForm );
 	}
-	
+
 	@FXML
 	private void doModifier() {
-		modelPersonne.preparerModifier( listView.getSelectionModel().getSelectedItem() );
-		managerGui.showView( EnumView.PersonneForm );
+		Participant item = listView.getSelectionModel().getSelectedItem();
+		if ( item == null ) {
+			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
+		} else {
+			modelparticipant.preparerModifier(item);
+			managerGui.showView( EnumView.ParticipantForm );
+		}
 	}
-	
+
 	@FXML
 	private void doSupprimer() {
-		if ( managerGui.showDialogConfirm("Etes-vous sûr de voulir supprimer cette personne ?" ) ) {
-			modelPersonne.supprimer( listView.getSelectionModel().getSelectedItem() );
-			refresh();
+		Participant item = listView.getSelectionModel().getSelectedItem();
+		if ( item == null ) {
+			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
+		} else {
+			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
+			if ( reponse ) {
+				modelparticipant.supprimer( item );
+				refresh();
+			}
 		}
 	}
 	
@@ -101,6 +114,7 @@ public class ControllerPersonneListe  {
 	// Méthodes auxiliaires
 	
 	private void configurerBoutons() {
+		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
 			buttonModifier.setDisable(true);
 			buttonSupprimer.setDisable(true);
@@ -109,5 +123,5 @@ public class ControllerPersonneListe  {
 			buttonSupprimer.setDisable(false);
 		}
 	}
-	
+
 }

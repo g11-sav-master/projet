@@ -1,4 +1,4 @@
-package projet.view.personne;
+package projet.view.benevole;
 
 import javax.inject.Inject;
 
@@ -9,17 +9,17 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Categorie;
+import projet.data.Benevole;
 import projet.view.EnumView;
 
 
-public class ControllerCategorieListe {
+public class ControllerBenevoleListe {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<Categorie>	listView;
+	private ListView<Benevole>		listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
@@ -31,7 +31,7 @@ public class ControllerCategorieListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelCategorie		modelCategorie;
+	private ModelBenevole		modelService;
 	
 	
 	// Initialisation du Controller
@@ -40,7 +40,9 @@ public class ControllerCategorieListe {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelCategorie.getListe() );
+		listView.setItems( modelService.getListe() );
+		
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() ));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -48,12 +50,12 @@ public class ControllerCategorieListe {
 					configurerBoutons();
 		});
 		configurerBoutons();
-		
+
 	}
 	
 	public void refresh() {
-		modelCategorie.actualiserListe();
-		UtilFX.selectInListView( listView, modelCategorie.getCourant() );
+		modelService.actualiserListe();
+		UtilFX.selectInListView( listView, modelService.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -62,21 +64,32 @@ public class ControllerCategorieListe {
 	
 	@FXML
 	private void doAjouter() {
-		modelCategorie.preparerAjouter();;
-		managerGui.showView( EnumView.CategorieForm );
+		modelService.preparerAjouter();;
+		managerGui.showView( EnumView.BenevoleForm );
 	}
 
 	@FXML
 	private void doModifier() {
-		modelCategorie.preparerModifier( listView.getSelectionModel().getSelectedItem() );
-		managerGui.showView( EnumView.CategorieForm );
+		Benevole item = listView.getSelectionModel().getSelectedItem();
+		if ( item == null ) {
+			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
+		} else {
+			modelService.preparerModifier(item);
+			managerGui.showView( EnumView.BenevoleForm );
+		}
 	}
 
 	@FXML
 	private void doSupprimer() {
-		if ( managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" ) ) {
-			modelCategorie.supprimer( listView.getSelectionModel().getSelectedItem() );
-			refresh();
+		Benevole item = listView.getSelectionModel().getSelectedItem();
+		if ( item == null ) {
+			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
+		} else {
+			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
+			if ( reponse ) {
+				modelService.supprimer( item );
+				refresh();
+			}
 		}
 	}
 	

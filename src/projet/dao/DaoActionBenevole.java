@@ -30,6 +30,7 @@ public class DaoActionBenevole {
 	
 		Connection			cn		= null;
 		PreparedStatement	stmt	= null;
+<<<<<<< HEAD
 		ResultSet 			rs 		= null;
 		String				sql;
 
@@ -133,6 +134,103 @@ public class DaoActionBenevole {
 			cn = dataSource.getConnection();
 
 			sql = "SELECT * FROM action_benevole WHERE id_action = ?";
+=======
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Insère le ActionBenevole
+			sql = "INSERT INTO action_benevole ( id_poste,id_utilisateur, panneau_prendre, descr_action, signaleur, horaire_debut, horaire_fin) VALUES ( ?, ?, ?,?,?,?,?)";
+			stmt = cn.prepareStatement( sql );
+			stmt.setInt(1, actionBenevole.getId_poste() );
+			stmt.setInt(2, actionBenevole.getId_utilisateur() );
+			stmt.setBoolean(3, actionBenevole.getPanneau_prendre());
+			stmt.setObject(4,actionBenevole.getDescr_action());
+			stmt.setBoolean(5,actionBenevole.getSignaleur());
+			stmt.setObject(6, actionBenevole.getHoraire_debut());
+			stmt.setObject(7, actionBenevole.getHoraire_fin());
+			stmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+
+
+		
+		// Retourne l'identifiant
+		return actionBenevole.getId_action();
+	}
+
+	
+	public void modifier(ActionBenevole actionBenevole)  {
+		
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String 				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Modifie le ActionBenevole
+			sql = "UPDATE action_benevole SET id_poste = ?,id_utilisateur = ?, panneau_prendre = ?, descr_action = ?, signaleur = ?, horaire_debut = ?, horaire_fin = ? WHERE id_action  =  ?";
+			stmt = cn.prepareStatement( sql );
+			stmt.setInt(1, actionBenevole.getId_poste() );
+			stmt.setInt(2, actionBenevole.getId_utilisateur() );
+			stmt.setBoolean(3, actionBenevole.getPanneau_prendre());
+			stmt.setObject(4,actionBenevole.getDescr_action());
+			stmt.setBoolean(5,actionBenevole.getSignaleur());
+			stmt.setObject(6, actionBenevole.getHoraire_debut());
+			stmt.setObject(7, actionBenevole.getHoraire_fin());
+			stmt.setInt(8, actionBenevole.getId_action() );
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+
+
+	}
+
+	
+	public void supprimer(int idActionBenevole)  {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String 				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Supprime le ActionBenevole
+			sql = "DELETE FROM action_benevole WHERE id_utilisateur = ? ";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, idActionBenevole );
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+	}
+
+	
+	public ActionBenevole retrouver(int idActionBenevole)  {
+		
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM action_benevole WHERE id_utilisateur = ?";
+>>>>>>> branch 'master' of https://github.com/g11-sav-master/projet.git
             stmt = cn.prepareStatement(sql);
             stmt.setObject( 1, idActionBenevole);
             rs = stmt.executeQuery();
