@@ -95,6 +95,11 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
 		menu.getItems().add( item );
 		itemComptes = item;
+		
+		item = new MenuItem( "Participants" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.ParticipantListe )  );
+		menu.getItems().add( item );
+		itemComptes = item;
 
 		
 		// Manu Etats

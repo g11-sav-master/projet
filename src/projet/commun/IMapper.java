@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import projet.data.Benevole;
+import projet.data.Participant;
 import projet.data.Categorie;
 import projet.data.Compte;
 import projet.data.Memo;
@@ -28,5 +29,7 @@ public interface IMapper {
 	Service update( @MappingTarget Service target, Service source );
 	
 	Benevole update(@MappingTarget Benevole benevole, Benevole source);
+	
+	Participant update(@MappingTarget Participant participant, Participant source);
 	
 }
