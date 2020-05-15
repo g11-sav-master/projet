@@ -11,22 +11,8 @@ public enum EnumView implements IEnumView {
 	
 	Info				( "systeme/ViewInfo.fxml" ),
 	Connexion			( "systeme/ViewConnexion.fxml" ),
-	CompteListe			( "compte/ViewCompteListe.fxml" ),
-	CompteForm			( "compte/ViewCompteForm.fxml" ),
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
 	BenevoleForm		( "benevole/ViewBenevoleForm.fxml" ),
-	CategorieListe		( "personne/ViewCategorieListe.fxml" ),
-	CategorieForm		( "personne/ViewCategorieForm.fxml" ),
-	PersonneListe		( "personne/ViewPersonneListe.fxml" ),
-	PersonneForm		( "personne/ViewPersonneForm.fxml" ),
-	MemoListe			( "memo/ViewMemoListe.fxml" ),
-	MemoForm			( "memo/ViewMemoForm.fxml" ),
-	MemoAjoutPersonnes	( "memo/ViewMemoAjoutPersonnes.fxml" ),
-	ServiceListe		( "service/ViewServiceListe.fxml" ),
-	ServiceForm			( "service/ViewServiceForm.fxml" ),
-	TestDaoCategorie	( "test/ViewTestDaoCategorie.fxml" ),
-	TestDaoMemo			( "test/ViewTestDaoMemo.fxml" ),
-	TestDaoService		( "test/ViewTestDaoService.fxml" ),
 	TestDaoUtilisateur	( "test/ViewTestDaoUtilisateur.fxml" ),
 	TestDaoBenevole		( "test/ViewTestDaoBenevole.fxml" ),
 	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),
@@ -39,8 +25,6 @@ public enum EnumView implements IEnumView {
 	TestDaoParticipeOrganisation ( "test/ViewTestDaoParticipeOrganisation.fxml" ),
 	TestDaoPoste ("test/ViewTestDaoPoste.fxml"),
 	TestDaoActionBenevole ("test/ViewTestDaoActionBenevole.fxml"),
-	EtatPersonnesParCateogire1	( "personne/ViewEtatPersonnesParCategorie1.fxml" ),
-	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" ),
 	;
 
 	

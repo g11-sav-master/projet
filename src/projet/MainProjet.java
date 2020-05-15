@@ -7,7 +7,6 @@ import jfox.commun.context.ContextLocal;
 import jfox.commun.context.IContext;
 import jfox.dao.jdbc.DataSourceSingleConnection;
 import projet.commun.IMapperImpl;
-import projet.report.ManagerReport;
 import projet.view.ManagerGui;
 
 
@@ -29,8 +28,7 @@ public class MainProjet {
 			context.addBean( dataSource );
 			context.addBean( new IMapperImpl() );
 
-			// Configure le ManagerReport
-			context.getBean( ManagerReport.class ).setDirReports( "etats" );;
+			
 			
 			// Démarre l'application
 			context.getBean( ManagerGui.class ).launch();

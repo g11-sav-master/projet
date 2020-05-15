@@ -10,8 +10,6 @@ import javafx.scene.control.MenuItem;
 import jfox.javafx.view.IManagerGui;
 import projet.commun.Roles;
 import projet.data.Compte;
-import projet.report.EnumReport;
-import projet.report.ManagerReport;
 import projet.view.systeme.ModelConnexion;
 
 
@@ -21,18 +19,14 @@ public class MenuBarAppli extends MenuBar {
 	// Champs
 	
 	private Menu	menuDonnees;
-	private Menu	menuEtats;
 	private Menu	menuTests;
 	
 	private MenuItem itemDeconnecter;
 
-	private MenuItem itemCategories;
-	private MenuItem itemComptes;
+	private MenuItem itemBenevole;
 	
 	@Inject
 	private IManagerGui 	managerGui;
-	@Inject
-	private ManagerReport 	managerReport;
 	@Inject
 	private ModelConnexion	modelConnexion;	
 	
@@ -69,65 +63,10 @@ public class MenuBarAppli extends MenuBar {
 		this.getMenus().add(menu);
 		menuDonnees = menu;
 		
-		item = new MenuItem( "Mémos" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.MemoListe )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Services" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.ServiceListe )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Personnes" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.PersonneListe )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Catégories" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieListe )  );
-		menu.getItems().add( item );
-		itemCategories = item;
-		
-		item = new MenuItem( "Comptes" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.CompteListe )  );
-		menu.getItems().add( item );
-		itemComptes = item;
-		
 		item = new MenuItem( "Bénévoles" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
 		menu.getItems().add( item );
-		itemComptes = item;
-
-		
-		// Manu Etats
-		
-		menu =  new Menu( "Etats" );;
-		this.getMenus().add(menu);
-		menuEtats = menu;
-		
-		item = new MenuItem( "Personnes par catégorie v1" );
-		item.setOnAction(  (e) ->  
-				managerGui.showDialog( EnumView.EtatPersonnesParCateogire1 ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Personnes par catégorie v2" );
-		item.setOnAction(  (e) ->  
-				managerGui.showDialog( EnumView.EtatPersonnesParCateogire2 ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Liste des personnes (PDF)" );
-		item.setOnAction(  (e) ->  
-				managerReport.openFilePdf( EnumReport.PersonnesListeSimple, null ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Liste des personnes (viewer)" );
-		item.setOnAction(  (e) ->  
-				managerReport.showViewer( EnumReport.PersonnesListeSimple, null ) );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "Annuaire téléphonique" );
-		item.setOnAction(  (e) ->  
-//				managerReport.print( EnumReport.AnnuaireTelephone, null ) );
-				managerReport.showViewer( EnumReport.AnnuaireTelephone, null ) );
-		menu.getItems().add( item );
+		itemBenevole = item;
 
 		
 		// Manu Tests
@@ -135,18 +74,6 @@ public class MenuBarAppli extends MenuBar {
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
 		menuTests = menu;
-		
-		item = new MenuItem( "DaoCategorie" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoCategorie )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "DaoMemo" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoMemo )  );
-		menu.getItems().add( item );
-		
-		item = new MenuItem( "DaoService" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoService )  );
-		menu.getItems().add( item );
 		
 		item = new MenuItem( "DaoUtilisateur" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.TestDaoUtilisateur )  );
@@ -216,25 +143,19 @@ public class MenuBarAppli extends MenuBar {
 		itemDeconnecter.setDisable(true);
 		
 		menuDonnees.setVisible(false);
-		itemCategories.setVisible(false);
-		itemComptes.setVisible(false);
-		menuEtats.setVisible(false);
+		itemBenevole.setVisible(false);
 		menuTests.setVisible(false);
-		menuEtats.setVisible(false);
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
 			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
 				menuDonnees.setVisible(true);
-				menuEtats.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				menuDonnees.setVisible(true);
-				itemCategories.setVisible(true);
-				itemComptes.setVisible(true);
+				itemBenevole.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}
 	}
-	
 }
