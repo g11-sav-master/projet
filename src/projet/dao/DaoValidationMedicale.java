@@ -71,7 +71,7 @@ public class DaoValidationMedicale {
 			if (daoParticipant.retrouver(validation.getIdUtilisateur()) != null) {
 				cn = dataSource.getConnection();
 				// Modifie la validation
-				sql = "UPDATE validation_medicale SET est_valide = ?, date_expiration = ? WHERE id_validation  =  ? id_utilisateur = ?";
+				sql = "UPDATE validation_medicale SET est_valide = ?, date_expiration = ? WHERE id_validation  =  ? AND id_utilisateur = ?";
 				stmt = cn.prepareStatement(sql);
 				stmt.setObject(1, validation.getEst_valide());
 				stmt.setObject(2, validation.getDate_expiration());
