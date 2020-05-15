@@ -91,8 +91,8 @@ public class ModelParticipant {
 		}
 		if (courant.getDateNaissance() == null) {
 			message.append("\nLa date de naissance ne doit pas être vide.");
-		} else if (courant.getDateNaissance().compareTo(LocalDate.now().minusYears(10)) >= 0) {
-			message.append("\nLe bénévole doit au moins avoir 10 ans.");
+		} else if (courant.getDateNaissance().compareTo(LocalDate.now().minusYears(13)) >= 0) {
+			message.append("\nLe participant doit au moins avoir 13 ans.");
 		}
 		if (courant.getLogin() == null || courant.getLogin().isEmpty()) {
 			message.append("\nLe login ne doit pas être vide.");
