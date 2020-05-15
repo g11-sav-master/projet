@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,11 @@ public class DaoActionBenevole {
 			cn = dataSource.getConnection();
 
 			// Insère le ActionBenevole
-			sql = "INSERT INTO action_benevole ( id_poste,id_utilisateur, panneau_prendre, descr_action, signaleur, horaire_debut, horaire_fin) VALUES ( ?, ?, ?,?,?,?,?)";
+			sql = "INSERT INTO action_benevole ( id_poste,id_utilisateur, panneau_prendre, descr_action, signaleur, horaire_debut, horaire_fin) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
 			
-			stmt = cn.prepareStatement( sql );
-			stmt.setInt(1, actionBenevole.getId_poste() );
-			stmt.setInt(2, actionBenevole.getId_utilisateur() );
+			stmt = cn.prepareStatement( sql,Statement.RETURN_GENERATED_KEYS  );
+			stmt.setObject(1, actionBenevole.getId_poste() );
+			stmt.setObject(2, actionBenevole.getId_utilisateur() );
 			stmt.setObject(3, actionBenevole.getPanneau_prendre());
 			stmt.setObject(4,actionBenevole.getDescr_action());
 			stmt.setObject(5,actionBenevole.getSignaleur());
@@ -58,9 +59,6 @@ public class DaoActionBenevole {
 		} finally {
 			UtilJdbc.close( stmt, cn );
 		}
-
-
-		
 		// Retourne l'identifiant
 		return actionBenevole.getId_action();
 	}
@@ -109,7 +107,7 @@ public class DaoActionBenevole {
 			cn = dataSource.getConnection();
 
 			// Supprime le ActionBenevole
-			sql = "DELETE FROM action_benevole WHERE id_utilisateur = ? ";
+			sql = "DELETE FROM action_benevole WHERE id_action = ? ";
 			stmt = cn.prepareStatement(sql);
 			stmt.setObject( 1, idActionBenevole );
 			stmt.executeUpdate();
