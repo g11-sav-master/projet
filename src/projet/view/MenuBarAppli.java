@@ -72,6 +72,11 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ParticipantListe )  );
 		menu.getItems().add( item );
 		itemBenevole = item;
+		
+		item = new MenuItem( "Raid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.RaidView )  );
+		menu.getItems().add( item );
+		itemBenevole = item;
 
 		
 		// Manu Tests

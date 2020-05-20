@@ -15,6 +15,8 @@ public enum EnumView implements IEnumView {
 	BenevoleForm		( "benevole/ViewBenevoleForm.fxml" ),
 	ParticipantListe	( "participant/ViewParticipantListe.fxml" ),
 	ParticipantForm		( "participant/ViewParticipantForm.fxml"),
+	RaidView			( "raid/ViewRaidListe.fxml" ),
+	RaidForm			( "raid/ViewFormRaid.fxml"),
 	TestDaoUtilisateur	( "test/ViewTestDaoUtilisateur.fxml" ),
 	TestDaoBenevole		( "test/ViewTestDaoBenevole.fxml" ),
 	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),

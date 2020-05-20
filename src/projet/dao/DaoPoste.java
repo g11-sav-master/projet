@@ -48,7 +48,7 @@ public class DaoPoste {
 				UtilJdbc.close( stmt, cn );
 			}
 			// Retourne l'identifiant
-			return poste.getId_poste();
+			return poste.getId();
 		}
 		
 		//modifier poste
@@ -67,7 +67,7 @@ public class DaoPoste {
 				stmt = cn.prepareStatement( sql );
 				stmt.setObject( 1, poste.getId_raid() );
 				stmt.setObject( 2, poste.getNbr_benev() );
-				stmt.setObject( 3, poste.getId_poste() );
+				stmt.setObject( 3, poste.getId() );
 				stmt.executeUpdate();
 				
 			} catch (SQLException e) {
