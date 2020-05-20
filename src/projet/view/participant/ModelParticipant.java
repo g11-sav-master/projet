@@ -79,8 +79,8 @@ public class ModelParticipant {
 		}
 		if (courant.getNumTel() == null || courant.getNumTel().isEmpty()) {
 			message.append("\nLe numéro de téléphone ne doit pas être vide.");
-		} else if (courant.getNumTel().length() > 12) {
-			message.append("\nLe numéro de téléphone n'a pas le bon nombre de numéro : 12.");
+		} else if (courant.getNumTel().length() != 10 ) {
+			message.append("\nLe numéro de téléphone n'a pas le bon nombre de numéro : 10.");
 		} else {
 			for (char c : courant.getNumTel().toCharArray()) {
 				if (c > '9' || c < '0') {
