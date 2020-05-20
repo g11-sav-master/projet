@@ -13,7 +13,8 @@ CREATE TABLE utilisateur (
 	date_naissance	DATE,
 	login			VARCHAR(50),
 	mot_passe		VARCHAR(50),
-	CONSTRAINT utilisateur_pkey PRIMARY KEY (id_utilisateur)
+	CONSTRAINT utilisateur_pkey PRIMARY KEY (id_utilisateur),
+	UNIQUE(login)
 );
 
 CREATE TABLE role_benevole (
