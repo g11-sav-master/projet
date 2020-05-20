@@ -100,11 +100,14 @@ public class ModelParticipant {
 			message.append("\nLe login est trop long : 50 maxi.");
 		} else {
 			if (courant.getIdUtilisateur() != null) {
-				for (Utilisateur utilisateur : daoUtilisateur.listerTout()) {
-					if (utilisateur.getLogin() != null && utilisateur.getLogin().equals(courant.getLogin())) {
-						message.append(
-								"\nLe login est déjà utilisé pour un autre utilisateur. Merci d'en choisir un autre");
-						break;
+				actualiserListe();
+				for (Utilisateur utilisateur : liste) {
+					if (utilisateur.getIdUtilisateur() != courant.getIdUtilisateur()) {
+						if (utilisateur.getLogin() != null && utilisateur.getLogin().equals(courant.getLogin())) {
+							message.append(
+									"\nLe login est déjà utilisé pour un autre utilisateur. Merci d'en choisir un autre");
+							break;
+						}
 					}
 				}
 			}

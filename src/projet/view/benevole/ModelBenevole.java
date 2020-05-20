@@ -79,8 +79,8 @@ public class ModelBenevole {
 		}
 		if (courant.getNumTel() == null || courant.getNumTel().isEmpty()) {
 			message.append("\nLe numéro de téléphone ne doit pas être vide.");
-		} else if (courant.getNumTel().length() != 12) {
-			message.append("\nLe numéro de téléphone n'a pas le bon nombre de numéro : 12.");
+		} else if (courant.getNumTel().length() != 10) {
+			message.append("\nLe numéro de téléphone n'a pas le bon nombre de numéro : 10.");
 		} else {
 			for (char c : courant.getNumTel().toCharArray()) {
 				if (c > '9' || c < '0') {
@@ -100,12 +100,14 @@ public class ModelBenevole {
 			message.append("\nLe login est trop long : 50 maxi.");
 		} else {
 			if (courant.getIdUtilisateur() != null) {
-
-				for (Utilisateur utilisateur : daoUtilisateur.listerTout()) {
-					if (utilisateur.getLogin() != null && utilisateur.getLogin().equals(courant.getLogin())) {
-						message.append(
-								"\nLe login est déjà utilisé pour un autre utilisateur. Merci d'en choisir un autre");
-						break;
+				actualiserListe();
+				for (Utilisateur utilisateur : liste) {
+					if (utilisateur.getIdUtilisateur() != courant.getIdUtilisateur()) {
+						if (utilisateur.getLogin() != null && utilisateur.getLogin().equals(courant.getLogin())) {
+							message.append(
+									"\nLe login est déjà utilisé pour un autre utilisateur. Merci d'en choisir un autre");
+							break;
+						}
 					}
 				}
 			}
