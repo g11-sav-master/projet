@@ -192,4 +192,25 @@ public class DaoActionBenevole {
 		
 		return actionBenevole;
 	}
+	
+	public void supprimerPoste(int idActionBenevole)  {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String 				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Supprime le ActionBenevole
+			sql = "DELETE FROM action_benevole WHERE id_poste = ? ";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, idActionBenevole );
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
+	}
 }
