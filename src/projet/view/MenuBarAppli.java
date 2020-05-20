@@ -29,6 +29,8 @@ public class MenuBarAppli extends MenuBar {
 	
 	private MenuItem itemPoste;
 	
+	private MenuItem itemCategorieRaid;
+	
 	@Inject
 	private IManagerGui 	managerGui;
 	@Inject
@@ -86,6 +88,11 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.RaidView )  );
 		menu.getItems().add( item );
 		itemBenevole = item;
+		
+		item = new MenuItem( "CategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieRaidListe )  );
+		menu.getItems().add( item );
+		itemCategorieRaid = item;
 
 		
 		// Manu Tests
