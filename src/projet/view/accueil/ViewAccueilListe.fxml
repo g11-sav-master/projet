@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="paneRoot" prefHeight="350.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.accueil.ControllerAccueilListe">
+   <children>
+      <Label alignment="CENTER" styleClass="titre-vue" text="Accueil" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+      <HBox layoutX="22.0" layoutY="75.0">
+         <children>
+            <TabPane prefHeight="229.0" prefWidth="369.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Dossier attentes">
+                     <content>
+                        <ListView fx:id="listViewDossierAttentes" prefHeight="171.0" />
+                     </content>
+                </Tab>
+                  <Tab text="Nombre de repas">
+                     <content>
+                        <ListView fx:id="listViewNbrRepas" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </TabPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="263.0" prefHeight="60.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>

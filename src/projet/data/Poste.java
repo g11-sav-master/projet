@@ -24,7 +24,7 @@ public class Poste {
 		return this.id_poste;
 	}
 	
-	public final Integer getId_poste() {
+	public final Integer getId() {
 		return this.id_posteProperty().getValue();
 	}
 	
@@ -59,7 +59,7 @@ public class Poste {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "poste :"+this.getId_poste();
+		return "poste :"+this.getId();
 	}
 
 	

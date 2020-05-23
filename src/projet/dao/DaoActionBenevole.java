@@ -147,6 +147,34 @@ public class DaoActionBenevole {
 			UtilJdbc.close( rs, stmt, cn );
 		}
 	}
+	
+public ActionBenevole retrouverPoste(int idPoste)  {
+		
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		ResultSet 			rs 		= null;
+		String				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM action_benevole WHERE id_poste = ?";
+
+            stmt = cn.prepareStatement(sql);
+            stmt.setObject( 1, idPoste);
+            rs = stmt.executeQuery();
+
+            if ( rs.next() ) {
+                return construireActionBenevole(rs);
+            } else {
+            	return null;
+            }
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( rs, stmt, cn );
+		}
+	}
 
 	
 	public List<ActionBenevole> listerTout()   {
@@ -191,5 +219,26 @@ public class DaoActionBenevole {
 		actionBenevole.setHoraire_fin(rs.getObject("horaire_fin",LocalTime.class));
 		
 		return actionBenevole;
+	}
+	
+	public void supprimerPoste(int idActionBenevole)  {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String 				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Supprime le ActionBenevole
+			sql = "DELETE FROM action_benevole WHERE id_poste = ? ";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, idActionBenevole );
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
 	}
 }
