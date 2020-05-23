@@ -2,14 +2,12 @@ package projet.view.action_benevole;
 
 import javax.inject.Inject;
 
-import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalTimeStringConverter;
 import jfox.javafx.view.IManagerGui;

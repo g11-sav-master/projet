@@ -31,6 +31,10 @@ public class MenuBarAppli extends MenuBar {
 	
 	private MenuItem itemCategorieRaid;
 	
+	private MenuItem itemRaid;
+	
+	private MenuItem itemActionBenevole;
+	
 	@Inject
 	private IManagerGui 	managerGui;
 	@Inject
@@ -87,7 +91,7 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Raid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.RaidView )  );
 		menu.getItems().add( item );
-		itemBenevole = item;
+		itemRaid = item;
 		
 		item = new MenuItem( "CategorieRaid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieRaidListe )  );
@@ -97,7 +101,7 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Actions Bénévole" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ActionBenevoleListe )  );
 		menu.getItems().add( item );
-		itemCategorieRaid = item;
+		itemActionBenevole = item;
 
 		
 		// Menu Tests
@@ -175,7 +179,13 @@ public class MenuBarAppli extends MenuBar {
 		
 		menuDonnees.setVisible(false);
 		itemBenevole.setVisible(false);
+		itemParticipant.setVisible(false);
+		itemCategorieRaid.setVisible(false);
+		itemPoste.setVisible(false);
+		itemRaid.setVisible(false);
+		itemActionBenevole.setVisible(false);
 		menuTests.setVisible(false);
+		
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
@@ -185,6 +195,11 @@ public class MenuBarAppli extends MenuBar {
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				menuDonnees.setVisible(true);
 				itemBenevole.setVisible(true);
+				itemParticipant.setVisible(true);
+				itemPoste.setVisible(true);
+				itemCategorieRaid.setVisible(true);
+				itemRaid.setVisible(true);
+				itemActionBenevole.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}

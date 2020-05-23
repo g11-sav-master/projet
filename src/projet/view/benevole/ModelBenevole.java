@@ -213,7 +213,7 @@ public class ModelBenevole {
 
 	public void supprimer(Benevole item) {
 		for (ActionBenevole action : daoActionBenevole.listerTout()) {
-			if(action.getId_utilisateur() == item.getIdUtilisateur()) {
+			if(action.getBenevole().getIdUtilisateur() == item.getIdUtilisateur()) {
 				StringBuilder message = new StringBuilder();
 				message.append("\nImpossible de supprimer ce bénévole car des actions sont encore lié à ce dernier.");
 				throw new ExceptionValidation(message.toString().substring(1));

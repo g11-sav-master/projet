@@ -1,8 +1,5 @@
 package projet.view.raid;
 
-
-import java.time.LocalDate;
-
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
