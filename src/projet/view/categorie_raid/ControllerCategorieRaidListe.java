@@ -43,7 +43,7 @@ public class ControllerCategorieRaidListe {
 		// Data binding
 		listView.setItems( modelCategorieRaid.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getIdCategorieRaid()+" "));
+		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getNomCategorie()));
 
 		
 		// Configuraiton des boutons
