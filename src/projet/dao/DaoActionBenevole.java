@@ -23,6 +23,11 @@ public class DaoActionBenevole {
 	@Inject
 	private DataSource		dataSource;
 	
+	@Inject
+	private DaoPoste		daoPoste;
+	
+	@Inject
+	private DaoBenevole		daoBenevole;
 
 	
 	// Actions
@@ -41,8 +46,18 @@ public class DaoActionBenevole {
 			sql = "INSERT INTO action_benevole ( id_poste,id_utilisateur, panneau_prendre, descr_action, signaleur, horaire_debut, horaire_fin) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
 			
 			stmt = cn.prepareStatement( sql,Statement.RETURN_GENERATED_KEYS  );
-			stmt.setObject(1, actionBenevole.getId_poste() );
-			stmt.setObject(2, actionBenevole.getId_utilisateur() );
+			if ( actionBenevole.getPoste() == null ) {
+				stmt.setObject( 1, null );
+				} else {
+				stmt.setObject( 1,
+				actionBenevole.getPoste().getId_poste() );
+				}
+			if ( actionBenevole.getBenevole() == null ) {
+				stmt.setObject( 2, null );
+				} else {
+				stmt.setObject( 2,
+				actionBenevole.getBenevole().getIdUtilisateur() );
+				}
 			stmt.setObject(3, actionBenevole.getPanneau_prendre());
 			stmt.setObject(4,actionBenevole.getDescr_action());
 			stmt.setObject(5,actionBenevole.getSignaleur());
@@ -76,8 +91,18 @@ public class DaoActionBenevole {
 			// Modifie le ActionBenevole
 			sql = "UPDATE action_benevole SET id_poste = ?,id_utilisateur = ?, panneau_prendre = ?, descr_action = ?, signaleur = ?, horaire_debut = ?, horaire_fin = ? WHERE id_action  =  ?";
 			stmt = cn.prepareStatement( sql );
-			stmt.setInt(1, actionBenevole.getId_poste() );
-			stmt.setInt(2, actionBenevole.getId_utilisateur() );
+			if ( actionBenevole.getPoste() == null ) {
+				stmt.setObject( 1, null );
+				} else {
+				stmt.setObject( 1,
+				actionBenevole.getPoste().getId_poste() );
+				}
+			if ( actionBenevole.getBenevole() == null ) {
+				stmt.setObject( 2, null );
+				} else {
+				stmt.setObject( 2,
+				actionBenevole.getBenevole().getIdUtilisateur() );
+				}
 			stmt.setBoolean(3, actionBenevole.getPanneau_prendre());
 			stmt.setObject(4,actionBenevole.getDescr_action());
 			stmt.setBoolean(5,actionBenevole.getSignaleur());
@@ -182,8 +207,14 @@ public class DaoActionBenevole {
 	private ActionBenevole construireActionBenevole( ResultSet rs) throws SQLException {
 		ActionBenevole actionBenevole = new ActionBenevole();
 		actionBenevole.setId_action(rs.getObject( "id_action", Integer.class ));
-		actionBenevole.setId_poste(rs.getObject( "id_poste", Integer.class ));
-		actionBenevole.setId_utilisateur(rs.getObject("id_utilisateur",Integer.class));
+		Integer idPoste = rs.getObject( "id_poste", Integer.class );
+		if ( idPoste != null ) {
+		actionBenevole.setPoste( daoPoste.retrouver(idPoste) );
+		}
+		Integer idUtil = rs.getObject( "id_utilisateur", Integer.class );
+		if ( idUtil != null ) {
+		actionBenevole.setBenevole( daoBenevole.retrouver(idUtil) );
+		}
 		actionBenevole.setPanneau_prendre(rs.getObject("panneau_prendre", Boolean.class));
 		actionBenevole.setDescr_action(rs.getObject("descr_action",String.class));
 		actionBenevole.setSignaleur(rs.getObject("signaleur", Boolean.class));
@@ -191,5 +222,26 @@ public class DaoActionBenevole {
 		actionBenevole.setHoraire_fin(rs.getObject("horaire_fin",LocalTime.class));
 		
 		return actionBenevole;
+	}
+	
+	public void supprimerPoste(int idActionBenevole)  {
+		Connection			cn		= null;
+		PreparedStatement	stmt	= null;
+		String 				sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			// Supprime le ActionBenevole
+			sql = "DELETE FROM action_benevole WHERE id_poste = ? ";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject( 1, idActionBenevole );
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close( stmt, cn );
+		}
 	}
 }

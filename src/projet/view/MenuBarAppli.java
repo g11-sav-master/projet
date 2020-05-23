@@ -25,6 +25,12 @@ public class MenuBarAppli extends MenuBar {
 
 	private MenuItem itemBenevole;
 	
+	private MenuItem itemParticipant;
+	
+	private MenuItem itemPoste;
+	
+	private MenuItem itemCategorieRaid;
+	
 	@Inject
 	private IManagerGui 	managerGui;
 	@Inject
@@ -71,10 +77,30 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Participant" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ParticipantListe )  );
 		menu.getItems().add( item );
+		itemParticipant = item;
+		
+		item = new MenuItem( "Poste" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.PosteListe )  );
+		menu.getItems().add( item );
+		itemPoste = item;
+		
+		item = new MenuItem( "Raid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.RaidView )  );
+		menu.getItems().add( item );
 		itemBenevole = item;
+		
+		item = new MenuItem( "CategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieRaidListe )  );
+		menu.getItems().add( item );
+		itemCategorieRaid = item;
+		
+		item = new MenuItem( "Actions Bénévole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.ActionBenevoleListe )  );
+		menu.getItems().add( item );
+		itemCategorieRaid = item;
 
 		
-		// Manu Tests
+		// Menu Tests
 		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
