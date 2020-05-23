@@ -1,24 +1,31 @@
 package projet.view.benevole;
 
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 import javax.inject.Inject;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
+import projet.dao.DaoActionBenevole;
 import projet.dao.DaoBenevole;
-import projet.dao.DaoUtilisateur;
+import projet.dao.DaoParticipeOrganisation;
+import projet.dao.DaoRoleBenevole;
+import projet.data.ActionBenevole;
 import projet.data.Benevole;
+import projet.data.ParticipeOrganisation;
 import projet.data.Utilisateur;
+import projet.data.RoleBenevole;
 
 public class ModelBenevole {
 
 	private final ObservableList<Benevole> liste = FXCollections.observableArrayList();
+	
+	private final ObservableList<RoleBenevole> listeRole = FXCollections.observableArrayList();
 
 	private final Benevole courant = new Benevole();
+	private final RoleBenevole roleSelected = new RoleBenevole();
 
 	// Autres champs
 	@Inject
@@ -26,7 +33,11 @@ public class ModelBenevole {
 	@Inject
 	private DaoBenevole daoBenevole;
 	@Inject
-	private DaoUtilisateur daoUtilisateur;
+	private DaoRoleBenevole daoRoleBenevole;
+	@Inject
+	private DaoActionBenevole daoActionBenevole;
+	@Inject
+	private DaoParticipeOrganisation daoParticipeOrganisation;
 
 	// Getters
 
@@ -37,11 +48,32 @@ public class ModelBenevole {
 	public Benevole getCourant() {
 		return courant;
 	}
+	
+	public RoleBenevole getRoleSelected() {
+		return roleSelected;
+	}
+	
+	public RoleBenevole getCourantRole() {
+		actualiserListeRole();
+		for (RoleBenevole role : listeRole) {
+			if(role.getId_role() == courant.getId_role())
+				return role;
+		}
+		return null;
+	}
+	
+	public ObservableList<RoleBenevole> getRoleBenevoleListe() {
+		return listeRole;
+	}
 
 	// Actualisations
 
 	public void actualiserListe() {
 		liste.setAll(daoBenevole.listerTout());
+	}
+	
+	public void actualiserListeRole() {
+		listeRole.setAll(daoRoleBenevole.listerTout());
 	}
 
 	// Actions
@@ -52,6 +84,14 @@ public class ModelBenevole {
 
 	public void preparerModifier(Benevole item) {
 		mapper.update(courant, daoBenevole.retrouver(item.getIdUtilisateur()));
+	}
+	
+	public void preparerAjouterRole() {
+		mapper.update(roleSelected, new RoleBenevole());
+	}
+
+	public void preparerModifierRole(RoleBenevole item) {
+		mapper.update(roleSelected, item);
 	}
 
 	public void validerMiseAJour() {
@@ -115,8 +155,14 @@ public class ModelBenevole {
 		if (courant.getId_role() == null) {
 			message.append("\nLe rôle ne peut être vide.");
 		} else {
-			System.out.println(
-					"Fichier ModelBenevole fonction valider mise à jour à completer en rajoutant DaoRoleBenevole");
+			actualiserListeRole();
+			ArrayList<Integer> lstIdRole = new ArrayList<Integer>();
+			for (RoleBenevole role : listeRole) {
+				lstIdRole.add(role.getId_role());
+			}
+			if(!lstIdRole.contains(courant.getId_role())) {
+				message.append("\nLe rôle n'a pas un id valide.");
+			}
 		}
 
 		if (message.length() > 0) {
@@ -133,11 +179,72 @@ public class ModelBenevole {
 			daoBenevole.modifier(courant);
 		}
 	}
+	
+	public void validerMiseAJourRole() {
+
+		// Vérifie la validité des données
+
+		StringBuilder message = new StringBuilder();
+
+		if (roleSelected.getNom_role() == null || roleSelected.getNom_role().isEmpty()) {
+			message.append("\nLe nom ne doit pas être vide.");
+		} else if (roleSelected.getNom_role().length() > 50) {
+			message.append("\nLe nom est trop long : 50 maxi.");
+		}
+
+		if (message.length() > 0) {
+			throw new ExceptionValidation(message.toString().substring(1));
+		}
+
+		// Effectue la mise à jour
+
+		if (roleSelected.getId_role() == null) {
+			// Insertion
+			roleSelected.setId_role(daoRoleBenevole.inserer(roleSelected));
+		} else {
+			// modficiation
+			daoRoleBenevole.modifier(roleSelected);
+			if(courant.getId_role() == roleSelected.getId_role()) {
+				courant.setId_role(null);
+				courant.setId_role(roleSelected.getId_role());
+			}
+		}
+	}
 
 	public void supprimer(Benevole item) {
-
+		for (ActionBenevole action : daoActionBenevole.listerTout()) {
+			if(action.getId_utilisateur() == item.getIdUtilisateur()) {
+				StringBuilder message = new StringBuilder();
+				message.append("\nImpossible de supprimer ce bénévole car des actions sont encore lié à ce dernier.");
+				throw new ExceptionValidation(message.toString().substring(1));
+			}
+		}
+		for (ParticipeOrganisation participeOrga : daoParticipeOrganisation.listerTout()) {
+			if(participeOrga.getIdUtilisateur() == item.getIdUtilisateur()) {
+				StringBuilder message = new StringBuilder();
+				message.append("\nImpossible de supprimer ce bénévole car une participation à l'organisation d'un raid est encore lié à ce dernier.");
+				throw new ExceptionValidation(message.toString().substring(1));
+			}
+		}
+		
 		daoBenevole.supprimer(item.getIdUtilisateur());
-		System.out.println(UtilFX.findNext(liste, item));
 		mapper.update(courant, UtilFX.findNext(liste, item));
+	}
+	
+	public void supprimerRole(RoleBenevole item) {
+		for (Benevole benevole : liste) {
+			if(benevole.getId_role() != null && benevole.getId_role() == item.getId_role()) {
+				StringBuilder message = new StringBuilder();
+				message.append("\nUn bénévole au moins possède ce rôle.");
+				throw new ExceptionValidation(message.toString().substring(1));
+			}
+		}
+		if(courant.getId_role() == item.getId_role()) {
+			StringBuilder message = new StringBuilder();
+			message.append("\nLe bénévole sélectionné possède ce rôle. Merci d'en changer avant de supprimer ce rôle");
+			throw new ExceptionValidation(message.toString().substring(1));
+		}
+		daoRoleBenevole.supprimer(item.getId_role());
+		mapper.update(roleSelected, UtilFX.findNext(listeRole, item));
 	}
 }

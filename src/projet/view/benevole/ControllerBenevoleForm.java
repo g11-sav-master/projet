@@ -2,13 +2,13 @@ package projet.view.benevole;
 
 import javax.inject.Inject;
 
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
-import jfox.javafx.util.ConverterStringInteger;
 import jfox.javafx.util.ConverterStringLocalDate;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
@@ -39,7 +39,6 @@ public class ControllerBenevoleForm {
 	private TextField		textFieldRole;
 	@FXML
 	private CheckBox		checkBoxPossedePermis;
-
 	
 	// Autres champs
 	
@@ -47,6 +46,7 @@ public class ControllerBenevoleForm {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelBenevole modelBenevole;
+	
 
 
 	// Initialisation du Controller
@@ -63,12 +63,26 @@ public class ControllerBenevoleForm {
 		textFieldE_Mail.textProperty().bindBidirectional( courant.e_mailProperty() );
 		textFieldNum_Tel.textProperty().bindBidirectional( courant.numTelProperty() );
 		textFieldLogin.textProperty().bindBidirectional( courant.loginProperty() );
-		textFieldRole.textProperty().bindBidirectional( courant.id_roleProperty(), new ConverterStringInteger() );
+		if(modelBenevole.getCourantRole() == null) {
+			textFieldRole.setText("Non désigné");
+		}else {
+			textFieldRole.setText(modelBenevole.getCourantRole().nom_roleProperty().getValue());
+		}
+		courant.id_roleProperty().addListener(new ChangeListener<Integer>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Integer> arg0, Integer oldValue, Integer newValue) {
+				if(newValue == null) {
+					textFieldRole.setText("Non désigné");
+				}else {
+					textFieldRole.setText(modelBenevole.getCourantRole().nom_roleProperty().getValue());
+				}
+			}
+		} );
 		UtilFX.bindBidirectional( datePickerNaissance.getEditor(), courant.dateNaissanceProperty(), new ConverterStringLocalDate() );
 		checkBoxPossedePermis.selectedProperty().bindBidirectional( courant.possedePermisProperty() );
-		
-		
 	}
+	
 	
 	
 	// Actions
@@ -82,6 +96,11 @@ public class ControllerBenevoleForm {
 	private void doValider() {
 		modelBenevole.validerMiseAJour();
 		managerGui.showView( EnumView.BenevoleListe );
+	}
+	
+	@FXML
+	private void doChoixRole() {
+		managerGui.showDialog(EnumView.BenevoleListeRole);
 	}
 	
 }

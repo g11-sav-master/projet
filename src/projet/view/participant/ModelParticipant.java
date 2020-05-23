@@ -100,8 +100,7 @@ public class ModelParticipant {
 			message.append("\nLe login est trop long : 50 maxi.");
 		} else {
 			if (courant.getIdUtilisateur() != null) {
-				actualiserListe();
-				for (Utilisateur utilisateur : liste) {
+				for (Utilisateur utilisateur : daoUtilisateur.listerTout()) {
 					if (utilisateur.getIdUtilisateur() != courant.getIdUtilisateur()) {
 						if (utilisateur.getLogin() != null && utilisateur.getLogin().equals(courant.getLogin())) {
 							message.append(
