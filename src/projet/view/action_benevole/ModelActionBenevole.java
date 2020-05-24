@@ -9,8 +9,6 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoActionBenevole;
-import projet.dao.DaoPoste;
-import projet.dao.DaoBenevole;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;
 import projet.data.Poste;
@@ -29,10 +27,6 @@ public class ModelActionBenevole {
 	private IMapper mapper;
 	@Inject
 	private DaoActionBenevole daoActionBenevole;
-	@Inject
-	private DaoPoste daoPoste;
-	@Inject 
-	private DaoBenevole daoBenevole;
 	@Inject 
 	private ModelBenevole modelBenevole;
 	@Inject 
@@ -64,11 +58,15 @@ public class ModelActionBenevole {
 	// Actions
 
 	public void preparerAjouter() {
+		modelBenevole.actualiserListe();
+		modelPoste.actualiserListe();
 		mapper.update(courant, new ActionBenevole());
 	}
 	
 
 	public void preparerModifier(ActionBenevole item) {
+		modelBenevole.actualiserListe();
+		modelPoste.actualiserListe();
 		mapper.update(courant, daoActionBenevole.retrouver(item.getId_action()));
 	}
 
@@ -80,13 +78,9 @@ public class ModelActionBenevole {
 
 		if (courant.getPoste() == null)  {
 			message.append("\nLe poste doit être défini.");
-		} else if (  daoPoste.retrouver(courant.getPoste().getId_poste()) == null ) {
-			message.append("\nLe poste n'existe pas.");
 		}
 		if (courant.getBenevole() == null ) {
 			message.append("\nLe bénévole doit être défini");
-		} else if (daoBenevole.retrouver(courant.getBenevole().getIdUtilisateur()) == null) {
-			message.append("\nLe bénévole n'existe pas.");
 		}
 		
 		if (message.length() > 0) {
