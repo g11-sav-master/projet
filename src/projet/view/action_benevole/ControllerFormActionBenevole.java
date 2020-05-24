@@ -61,6 +61,24 @@ public class ControllerFormActionBenevole {
 			return null;
 		}
 	};
+	
+	StringConverter<LocalTime> converter = new StringConverter<LocalTime>() {
+
+	    @Override
+	    public LocalTime fromString(String s) {
+	        if (s == null) {
+	            return LocalTime.parse("00:00") ;
+	        } else {
+	            return LocalTime.parse(s);
+	        }
+	    }
+
+
+	    @Override
+	    public String toString(LocalTime t) {
+	        return t.toString();
+	    }
+	};
 
 	// Initialisation du Controller
 
@@ -78,12 +96,22 @@ public class ControllerFormActionBenevole {
 		textAreaDesc.textProperty().bindBidirectional(courant.descr_actionProperty());
 		checkBoxPanneau.selectedProperty().bindBidirectional(courant.panneau_prendreProperty());
 		checkBoxSignal.selectedProperty().bindBidirectional(courant.signaleurProperty());
+		if (courant.getHoraire_debut() != null && courant.getHoraire_fin() != null)
+		{
 		textFieldDebut.textProperty().bindBidirectional(courant.horaire_debutProperty(), new LocalTimeStringConverter());
 		TextFormatter<LocalTime> tf = new TextFormatter<>(filter);
 		textFieldDebut.setTextFormatter(tf);
 		textFieldFin.textProperty().bindBidirectional(courant.horaire_finProperty(), new LocalTimeStringConverter());
 		TextFormatter<LocalTime> tf2 = new TextFormatter<>(filter);
 		textFieldFin.setTextFormatter(tf2);
+		} else {
+			textFieldDebut.textProperty().bindBidirectional(courant.horaire_debutProperty(), new LocalTimeStringConverter());
+			TextFormatter<LocalTime> tf = new TextFormatter<>(converter,LocalTime.parse("00:00") ,filter);
+			textFieldDebut.setTextFormatter(tf);
+			textFieldFin.textProperty().bindBidirectional(courant.horaire_finProperty(), new LocalTimeStringConverter());
+			TextFormatter<LocalTime> tf2 = new TextFormatter<>(converter,LocalTime.parse("00:00") ,filter);
+			textFieldFin.setTextFormatter(tf2);
+		}
 	}
 
 	// Actions
