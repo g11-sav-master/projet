@@ -11,6 +11,8 @@ import projet.dao.DaoPoste;
 import projet.dao.DaoActionBenevole;
 import projet.dao.DaoRaid;
 import projet.data.Poste;
+import projet.data.Raid;
+import projet.view.raid.ModelRaid;
 
 public class ModelPoste {
 
@@ -26,7 +28,10 @@ public class ModelPoste {
 	@Inject
 	private DaoActionBenevole daoActionB;
 	@Inject
+	private ModelRaid modelRaid;
+	@Inject
 	private DaoRaid daoRaid;
+
 
 	// Getters
 
@@ -36,6 +41,10 @@ public class ModelPoste {
 
 	public Poste getCourant() {
 		return courant;
+	}
+	
+	public ObservableList<Raid> getRaid() {
+		return modelRaid.getListe();
 	}
 
 	// Actualisations
