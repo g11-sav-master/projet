@@ -2,6 +2,8 @@ package projet.view.poste;
 
 import javax.inject.Inject;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -48,7 +50,7 @@ public class ControllerPosteForm {
 		textFieldIdPoste.textProperty().bindBidirectional(courant.id_posteProperty(), new IntegerStringConverter());
 		//textFieldIdRaid.textProperty().bindBidirectional(courant.id_raidProperty(), new IntegerStringConverter());
 		textFieldNbrBen.textProperty().bindBidirectional(courant.nbr_benevProperty(), new IntegerStringConverter());
-		CBNomRaid.setItems(modelposte.getRaid());
+		CBNomRaid.setItems(FXCollections.observableArrayList(daoRaid.listerTout()));
 		CBNomRaid.getSelectionModel().select(daoRaid.retrouver(courant.getId_raid()));
 
 	}
