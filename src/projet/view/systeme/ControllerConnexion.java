@@ -28,8 +28,6 @@ public class ControllerConnexion {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelConnexion	modelConnexion;
-	@Inject
-	private ModelInfo		modelInfo;
 	
 	
 	// Initialisation du Controller
@@ -59,9 +57,7 @@ public class ControllerConnexion {
 		managerGui.execTask( () -> {
 			modelConnexion.ouvrirSessionUtilisateur();
 			Platform.runLater( () -> {
-         			modelInfo.titreProperty().setValue( "Bienvenue" );
-        			modelInfo.messageProperty().setValue( "Connexion réussie" );
-        			managerGui.showView(EnumView.Info);
+        			managerGui.showView(EnumView.Accueil);
             }) ;
 		} );
 	}

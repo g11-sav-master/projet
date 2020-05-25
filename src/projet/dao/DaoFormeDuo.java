@@ -128,6 +128,33 @@ public class DaoFormeDuo {
 		}
 	}
 
+	public FormeDuo retrouverUtilisateur(int idUtilisateur) {
+
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM forme_duo WHERE id_utilisateur = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setInt( 1, idUtilisateur );
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return construireFormeDuo(rs);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(rs, stmt, cn);
+		}
+	}
+	
 	public List<FormeDuo> listerTout() {
 
 		Connection cn = null;
