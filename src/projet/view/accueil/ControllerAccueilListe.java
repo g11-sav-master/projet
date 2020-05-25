@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import jfox.javafx.util.UtilFX;
-import jfox.javafx.view.IManagerGui;
 import projet.data.Participant;
 
 
@@ -17,13 +16,12 @@ public class ControllerAccueilListe {
 	@FXML
 	private ListView<Participant>		listViewDossierAttentes;
 	@FXML
-	private ListView<String>			listViewNbrRepas;			
-
+	private ListView<String>			listViewNbrRepas;		
+	@FXML
+	private ListView<String>			listViewPoste;
 
 	// Autres champs
 	
-	@Inject
-	private IManagerGui			managerGui;
 	@Inject
 	private ModelAccueil		modelAccueil;
 	
@@ -38,6 +36,8 @@ public class ControllerAccueilListe {
 		listViewDossierAttentes.setCellFactory(  UtilFX.cellFactory( item -> item.getNom().toUpperCase()+" "+item.getPrenom() ));
 		listViewNbrRepas.setItems( modelAccueil.listerNbrRepas() );
 		listViewNbrRepas.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
+		listViewPoste.setItems( modelAccueil.listerPosteNonRempli() );
+		listViewPoste.setCellFactory( UtilFX.cellFactory( item -> item.toString() ));
 		
 	}
 	

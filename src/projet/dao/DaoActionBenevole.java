@@ -201,6 +201,35 @@ public ActionBenevole retrouverPoste(int idPoste)  {
 		}
 	}
 
+public int nombreBenevoleAttribue(int idPoste, int id_raid)  {
+	
+	Connection			cn		= null;
+	PreparedStatement	stmt	= null;
+	ResultSet 			rs 		= null;
+	String				sql;
+
+	try {
+		cn = dataSource.getConnection();
+
+		sql = "SELECT COUNT(*) FROM action_benevole a INNER JOIN poste p ON p.id_poste = a.id_poste INNER JOIN raid r ON r.id_raid = p.id_raid WHERE a.id_poste = ? AND r.id_raid = ?";
+
+        stmt = cn.prepareStatement(sql);
+        stmt.setInt( 1, idPoste);
+        stmt.setInt( 2, id_raid);
+        rs = stmt.executeQuery();
+
+        if ( rs.next() ) {
+            return Integer.parseInt((rs.getObject(1).toString()));
+        } else {
+        	return 0;
+        }
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+	} finally {
+		UtilJdbc.close( rs, stmt, cn );
+	}
+}
+
 	
 	public List<ActionBenevole> listerTout()   {
 

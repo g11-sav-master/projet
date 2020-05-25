@@ -31,7 +31,7 @@ public class ControllerBenevoleListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelBenevole		modelService;
+	private ModelBenevole		modelBenevole;
 	
 	
 	// Initialisation du Controller
@@ -40,7 +40,7 @@ public class ControllerBenevoleListe {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelService.getListe() );
+		listView.setItems( modelBenevole.getListe() );
 		
 		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() ));
 		
@@ -54,8 +54,8 @@ public class ControllerBenevoleListe {
 	}
 	
 	public void refresh() {
-		modelService.actualiserListe();
-		UtilFX.selectInListView( listView, modelService.getCourant() );
+		modelBenevole.actualiserListe();
+		UtilFX.selectInListView( listView, modelBenevole.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -64,7 +64,7 @@ public class ControllerBenevoleListe {
 	
 	@FXML
 	private void doAjouter() {
-		modelService.preparerAjouter();;
+		modelBenevole.preparerAjouter();;
 		managerGui.showView( EnumView.BenevoleForm );
 	}
 
@@ -74,7 +74,7 @@ public class ControllerBenevoleListe {
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
-			modelService.preparerModifier(item);
+			modelBenevole.preparerModifier(item);
 			managerGui.showView( EnumView.BenevoleForm );
 		}
 	}
@@ -87,7 +87,7 @@ public class ControllerBenevoleListe {
 		} else {
 			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
 			if ( reponse ) {
-				modelService.supprimer( item );
+				modelBenevole.supprimer( item );
 				refresh();
 			}
 		}

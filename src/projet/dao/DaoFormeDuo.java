@@ -193,4 +193,25 @@ public class DaoFormeDuo {
 		
 		return formeDuo;
 	}
+	
+	public void supprimerCat(int idPartDuo) {
+
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "DELETE FROM forme_duo WHERE id_part_duo IN (SELECT id_part_duo FROM participant_duo WHERE id_categorie = ?)";
+			stmt = cn.prepareStatement(sql);
+			stmt.setInt( 1, idPartDuo);
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(stmt, cn);
+		}
+	}
 }

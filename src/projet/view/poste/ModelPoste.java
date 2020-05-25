@@ -65,8 +65,8 @@ public class ModelPoste {
 		} else if (daoRaid.retrouver(courant.getId_raid()) == null) {
 			message.append("\nLe raid n'existe pas");
 		}
-		if (courant.getNbr_benev() == null || courant.getNbr_benev() == 0) {
-			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0.");
+		if (courant.getNbr_benev() == null || courant.getNbr_benev() <= 0) {
+			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0 ou être négatif.");
 		}
 
 		if (message.length() > 0) {
@@ -88,6 +88,13 @@ public class ModelPoste {
 
 		if (daoActionB.retrouver(item.getId_poste()) != null) {
 			daoActionB.supprimerPoste(item.getId_poste());
+			daoPoste.supprimer(item.getId_poste());
+			System.out.println(UtilFX.findNext(liste, item));
+			mapper.update(courant, UtilFX.findNext(liste, item));
+		}
+		
+		else
+		{
 			daoPoste.supprimer(item.getId_poste());
 			System.out.println(UtilFX.findNext(liste, item));
 			mapper.update(courant, UtilFX.findNext(liste, item));

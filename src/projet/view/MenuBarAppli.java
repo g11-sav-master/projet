@@ -29,6 +29,12 @@ public class MenuBarAppli extends MenuBar {
 	
 	private MenuItem itemPoste;
 	
+	private MenuItem itemCategorieRaid;
+	
+	private MenuItem itemRaid;
+	
+	private MenuItem itemActionBenevole;
+	
 	@Inject
 	private IManagerGui 	managerGui;
 	@Inject
@@ -67,7 +73,6 @@ public class MenuBarAppli extends MenuBar {
 		this.getMenus().add(menu);
 		menuDonnees = menu;
 		
-		
 		item = new MenuItem( "Accueil" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
 		menu.getItems().add( item );
@@ -91,10 +96,20 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Raid" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.RaidView )  );
 		menu.getItems().add( item );
-		itemBenevole = item;
+		itemRaid = item;
+		
+		item = new MenuItem( "CategorieRaid" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.CategorieRaidListe )  );
+		menu.getItems().add( item );
+		itemCategorieRaid = item;
+		
+		item = new MenuItem( "Actions Bénévole" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.ActionBenevoleListe )  );
+		menu.getItems().add( item );
+		itemActionBenevole = item;
 
 		
-		// Manu Tests
+		// Menu Tests
 		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
@@ -169,7 +184,13 @@ public class MenuBarAppli extends MenuBar {
 		
 		menuDonnees.setVisible(false);
 		itemBenevole.setVisible(false);
+		itemParticipant.setVisible(false);
+		itemCategorieRaid.setVisible(false);
+		itemPoste.setVisible(false);
+		itemRaid.setVisible(false);
+		itemActionBenevole.setVisible(false);
 		menuTests.setVisible(false);
+		
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
@@ -179,6 +200,11 @@ public class MenuBarAppli extends MenuBar {
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				menuDonnees.setVisible(true);
 				itemBenevole.setVisible(true);
+				itemParticipant.setVisible(true);
+				itemPoste.setVisible(true);
+				itemCategorieRaid.setVisible(true);
+				itemRaid.setVisible(true);
+				itemActionBenevole.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}

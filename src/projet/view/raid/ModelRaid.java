@@ -1,8 +1,5 @@
 package projet.view.raid;
 
-
-import java.time.LocalDate;
-
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
@@ -88,7 +85,6 @@ public class ModelRaid {
 	public void supprimer(Raid item) {
 
 		daoRaid.supprimer(item.getId());
-		System.out.println(UtilFX.findNext(liste, item));
 		mapper.update(courant, UtilFX.findNext(liste, item));
 	}
 }

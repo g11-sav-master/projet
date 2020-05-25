@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import projet.dao.DaoActionBenevole;
 import projet.dao.DaoFormeDuo;
 import projet.dao.DaoParticipantDuo;
@@ -14,7 +15,7 @@ import projet.dao.DaoPoste;
 import projet.dao.DaoRaid;
 import projet.dao.DaoParticipant;
 import projet.dao.DaoValidationMedicale;
-import projet.data.ActionBenevole;
+
 import projet.data.FormeDuo;
 import projet.data.Participant;
 import projet.data.ParticipantDuo;
@@ -44,11 +45,11 @@ public class ModelAccueil {
 	@Inject
 	private DaoParticipeOrganisation daoParticipeOrganisation;
 	@Inject
-	private DaoRaid daoRaid;
+	private DaoPoste daoPoste;
 	@Inject
 	private DaoActionBenevole daoActionBenevole;
 	@Inject
-	private DaoPoste daoPoste;
+	private DaoRaid 		daoRaid;
 	
 	// Getters
 	
@@ -112,17 +113,24 @@ public class ModelAccueil {
 		return listes;
 	}
 	
-	public ObservableList<String> listerNbrPersonnesParRaid()
+	public ObservableList<String> listerPosteNonRempli()
 	{
-		ArrayList<Raid> raids = new ArrayList<Raid>(); 
-		ObservableList<String> list = FXCollections.observableArrayList();
+		ObservableList<String> listes = FXCollections.observableArrayList();
+		ArrayList<Raid> raids = new ArrayList<Raid>();
 		raids.addAll(daoRaid.listerTout());
+		ArrayList<Poste> postes = new ArrayList<Poste>();
 		for(Raid raid : raids)
 		{
-			list.add(raid.getNom_raid());
+			postes.addAll(daoPoste.listerPosteRaid(raid.getId()));
+			for(Poste poste : postes)
+			{
+				if(daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId()) != poste.getNbr_benev())
+					listes.add(Character.toString('\u261b') +raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev()+Character.toString('\u261a'));
+				else
+					listes.add(raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev());
+			}
 		}
-		
-		return list;
+		return listes;
 	}
 	
 }

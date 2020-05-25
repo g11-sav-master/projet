@@ -40,7 +40,12 @@
                   <TextField fx:id="textFieldNom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Prenom :" GridPane.rowIndex="2" />
                   <Label text="Rôle :" GridPane.rowIndex="8" />
-                  <TextField fx:id="textFieldRole" maxWidth="-Infinity" prefHeight="25.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <HBox GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <children>
+                        <TextField fx:id="textFieldRole" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="190.0" />
+                        <Button mnemonicParsing="false" onAction="#doChoixRole" text="Modifier" />
+                     </children>
+                  </HBox>
                   <TextField fx:id="textFieldPrenom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="E-Mail :" GridPane.rowIndex="3" />
                   <Label text="Numéro Tel :" GridPane.rowIndex="4" />

@@ -1,7 +1,6 @@
 package projet.view.action_benevole;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
@@ -16,7 +15,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalTimeStringConverter;
-import jfox.javafx.util.ListenerFocusValidation;
 import jfox.javafx.view.IManagerGui;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;

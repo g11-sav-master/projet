@@ -1,26 +1,28 @@
-package projet.view.categorie_raid;
+package projet.view.benevole;
 
 import javax.inject.Inject;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.CategorieRaid;
+import projet.commun.IMapper;
+import projet.data.RoleBenevole;
 import projet.view.EnumView;
 
 
-public class ControllerCategorieRaidListe {
+public class ControllerBenevoleListeRole {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<CategorieRaid>	listView;
+	private ListView<RoleBenevole>		listView;
+	@FXML
+	private Button				buttonSelectionner;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
@@ -32,19 +34,20 @@ public class ControllerCategorieRaidListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelCategorieRaid		modelCategorieRaid;
+	private ModelBenevole modelBenevole;
+	@Inject
+	private IMapper mapper;
 	
 	
 	// Initialisation du Controller
 
 	@FXML
 	private void initialize() {
-
+		modelBenevole.actualiserListeRole();
 		// Data binding
-		listView.setItems( modelCategorieRaid.getListe() );
+		listView.setItems( modelBenevole.getRoleBenevoleListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getNomCategorie()));
-
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom_role() ));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -52,12 +55,14 @@ public class ControllerCategorieRaidListe {
 					configurerBoutons();
 		});
 		configurerBoutons();
+		listView.getSelectionModel().setSelectionMode((SelectionMode.SINGLE));
 
 	}
 	
+	
 	public void refresh() {
-		modelCategorieRaid.actualiserListe();
-		UtilFX.selectInListView( listView, modelCategorieRaid.getCourant() );
+		modelBenevole.actualiserListeRole();
+		UtilFX.selectInListView( listView, modelBenevole.getRoleSelected() );
 		listView.requestFocus();
 	}
 
@@ -65,31 +70,38 @@ public class ControllerCategorieRaidListe {
 	// Actions
 	
 	@FXML
+	private void doFermer() {
+		modelBenevole.getCourant().setId_role(listView.getSelectionModel().getSelectedItem().getId_role());
+		mapper.update(modelBenevole.getCourantRole(), listView.getSelectionModel().getSelectedItem());
+		managerGui.closeStage();
+	}
+	
+	@FXML
 	private void doAjouter() {
-		modelCategorieRaid.preparerAjouter();;
-		managerGui.showView( EnumView.CategorieRaidForm );
+		modelBenevole.preparerAjouterRole();
+		managerGui.showView( EnumView.BenevoleRoleForm );
 	}
 
 	@FXML
 	private void doModifier() {
-		CategorieRaid item = listView.getSelectionModel().getSelectedItem();
+		RoleBenevole item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
-			modelCategorieRaid.preparerModifier(item);
-			managerGui.showView( EnumView.CategorieRaidForm );
+			modelBenevole.preparerModifierRole(item);
+			managerGui.showView( EnumView.BenevoleRoleForm );
 		}
 	}
 
 	@FXML
 	private void doSupprimer() {
-		CategorieRaid item = listView.getSelectionModel().getSelectedItem();
+		RoleBenevole item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
 			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
 			if ( reponse ) {
-				modelCategorieRaid.supprimer( item );
+				modelBenevole.supprimerRole( item );
 				refresh();
 			}
 		}
@@ -106,21 +118,22 @@ public class ControllerCategorieRaidListe {
 				if ( listView.getSelectionModel().getSelectedIndex() == -1 ) {
 					managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 				} else {
-					doModifier();
+					doFermer();
 				}
 			}
 		}
 	}
-
 	
 	// Méthodes auxiliaires
 	
 	private void configurerBoutons() {
 		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
+    		buttonSelectionner.setDisable(true);
 			buttonModifier.setDisable(true);
 			buttonSupprimer.setDisable(true);
 		} else {
+    		buttonSelectionner.setDisable(false);
 			buttonModifier.setDisable(false);
 			buttonSupprimer.setDisable(false);
 		}
