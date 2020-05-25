@@ -65,8 +65,8 @@ public class ModelPoste {
 		} else if (daoRaid.retrouver(courant.getId_raid()) == null) {
 			message.append("\nLe raid n'existe pas");
 		}
-		if (courant.getNbr_benev() == null || courant.getNbr_benev() == 0) {
-			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0.");
+		if (courant.getNbr_benev() == null || courant.getNbr_benev() <= 0) {
+			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0 ou être négatif.");
 		}
 
 		if (message.length() > 0) {
