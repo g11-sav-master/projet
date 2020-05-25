@@ -48,7 +48,6 @@ public class ControllerRaidForm {
 	UnaryOperator<TextFormatter.Change> filter = c -> {
 		String heure = c.getControlNewText();
 		if (pattern.matcher(heure).matches()) {
-			System.out.println(c);
 			return c;
 		} else {
 			return null;
