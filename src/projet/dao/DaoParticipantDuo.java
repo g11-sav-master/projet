@@ -179,4 +179,52 @@ public class DaoParticipantDuo {
 
 		return participantduo;
 	}
+	
+	public ParticipantDuo retrouverCat(int idcategorie) {
+
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM participant_duo WHERE id_categorie = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject(1, idcategorie);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return construireParticipantDuo(rs);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(rs, stmt, cn);
+		}
+	}
+	
+	public void supprimerCat(int idCat) {
+
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "DELETE FROM participant_duo WHERE id_categorie = ? ";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject(1, idCat);
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(stmt, cn);
+		}
+	}
 }
