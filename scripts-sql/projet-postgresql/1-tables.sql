@@ -9,12 +9,13 @@ CREATE TABLE utilisateur (
 	nom				VARCHAR(50),
 	prenom			VARCHAR(50),
 	e_mail			VARCHAR(225),
-	num_tel			VARCHAR(12),
+	num_tel			VARCHAR(10) ,
 	date_naissance	DATE,
 	login			VARCHAR(50),
 	mot_passe		VARCHAR(50),
 	CONSTRAINT utilisateur_pkey PRIMARY KEY (id_utilisateur),
-	UNIQUE(login)
+	UNIQUE(login),
+	CHECK (char_length(num_tel) = 10)
 );
 
 CREATE TABLE role_benevole (
@@ -29,7 +30,9 @@ CREATE TABLE raid (
 	annee			DATE,
 	prix_insc		DOUBLE PRECISION,
 	prix_repas		DOUBLE PRECISION,
-	CONSTRAINT raid_pkey PRIMARY KEY (id_raid)
+	CONSTRAINT raid_pkey PRIMARY KEY (id_raid),
+	CHECK (prix_insc >=0),
+	CHECK (prix_repas >=0)
 );
 
 CREATE TABLE poste (
@@ -37,7 +40,8 @@ CREATE TABLE poste (
 	id_raid			INT,
 	nbr_benev		INT,
 	CONSTRAINT poste_pkey PRIMARY KEY (id_poste),
-	CONSTRAINT poste_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid)
+	CONSTRAINT poste_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid),
+	CHECK (nbr_benev >=0)
 );
 
 CREATE TABLE benevole (
@@ -84,7 +88,8 @@ CREATE TABLE participant_duo (
 	paiement_valide	BOOLEAN,
 	CONSTRAINT participant_duo_pkey PRIMARY KEY (id_part_duo),
 	CONSTRAINT participant_duo_id_categorie_fkey FOREIGN KEY (id_categorie) REFERENCES categorie_raid (id_categorie),
-	CONSTRAINT participant_duo_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid)
+	CONSTRAINT participant_duo_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid),
+	CHECK (nbr_repas >=0)
 );
 
 CREATE TABLE forme_duo (
@@ -100,7 +105,8 @@ CREATE TABLE participe_organisation (
 	id_utilisateur	INT,
 	nbr_repas		INT,
 	CONSTRAINT participe_organisation_id_utilisateur_fkey FOREIGN KEY (id_utilisateur) REFERENCES benevole (id_utilisateur),
-	CONSTRAINT participe_organisation_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid)
+	CONSTRAINT participe_organisation_id_raid_fkey FOREIGN KEY (id_raid) REFERENCES raid (id_raid),
+	CHECK (nbr_repas >=0)
 );
 
 CREATE TABLE validation_medicale (
@@ -112,10 +118,3 @@ CREATE TABLE validation_medicale (
 	CONSTRAINT validation_medicale_id_utilisateur_fkey FOREIGN KEY (id_utilisateur) REFERENCES participant (id_utilisateur)
 );
 
--- Vue
-CREATE VIEW v_utilisateur_avec_roles AS
-	SELECT u.*, ARRAY_AGG(r.nom_role) AS roles
-	FROM utilisateur u
-	INNER JOIN benevole b ON b.id_utilisateur = u.id_utilisateur
-	LEFT JOIN role_benevole r ON r.id_role = b.id_role
-	GROUP BY u.id_utilisateur;
