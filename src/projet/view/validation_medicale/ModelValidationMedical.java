@@ -4,11 +4,9 @@ import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoValidationMedicale;
-import projet.data.Benevole;
 import projet.data.Participant;
 import projet.data.ValidationMedicale;
 import projet.view.participant.ModelParticipant;
@@ -61,8 +59,6 @@ public class ModelValidationMedical {
 	public void validerMiseAJour() {
 
 		// Vérifie la validité des données
-
-		StringBuilder message = new StringBuilder();
 
 		/*if (courant.getId_validation() == null ) {
 			message.append("\nLe numero de validation ne peut pas être nul.");
