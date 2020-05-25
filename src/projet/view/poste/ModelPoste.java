@@ -51,7 +51,7 @@ public class ModelPoste {
 	}
 
 	public void preparerModifier(Poste item) {
-		mapper.update(courant, daoPoste.retrouver(item.getId()));
+		mapper.update(courant, daoPoste.retrouver(item.getId_poste()));
 	}
 
 	public void validerMiseAJour() {
@@ -75,7 +75,7 @@ public class ModelPoste {
 
 		// Effectue la mise à jour
 
-		if (courant.getId() == null) {
+		if (courant.getId_poste() == null) {
 			// Insertion
 			courant.setId_poste(daoPoste.inserer(courant));
 		} else {
@@ -86,9 +86,9 @@ public class ModelPoste {
 
 	public void supprimer(Poste item) {
 
-		if (daoActionB.retrouver(item.getId()) != null) {
-			daoActionB.supprimerPoste(item.getId());
-			daoPoste.supprimer(item.getId());
+		if (daoActionB.retrouver(item.getId_poste()) != null) {
+			daoActionB.supprimerPoste(item.getId_poste());
+			daoPoste.supprimer(item.getId_poste());
 			System.out.println(UtilFX.findNext(liste, item));
 			mapper.update(courant, UtilFX.findNext(liste, item));
 		}

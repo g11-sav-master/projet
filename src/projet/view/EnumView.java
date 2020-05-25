@@ -14,12 +14,18 @@ public enum EnumView implements IEnumView {
 	Connexion			( "systeme/ViewConnexion.fxml" ),
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),
 	BenevoleForm		( "benevole/ViewBenevoleForm.fxml" ),
+	BenevoleListeRole	( "benevole/ViewBenevoleListeRole.fxml" ),
+	BenevoleRoleForm	( "benevole/ViewBenevoleRoleForm.fxml" ),
 	ParticipantListe	( "participant/ViewParticipantListe.fxml" ),
 	ParticipantForm		( "participant/ViewParticipantForm.fxml"),
 	RaidView			( "raid/ViewRaidListe.fxml" ),
 	RaidForm			( "raid/ViewFormRaid.fxml"),
 	PosteListe			( "poste/ViewPosteListe.fxml" ),
 	PosteForm			( "poste/ViewPosteForm.fxml "),
+	CategorieRaidForm	("categorie_raid/ViewCategorieRaidForm.fxml"),
+	CategorieRaidListe	("categorie_raid/ViewCategorieRaidListe.fxml"),
+	ActionBenevoleForm  ("action_benevole/ViewFormActionBenevole.fxml"),
+	ActionBenevoleListe ("action_benevole/ViewListeActionBenevole.fxml"),
 	TestDaoUtilisateur	( "test/ViewTestDaoUtilisateur.fxml" ),
 	TestDaoBenevole		( "test/ViewTestDaoBenevole.fxml" ),
 	TestDaoParticipant	( "test/ViewTestDaoParticipant.fxml" ),
@@ -30,11 +36,10 @@ public enum EnumView implements IEnumView {
 	TestDaoParticipantDuo ("test/ViewTestDaoParticipantDuo.fxml"),
 	TestDaoFormeDuo		( "test/ViewTestDaoFormeDuo.fxml" ),
 	TestDaoParticipeOrganisation ( "test/ViewTestDaoParticipeOrganisation.fxml" ),
-	TestDaoPoste ("test/ViewTestDaoPoste.fxml"),
+	TestDaoPoste 		("test/ViewTestDaoPoste.fxml"),
 	TestDaoActionBenevole ("test/ViewTestDaoActionBenevole.fxml"),
 	EtatPersonnesParCateogire1	( "personne/ViewEtatPersonnesParCategorie1.fxml" ),
-	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" ),
-	;
+	EtatPersonnesParCateogire2	( "personne/ViewEtatPersonnesParCategorie2.fxml" );
 
 	
 	// Champs

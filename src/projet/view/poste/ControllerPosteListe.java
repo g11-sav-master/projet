@@ -42,7 +42,7 @@ public class ControllerPosteListe {
 		// Data binding
 		listView.setItems( modelposte.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getId()+" "));
+		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getId_poste()+" "));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(

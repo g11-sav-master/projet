@@ -8,8 +8,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class ActionBenevole {
 	private final Property<Integer> id_action = new SimpleObjectProperty<>();
-	private final Property<Integer> id_poste = new SimpleObjectProperty<>();
-	private final Property<Integer> id_utilisateur = new SimpleObjectProperty<>();
+	private final Property<Poste> poste = new SimpleObjectProperty<>();
+	private final Property<Benevole> benevole = new SimpleObjectProperty<>();
 	private final Property<Boolean> panneau_prendre = new SimpleObjectProperty<>();
 	private final Property<String>  descr_action = new SimpleStringProperty();
 	private final Property<Boolean> signaleur = new SimpleObjectProperty<>();
@@ -18,10 +18,10 @@ public class ActionBenevole {
 	
 	//constructer
 	public ActionBenevole() {};
-	public ActionBenevole( int id_action,int id_poste, int id_utilisateur, boolean panneau_prendre, String descr_action, boolean signaleur, LocalTime horaire_debut, LocalTime horaire_fin) {
+	public ActionBenevole( int id_action,Poste poste, Benevole benevole, boolean panneau_prendre, String descr_action, boolean signaleur, LocalTime horaire_debut, LocalTime horaire_fin) {
 		setId_action(id_action);
-		setId_poste(id_poste);
-		setId_utilisateur(id_utilisateur);
+		setPoste(poste);
+		setBenevole(benevole);
 		setPanneau_prendre(panneau_prendre);
 		setDescr_action(descr_action);
 		setSignaleur(signaleur);
@@ -50,28 +50,28 @@ public class ActionBenevole {
 		this.id_actionProperty().setValue(id_action);
 	}
 	
-	public final Property<Integer> id_posteProperty() {
-		return this.id_poste;
+	public final Property<Poste> posteProperty() {
+		return this.poste;
 	}
 	
-	public final Integer getId_poste() {
-		return this.id_posteProperty().getValue();
+	public final Poste getPoste() {
+		return this.posteProperty().getValue();
 	}
 	
-	public final void setId_poste(final Integer id_poste) {
-		this.id_posteProperty().setValue(id_poste);
+	public final void setPoste(final Poste poste) {
+		this.posteProperty().setValue(poste);
 	}
 	
-	public final Property<Integer> id_utilisateurProperty() {
-		return this.id_utilisateur;
+	public final Property<Benevole> benevoleProperty() {
+		return this.benevole;
 	}
 	
-	public final Integer getId_utilisateur() {
-		return this.id_utilisateurProperty().getValue();
+	public final Benevole getBenevole() {
+		return this.benevoleProperty().getValue();
 	}
 	
-	public final void setId_utilisateur(final Integer id_utilisateur) {
-		this.id_utilisateurProperty().setValue(id_utilisateur);
+	public final void setBenevole(final Benevole benevole) {
+		this.benevoleProperty().setValue(benevole);
 	}
 	
 	public final Property<Boolean> panneau_prendreProperty() {
