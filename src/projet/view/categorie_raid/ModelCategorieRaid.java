@@ -9,6 +9,8 @@ import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCategorieRaid;
 import projet.data.CategorieRaid;
+import projet.dao.DaoParticipantDuo;
+import projet.dao.DaoFormeDuo;
 
 public class ModelCategorieRaid {
 
@@ -21,6 +23,10 @@ public class ModelCategorieRaid {
 	private IMapper mapper;
 	@Inject
 	private DaoCategorieRaid daoCategorieRaid;
+	@Inject
+	private DaoParticipantDuo daoParticipantDuo;
+	@Inject
+	private DaoFormeDuo daoFormeDuo;
 
 	// Getters
 
@@ -75,9 +81,19 @@ public class ModelCategorieRaid {
 
 	public void supprimer(CategorieRaid item) {
 
-		daoCategorieRaid.supprimerCategorieRaid(item.getIdCategorieRaid());
-		System.out.println(UtilFX.findNext(liste, item));
-		mapper.update(courant, UtilFX.findNext(liste, item));
+		if (daoParticipantDuo.retrouverCat(item.getIdCategorieRaid()) != null) {
+			daoFormeDuo.supprimerCat(item.getIdCategorieRaid());
+			daoParticipantDuo.supprimerCat(item.getIdCategorieRaid());
+			daoCategorieRaid.supprimerCategorieRaid(item.getIdCategorieRaid());
+			System.out.println(UtilFX.findNext(liste, item));
+			mapper.update(courant, UtilFX.findNext(liste, item));
+		}
+		else
+		{
+			daoCategorieRaid.supprimerCategorieRaid(item.getIdCategorieRaid());
+			System.out.println(UtilFX.findNext(liste, item));
+			mapper.update(courant, UtilFX.findNext(liste, item));
+		}
 
 	}
 }
