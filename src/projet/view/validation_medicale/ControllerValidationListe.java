@@ -9,7 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Poste;
+import projet.data.ValidationMedicale;
 import projet.view.EnumView;
 
 
@@ -19,7 +19,7 @@ public class ControllerValidationListe {
 	// Composants de la vue
 
 	@FXML
-	private ListView<Poste>	listView;
+	private ListView<ValidationMedicale>	listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
@@ -31,7 +31,7 @@ public class ControllerValidationListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelValidationMedical		modelposte;
+	private ModelValidationMedical		modelValidation;
 	
 	
 	// Initialisation du Controller
@@ -40,9 +40,9 @@ public class ControllerValidationListe {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelposte.getListe() );
+		listView.setItems( modelValidation.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getId_poste()+" "));
+		listView.setCellFactory(  UtilFX.cellFactory(item -> item.toString()+" "));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -54,8 +54,8 @@ public class ControllerValidationListe {
 	}
 	
 	public void refresh() {
-		modelposte.actualiserListe();
-		UtilFX.selectInListView( listView, modelposte.getCourant() );
+		modelValidation.actualiserListe();
+		UtilFX.selectInListView( listView, modelValidation.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -64,30 +64,30 @@ public class ControllerValidationListe {
 	
 	@FXML
 	private void doAjouter() {
-		modelposte.preparerAjouter();;
-		managerGui.showView( EnumView.PosteForm );
+		modelValidation.preparerAjouter();
+		managerGui.showView( EnumView.ValidationForm );
 	}
 
 	@FXML
 	private void doModifier() {
-		Poste item = listView.getSelectionModel().getSelectedItem();
+		ValidationMedicale item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
-			modelposte.preparerModifier(item);
-			managerGui.showView( EnumView.PosteForm );
+			modelValidation.preparerModifier(item);
+			managerGui.showView( EnumView.ValidationForm );
 		}
 	}
 
 	@FXML
 	private void doSupprimer() {
-		Poste item = listView.getSelectionModel().getSelectedItem();
+		ValidationMedicale item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
 			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
 			if ( reponse ) {
-				modelposte.supprimer( item );
+				modelValidation.supprimer( item );
 				refresh();
 			}
 		}

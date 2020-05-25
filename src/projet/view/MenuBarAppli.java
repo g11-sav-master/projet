@@ -35,6 +35,8 @@ public class MenuBarAppli extends MenuBar {
 	
 	private MenuItem itemActionBenevole;
 	
+	private MenuItem itemValidationMedicale;
+	
 	@Inject
 	private IManagerGui 	managerGui;
 	@Inject
@@ -102,6 +104,11 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ActionBenevoleListe )  );
 		menu.getItems().add( item );
 		itemActionBenevole = item;
+		
+		item = new MenuItem( "Validation Médicale" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.ValidationListe )  );
+		menu.getItems().add( item );
+		itemValidationMedicale = item;
 
 		
 		// Menu Tests

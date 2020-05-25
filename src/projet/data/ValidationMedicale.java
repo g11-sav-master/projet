@@ -7,11 +7,12 @@ import java.util.Objects;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class ValidationMedicale extends Utilisateur {
+public class ValidationMedicale {
 
 
 	// Données observables
 	private final Property<Integer>		id_validation	= new SimpleObjectProperty<>();
+	private final Property<Participant> participant		= new SimpleObjectProperty<>();
 	private final Property<Boolean>		est_valide		= new SimpleObjectProperty<>();
 	private final Property<LocalDate>	date_expiration = new SimpleObjectProperty<>();
 	
@@ -20,12 +21,12 @@ public class ValidationMedicale extends Utilisateur {
 
 	public ValidationMedicale() {}
 	
-	public ValidationMedicale(int id_validation,int id_utilisateur, boolean est_valide, LocalDate date) {
+	public ValidationMedicale(int id_validation,Participant participant, boolean est_valide, LocalDate date) {
 		super();
 		setId_validation(id_validation);
+		setParticipant(participant);
 		setEst_valide(est_valide);
 		setDate_expiration(date);
-		setIdUtilisateur(id_utilisateur);
 	}
 	
 	// Getters & setters
@@ -45,6 +46,20 @@ public class ValidationMedicale extends Utilisateur {
 	}
 	
 
+	public final Property<Participant> participantProperty() {
+		return this.participant;
+	}
+	
+
+	public final Participant getParticipant() {
+		return this.participantProperty().getValue();
+	}
+	
+
+	public final void setParticipant(final Participant participant) {
+		this.participantProperty().setValue(participant);
+	}
+	
 	public final Property<Boolean> est_valideProperty() {
 		return this.est_valide;
 	}
@@ -101,5 +116,8 @@ public class ValidationMedicale extends Utilisateur {
 	public String toString() {
 		return getId_validation() + " "+ getEst_valide();
 	}
+
+	
+	
 	
 }

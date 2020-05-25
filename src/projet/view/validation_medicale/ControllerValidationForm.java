@@ -5,11 +5,13 @@ import javax.inject.Inject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
+import jfox.javafx.util.ConverterStringLocalDate;
+import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.data.Poste;
+import projet.data.ValidationMedicale;
 import projet.view.EnumView;
 
 
@@ -21,16 +23,18 @@ public class ControllerValidationForm {
 	@FXML
 	private TextField		textFieldIdValidation;
 	@FXML
-	private ComboBox		comboBoxUtilisateur;
+	private TextField		textFieldParticipant;
 	@FXML
 	private CheckBox		checkBoxValide;
+	@FXML
+	private DatePicker		datePickerExpiration;
 	
 	// Autres champs
 	
 	@Inject
 	private IManagerGui		managerGui;
 	@Inject
-	private ModelValidationMedical modelposte;
+	private ModelValidationMedical modelValidation;
 
 
 	// Initialisation du Controller
@@ -40,10 +44,11 @@ public class ControllerValidationForm {
 
 		// Data binding
 		
-		Poste courant = modelposte.getCourant();
-		textFieldIdPoste.textProperty().bindBidirectional(courant.id_posteProperty(), new IntegerStringConverter());
-		textFieldIdRaid.textProperty().bindBidirectional(courant.id_raidProperty(), new IntegerStringConverter());
-		textFieldNbrBen.textProperty().bindBidirectional(courant.nbr_benevProperty(), new IntegerStringConverter());
+		ValidationMedicale courant = modelValidation.getCourant();
+		textFieldIdValidation.textProperty().bindBidirectional(courant.id_validationProperty(), new IntegerStringConverter()); // textProperty.bindBidirectional(courant.getId_validation().toString());
+		textFieldParticipant.textProperty().bindBidirectional(courant.getParticipant().idUtilisateurProperty(), new IntegerStringConverter());
+		checkBoxValide.selectedProperty().bindBidirectional(courant.est_valideProperty());
+		UtilFX.bindBidirectional( datePickerExpiration.getEditor(), courant.date_expirationProperty(), new ConverterStringLocalDate() );
 	
 	}
 	
@@ -52,13 +57,13 @@ public class ControllerValidationForm {
 	
 	@FXML
 	private void doAnnuler() {
-		managerGui.showView( EnumView.PosteListe );
+		managerGui.showView( EnumView.ValidationListe );
 	}
 	
 	@FXML
 	private void doValider() {
-		modelposte.validerMiseAJour();
-		managerGui.showView( EnumView.PosteListe );
+		modelValidation.validerMiseAJour();
+		managerGui.showView( EnumView.ValidationListe );
 	}
 	
 }

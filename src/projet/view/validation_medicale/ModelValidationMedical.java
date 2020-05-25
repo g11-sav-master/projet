@@ -8,49 +8,54 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoValidationMedicale;
-import projet.dao.DaoUtilisateur;
+import projet.data.Benevole;
+import projet.data.Participant;
 import projet.data.ValidationMedicale;
+import projet.view.participant.ModelParticipant;
 
 public class ModelValidationMedical {
 
-	private final ObservableList<P> liste = FXCollections.observableArrayList();
+	private final ObservableList<ValidationMedicale> liste = FXCollections.observableArrayList();
 
-	private final Poste courant = new Poste();
+	private final ValidationMedicale courant = new ValidationMedicale();
 
 	// Autres champs
 	@Inject
 	private IMapper mapper;
 	@Inject
-	private DaoPoste daoPoste;
+	private DaoValidationMedicale daoValidationMedicale;
 	@Inject
-	private DaoActionBenevole daoActionB;
-	@Inject
-	private DaoRaid daoRaid;
+	private ModelParticipant modelParticipant;
 
 	// Getters
 
-	public ObservableList<Poste> getListe() {
+	public ObservableList<ValidationMedicale> getListe() {
 		return liste;
 	}
+	public ObservableList<Participant> getParticipants(){
+		return modelParticipant.getListe();
+	}
 
-	public Poste getCourant() {
+	public ValidationMedicale getCourant() {
 		return courant;
 	}
 
 	// Actualisations
 
 	public void actualiserListe() {
-		liste.setAll(daoPoste.listerTout());
+		liste.setAll(daoValidationMedicale.listerTout());
 	}
 
 	// Actions
 
 	public void preparerAjouter() {
-		mapper.update(courant, new Poste());
+		modelParticipant.actualiserListe();
+		mapper.update(courant, new ValidationMedicale());
 	}
 
-	public void preparerModifier(Poste item) {
-		mapper.update(courant, daoPoste.retrouver(item.getId_poste()));
+	public void preparerModifier(ValidationMedicale item) {
+		modelParticipant.actualiserListe();
+		mapper.update(courant, daoValidationMedicale.retrouver(item.getId_validation()));
 	}
 
 	public void validerMiseAJour() {
@@ -59,35 +64,34 @@ public class ModelValidationMedical {
 
 		StringBuilder message = new StringBuilder();
 
-		if (courant.getId_raid() == null || courant.getId_raid() == 0) {
-			message.append("\nLe numero de raid ne peut pas être nul.");
-		} else if (daoRaid.retrouver(courant.getId_raid()) == null) {
-			message.append("\nLe raid n'existe pas");
+		/*if (courant.getId_validation() == null ) {
+			message.append("\nLe numero de validation ne peut pas être nul.");
+		} else if (daoValidationMedicale.retrouver(courant.getId_validation()) == null) {
+			message.append("\nLa validation n'existe pas");
 		}
-		if (courant.getNbr_benev() == null || courant.getNbr_benev() == 0) {
-			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0.");
+		if (courant.getParticipant() == null ) {
+			message.append("\nVous ne pouvez pa");
 		}
 
 		if (message.length() > 0) {
 			throw new ExceptionValidation(message.toString().substring(1));
-		}
+		}*/
 
 		// Effectue la mise à jour
 
-		if (courant.getId_poste() == null) {
+		if (courant.getId_validation() == null) {
 			// Insertion
-			courant.setId_poste(daoPoste.inserer(courant));
+			courant.setId_validation(daoValidationMedicale.inserer(courant));
 		} else {
 			// Modficiation
-			daoPoste.modifier(courant);
+			daoValidationMedicale.modifier(courant);
 		}
 	}
 
-	public void supprimer(Poste item) {
+	public void supprimer(ValidationMedicale item) {
 
-		if (daoActionB.retrouver(item.getId_poste()) != null) {
-			daoActionB.supprimerPoste(item.getId_poste());
-			daoPoste.supprimer(item.getId_poste());
+		if (daoValidationMedicale.retrouver(item.getId_validation()) != null) {
+			daoValidationMedicale.supprimer(item.getId_validation());
 			System.out.println(UtilFX.findNext(liste, item));
 			mapper.update(courant, UtilFX.findNext(liste, item));
 		}

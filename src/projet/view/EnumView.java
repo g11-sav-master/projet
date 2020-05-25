@@ -21,6 +21,8 @@ public enum EnumView implements IEnumView {
 	RaidForm			( "raid/ViewFormRaid.fxml"),
 	PosteListe			( "poste/ViewPosteListe.fxml" ),
 	PosteForm			( "poste/ViewPosteForm.fxml "),
+	ValidationListe		( "validation_medicale/ViewValidationListe.fxml" ),
+	ValidationForm		( "validation_medicale/ViewValidationForm.fxml "),
 	CategorieRaidForm	("categorie_raid/ViewCategorieRaidForm.fxml"),
 	CategorieRaidListe	("categorie_raid/ViewCategorieRaidListe.fxml"),
 	ActionBenevoleForm  ("action_benevole/ViewFormActionBenevole.fxml"),

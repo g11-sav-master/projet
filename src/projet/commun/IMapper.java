@@ -9,6 +9,7 @@ import projet.data.Benevole;
 import projet.data.Participant;
 import projet.data.Raid;
 import projet.data.RoleBenevole;
+import projet.data.ValidationMedicale;
 import projet.data.Poste;
 import projet.data.CategorieRaid;
 
@@ -25,5 +26,6 @@ public interface IMapper {
 	@Mapping( target="poste", expression="java( source.getPoste() )" )
 	ActionBenevole update (@MappingTarget ActionBenevole actionBenevole, ActionBenevole source);
 	RoleBenevole update (@MappingTarget RoleBenevole actionBenevole, RoleBenevole source);
-	
+	@Mapping( target="participant", expression="java( source.getParticipant() )" )
+	ValidationMedicale update (@MappingTarget ValidationMedicale validationMedicale, ValidationMedicale source);
 }
