@@ -159,6 +159,34 @@ public class DaoPoste {
 			}
 		}
 		
+		public List<Poste> listerPosteRaid(int id_raid)   {
+
+			Connection			cn		= null;
+			PreparedStatement	stmt	= null;
+			ResultSet 			rs 		= null;
+			String				sql;
+
+			try {
+				cn = dataSource.getConnection();
+
+				sql = "SELECT * FROM poste WHERE id_raid = ?;";
+				stmt = cn.prepareStatement(sql);
+				stmt.setObject( 1, id_raid);
+				rs = stmt.executeQuery();
+				
+				List<Poste> poste = new ArrayList<>();
+				while (rs.next()) {
+					poste.add( construirePoste(rs) );
+				}
+				return poste;
+
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			} finally {
+				UtilJdbc.close( rs, stmt, cn );
+			}
+		}
+		
 		//méthodes auxilliaires
 		
 		private Poste construirePoste( ResultSet rs ) throws SQLException {

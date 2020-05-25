@@ -135,6 +135,33 @@ public class DaoValidationMedicale {
 			UtilJdbc.close(rs, stmt, cn);
 		}
 	}
+	
+	public ValidationMedicale retrouverUtilisateur(int idUtilisateur)
+	{
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM validation_medicale WHERE id_utilisateur = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setObject(1, idUtilisateur);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return construireValidationMedicale(rs);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(rs, stmt, cn);
+		}
+	}
 
 	public List<ValidationMedicale> listerTout() {
 
