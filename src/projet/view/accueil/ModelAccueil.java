@@ -69,10 +69,10 @@ public class ModelAccueil {
 	
 	// 
 	
-	public ObservableList<Participant> listerDossierAttentes()
+	public ObservableList<String> listerDossierAttentes()
 	{
 		ArrayList<Participant> participants = new ArrayList<Participant>();
-		ObservableList<Participant> dossierEnAttente = FXCollections.observableArrayList();
+		ObservableList<String> dossierEnAttente = FXCollections.observableArrayList();
 		participants.addAll(daoParticipant.listerTout());
 		for(Participant participant : participants)
 		{
@@ -80,10 +80,12 @@ public class ModelAccueil {
 			FormeDuo formeDuo = daoFormeDuo.retrouverUtilisateur(participant.getIdUtilisateur());
 			ParticipantDuo participantDuo = daoParticipantDuo.retrouver(formeDuo.getIdPartDuo());
 			
-			if(!validationMedicale.getEst_valide() || !participantDuo.getPaiement_valide())
-			{
-				dossierEnAttente.add(participant);
-			}
+			if(!validationMedicale.getEst_valide() && !participantDuo.getPaiement_valide())
+				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale et paiement en attente");
+			else if(!validationMedicale.getEst_valide() && participantDuo.getPaiement_valide()) 
+				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale en attente");
+			else if(validationMedicale.getEst_valide() && !participantDuo.getPaiement_valide())
+				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : paiement en attente");
 		}
 		
 		return dossierEnAttente;

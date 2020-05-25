@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import jfox.javafx.util.UtilFX;
-import projet.data.Participant;
 
 
 public class ControllerAccueilListe {
@@ -14,7 +13,7 @@ public class ControllerAccueilListe {
 	// Composants de la vue
 
 	@FXML
-	private ListView<Participant>		listViewDossierAttentes;
+	private ListView<String>			listViewDossierAttentes;
 	@FXML
 	private ListView<String>			listViewNbrRepas;		
 	@FXML
@@ -33,7 +32,7 @@ public class ControllerAccueilListe {
 
 		// Data binding
 		listViewDossierAttentes.setItems( modelAccueil.listerDossierAttentes() );
-		listViewDossierAttentes.setCellFactory(  UtilFX.cellFactory( item -> item.getNom().toUpperCase()+" "+item.getPrenom() ));
+		listViewDossierAttentes.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
 		listViewNbrRepas.setItems( modelAccueil.listerNbrRepas() );
 		listViewNbrRepas.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
 		listViewPoste.setItems( modelAccueil.listerPosteNonRempli() );
@@ -43,7 +42,6 @@ public class ControllerAccueilListe {
 	
 	public void refresh() {
 		modelAccueil.actualiserListe();
-		UtilFX.selectInListView( listViewDossierAttentes, modelAccueil.getCourant() );
 		listViewDossierAttentes.requestFocus();
 	}
 
