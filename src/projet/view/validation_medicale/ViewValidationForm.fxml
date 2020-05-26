@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="paneRoot" prefHeight="390.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.validation_medicale.ControllerValidationForm">
    <children>
-      <Label alignment="CENTER" styleClass="titre-vue" text="Validation Medicale" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
       <VBox alignment="CENTER" fillWidth="false" layoutY="80.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
+            <Label alignment="CENTER" styleClass="titre-vue" text="Validation Medicale" />
             <GridPane prefHeight="250.0" prefWidth="358.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="106.0" />
@@ -30,18 +30,30 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Id Validation :" />
-                  <TextField fx:id="textFieldIdValidation" editable="false" focusTraversable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" />
-                  <Label text="Participant :" GridPane.rowIndex="1" />
-                  <TextField fx:id="textFieldParticipant" editable="false" maxWidth="-Infinity" prefHeight="26.0" prefWidth="144.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Validé" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="checkBoxValide" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets left="80.0" />
-                     </GridPane.margin>
-                  </CheckBox>
-                  <Label text="expire le" GridPane.rowIndex="3" />
-                  <DatePicker fx:id="datePickerExpiration" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Id  :">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textFieldIdValidation" editable="false" focusTraversable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                        <Label text="Participant :">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textFieldNomParticipant" editable="false" maxWidth="-Infinity" prefHeight="26.0" prefWidth="102.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Validé" />
+                        <CheckBox fx:id="checkBoxValide" mnemonicParsing="false" />
+                        <Label text="expire le" />
+                        <DatePicker fx:id="datePickerExpiration" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>
