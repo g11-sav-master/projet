@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -27,7 +28,7 @@ public class ControllerValidationForm {
 	@FXML
 	private TextField		textFieldNomParticipant;
 	@FXML
-	private CheckBox		checkBoxValide;
+	private RadioButton		radioButtonValide;
 	@FXML
 	private DatePicker		datePickerExpiration;
 	
@@ -67,7 +68,7 @@ public class ControllerValidationForm {
 		ValidationMedicale courant = modelValidation.getCourant();
 		textFieldIdValidation.textProperty().bindBidirectional(courant.id_validationProperty(), new IntegerStringConverter()); // textProperty.bindBidirectional(courant.getId_validation().toString());
 		textFieldNomParticipant.textProperty().bindBidirectional(courant.participantProperty(), ParticipantConverter() );
-		checkBoxValide.selectedProperty().bindBidirectional(courant.est_valideProperty());
+		radioButtonValide.selectedProperty().bindBidirectional(courant.est_valideProperty());
 		UtilFX.bindBidirectional( datePickerExpiration.getEditor(), courant.date_expirationProperty(), new ConverterStringLocalDate() );
 	
 	}
