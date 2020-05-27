@@ -33,7 +33,7 @@
                   <Label text="Nombre Bénévole :" GridPane.rowIndex="2" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="textFieldNbrBen" />
+                        <TextField fx:id="textFieldNbrBen" editable="false" />
                         <Button mnemonicParsing="false" onAction="#ActionPlus" text="+" />
                         <Button mnemonicParsing="false" onAction="#ActionMoins" text="-" />
                      </children>
