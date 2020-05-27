@@ -22,8 +22,6 @@ public class ControllerValidationListe {
 	private ListView<ValidationMedicale>	listView;
 	@FXML
 	private Button				buttonModifier;
-	@FXML
-	private Button				buttonSupprimer;
 
 
 	// Autres champs
@@ -117,10 +115,8 @@ public class ControllerValidationListe {
 		
     	if( listView.getSelectionModel().getSelectedItems().isEmpty() ) {
 			buttonModifier.setDisable(true);
-			buttonSupprimer.setDisable(true);
 		} else {
 			buttonModifier.setDisable(false);
-			buttonSupprimer.setDisable(false);
 		}
 	}
 
