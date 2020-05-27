@@ -31,18 +31,22 @@ public class ControllerAccueilListe {
 	private void initialize() {
 
 		// Data binding
+		affichage();
+		
+	}
+	
+	public void refresh() {
+		affichage();
+		listViewDossierAttentes.requestFocus();
+	}
+	
+	public void affichage() {
 		listViewDossierAttentes.setItems( modelAccueil.listerDossierAttentes() );
 		listViewDossierAttentes.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
 		listViewNbrRepas.setItems( modelAccueil.listerNbrRepas() );
 		listViewNbrRepas.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
 		listViewPoste.setItems( modelAccueil.listerPosteNonRempli() );
 		listViewPoste.setCellFactory( UtilFX.cellFactory( item -> item.toString() ));
-		
-	}
-	
-	public void refresh() {
-		modelAccueil.actualiserListe();
-		listViewDossierAttentes.requestFocus();
 	}
 
 }
