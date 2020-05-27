@@ -94,6 +94,7 @@ public class ModelActionBenevole {
 			courant.setId_action(daoActionBenevole.inserer(courant));
 		} else {
 			// modficiation
+			System.out.println(courant.posteProperty().toString());
 			daoActionBenevole.modifier(courant);
 		}
 	}
@@ -101,7 +102,6 @@ public class ModelActionBenevole {
 	public void supprimer(ActionBenevole item) {
 
 		daoActionBenevole.supprimer(item.getId_action());
-		System.out.println(UtilFX.findNext(liste, item));
 		mapper.update(courant, UtilFX.findNext(liste, item));
 	}
 }

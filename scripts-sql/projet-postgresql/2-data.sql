@@ -125,8 +125,8 @@ INSERT INTO role_benevole (nom_role)
 --Raids
 
 INSERT INTO raid 
-	VALUES (1,'raid1', '20/08/2020', '25', '7'),
-			(2,'raid2', '22/08/2020', '20', '7');
+	VALUES (1,'Bol d''air 2020', '20/08/2020', '25', '7'),
+			(2,'Mini Bol d''air 2020', '22/08/2020', '20', '7');
 
 --Postes
 INSERT INTO poste VALUES ('1', '1', '3');
@@ -211,9 +211,9 @@ INSERT INTO action_benevole VALUES ('30','12','30','false','descr12','true','13:
 
 --Catégories raid
 
-INSERT INTO categorie_raid VALUES ('1','homme');
-INSERT INTO categorie_raid VALUES ('2','femme');
-INSERT INTO categorie_raid VALUES ('3','mixte');
+INSERT INTO categorie_raid VALUES ('1','Homme');
+INSERT INTO categorie_raid VALUES ('2','Femme');
+INSERT INTO categorie_raid VALUES ('3','Mixte');
 INSERT INTO categorie_raid VALUES ('4','VAE');
 
 

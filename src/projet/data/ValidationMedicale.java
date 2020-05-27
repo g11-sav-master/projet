@@ -114,7 +114,7 @@ public class ValidationMedicale {
 	
 	@Override
 	public String toString() {
-		return getId_validation() + " "+ getEst_valide();
+		return participant.getValue().getPrenom()+" "+participant.getValue().getNom()+ " "+ getEst_valide();
 	}
 
 	
