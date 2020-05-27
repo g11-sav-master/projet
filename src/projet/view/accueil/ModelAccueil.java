@@ -26,9 +26,7 @@ import projet.data.ValidationMedicale;
 
 public class ModelAccueil {
 	
-	// TODO : curseur invisible tab accueil
-	
-	private ObservableList<Participant> liste = FXCollections.observableArrayList();
+	private ObservableList<String> liste = FXCollections.observableArrayList();
 	
 	private final Participant courant = new Participant();
 	
@@ -53,7 +51,7 @@ public class ModelAccueil {
 	
 	// Getters
 	
-	public ObservableList<Participant> getListe() {
+	public ObservableList<String> getListe() {
 		return liste;
 	}
 
@@ -64,7 +62,7 @@ public class ModelAccueil {
 	// Actualisations
 
 	public void actualiserListe() {
-		liste.setAll(daoParticipant.listerTout());
+		liste.setAll(this.listerDossierAttentes());
 	}
 	
 	// 
