@@ -52,8 +52,22 @@ public class ModelConnexion {
 	
 	@PostConstruct
 	public void init() {
+//		//ADMINISTRATEUR
 		courant.setPseudo( "isidu25" );
 		courant.setMotDePasse( "2525isirob" );
+//		
+//		// RESPONSABLE PARTICIPANT
+//		courant.setPseudo( "angietan65" );
+//		courant.setMotDePasse( "angtanvapo45" );
+//		
+		// RESPONSABLE BENEVOLE
+//		courant.setPseudo( "victan65" );
+//		courant.setMotDePasse( "victanvapo45" );
+//		
+//		// NON DESIGNE
+//		courant.setPseudo( "daudaudu01" );
+//		courant.setMotDePasse( "duciva54" );
+		
 	}
 	
 	
@@ -68,7 +82,8 @@ public class ModelConnexion {
 		if( compte == null ) {
 			throw new ExceptionValidation( "Pseudo ou mot de passe invalide." );
 		} else {
-			Platform.runLater( () -> compteActif.setValue( compte ) );
+//			Platform.runLater( () -> compteActif.setValue( compte ) );
+			compteActif.setValue( compte );
 		}
 	}
 	

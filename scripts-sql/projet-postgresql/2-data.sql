@@ -121,7 +121,7 @@ INSERT INTO utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_pass
 
 --Rôles-Bénévole
 INSERT INTO role_benevole (nom_role)
-	VALUES ('admin'),('role1'),('role2'),('role3'),('role4');
+	VALUES ('Administrateur'),('Responsable participant'),('Responsable Bénévole'), ('Non désigné');
 --Raids
 
 INSERT INTO raid 
@@ -148,32 +148,32 @@ INSERT INTO benevole VALUES ('1','1','true');
 INSERT INTO benevole VALUES ('2','2','false');
 INSERT INTO benevole VALUES ('3','3','true');
 INSERT INTO benevole VALUES ('4','4','true');
-INSERT INTO benevole VALUES ('5','5','false');
+INSERT INTO benevole VALUES ('5','4','false');
 INSERT INTO benevole VALUES ('6','1','true');
-INSERT INTO benevole VALUES ('7','5','false');
+INSERT INTO benevole VALUES ('7','4','false');
 INSERT INTO benevole VALUES ('8','2','true');
 INSERT INTO benevole VALUES ('9','4','true');
 INSERT INTO benevole VALUES ('10','3','true');
-INSERT INTO benevole VALUES ('11','3','false');
-INSERT INTO benevole VALUES ('12','5','true');
-INSERT INTO benevole VALUES ('13','5','false');
+INSERT INTO benevole VALUES ('11','4','false');
+INSERT INTO benevole VALUES ('12','4','true');
+INSERT INTO benevole VALUES ('13','4','false');
 INSERT INTO benevole VALUES ('14','3','true');
 INSERT INTO benevole VALUES ('15','3','true');
 INSERT INTO benevole VALUES ('16','4','true');
 INSERT INTO benevole VALUES ('17','2','false');
-INSERT INTO benevole VALUES ('18','5','true');
+INSERT INTO benevole VALUES ('18','4','true');
 INSERT INTO benevole VALUES ('19','1','true');
-INSERT INTO benevole VALUES ('20','3','true');
+INSERT INTO benevole VALUES ('20','4','true');
 INSERT INTO benevole VALUES ('21','1','true');
-INSERT INTO benevole VALUES ('22','5','false');
-INSERT INTO benevole VALUES ('23','2','true');
+INSERT INTO benevole VALUES ('22','4','false');
+INSERT INTO benevole VALUES ('23','4','true');
 INSERT INTO benevole VALUES ('24','4','true');
-INSERT INTO benevole VALUES ('25','2','false');
-INSERT INTO benevole VALUES ('26','2','true');
+INSERT INTO benevole VALUES ('25','4','false');
+INSERT INTO benevole VALUES ('26','4','true');
 INSERT INTO benevole VALUES ('27','4','true');
 INSERT INTO benevole VALUES ('28','2','false');
 INSERT INTO benevole VALUES ('29','3','true');
-INSERT INTO benevole VALUES ('30','2','false');
+INSERT INTO benevole VALUES ('30','4','false');
 
 --Actions bénévole
 

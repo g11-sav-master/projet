@@ -22,7 +22,9 @@ public class MenuBarAppli extends MenuBar {
 	private Menu	menuTests;
 	
 	private MenuItem itemDeconnecter;
-
+	
+	private MenuItem itemAccueil;
+	
 	private MenuItem itemBenevole;
 	
 	private MenuItem itemParticipant;
@@ -34,6 +36,8 @@ public class MenuBarAppli extends MenuBar {
 	private MenuItem itemRaid;
 	
 	private MenuItem itemActionBenevole;
+	
+	private MenuItem itemValidationMedicale;
 	
 	@Inject
 	private IManagerGui 	managerGui;
@@ -52,7 +56,7 @@ public class MenuBarAppli extends MenuBar {
 		MenuItem item;
 		
 		
-		// Manu Système
+		// Menu Système
 		
 		menu =  new Menu( "Système" );;
 		this.getMenus().add(menu);
@@ -65,18 +69,17 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Quitter" );
 		item.setOnAction(  (e) -> managerGui.exit()  );
 		menu.getItems().add( item );
-
-		
-		// Manu Données
-		
-		menu =  new Menu( "Données" );;
-		this.getMenus().add(menu);
-		menuDonnees = menu;
 		
 		item = new MenuItem( "Accueil" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
 		menu.getItems().add( item );
-		itemBenevole = item;
+		itemAccueil = item;
+		
+		// Menu Données
+		
+		menu =  new Menu( "Données" );;
+		this.getMenus().add(menu);
+		menuDonnees = menu;
 		
 		item = new MenuItem( "Bénévoles" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
@@ -111,6 +114,8 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Validation Médicale" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ValidationListe )  );
 		menu.getItems().add( item );
+		itemValidationMedicale = item;
+		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
 		menuTests = menu;
@@ -183,21 +188,31 @@ public class MenuBarAppli extends MenuBar {
 		itemDeconnecter.setDisable(true);
 		
 		menuDonnees.setVisible(false);
+		menuTests.setVisible(false);
+		itemAccueil.setVisible(false);
 		itemBenevole.setVisible(false);
 		itemParticipant.setVisible(false);
 		itemCategorieRaid.setVisible(false);
 		itemPoste.setVisible(false);
 		itemRaid.setVisible(false);
 		itemActionBenevole.setVisible(false);
-		menuTests.setVisible(false);
+		itemValidationMedicale.setVisible(false);
 		
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
-			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
+			if( compteActif.isInRole( Roles.RESPONSABLE_BENEVOLE) ) {
 				menuDonnees.setVisible(true);
+				itemBenevole.setVisible(true);
+				itemActionBenevole.setVisible(true);
+			}
+			if( compteActif.isInRole( Roles.RESPONSABLE_PARTICIPANT) ) {
+				menuDonnees.setVisible(true);
+				itemParticipant.setVisible(true);
+				itemValidationMedicale.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
+				itemAccueil.setVisible(true);
 				menuDonnees.setVisible(true);
 				itemBenevole.setVisible(true);
 				itemParticipant.setVisible(true);
