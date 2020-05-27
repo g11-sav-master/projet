@@ -77,6 +77,9 @@ public class ModelPoste {
 		if (courant.getNbr_benev() == null || courant.getNbr_benev() <= 0) {
 			message.append("\nLe nombre de benevole requis pour un poste ne peut pas valoir 0 ou être négatif.");
 		}
+		if (courant.getDescription() != null && courant.getDescription().length() > 250) {
+			message.append("\nLa description ne peux comporter plus de 250 caractères");
+		}
 
 		if (message.length() > 0) {
 			throw new ExceptionValidation(message.toString().substring(1));

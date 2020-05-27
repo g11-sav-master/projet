@@ -7,6 +7,7 @@ public class Poste {
 	private final Property<Integer> id_poste = new SimpleObjectProperty<>();
 	private final Property<Integer> id_raid = new SimpleObjectProperty<>();
 	private final Property<Integer> nbr_benev = new SimpleObjectProperty<>();
+	private final Property<String> description = new SimpleObjectProperty<>();
 	
 	//constructer
 	public Poste() {};
@@ -56,11 +57,25 @@ public class Poste {
 		this.nbr_benevProperty().setValue(nbr_benev);
 	}
 	
+	public final Property<String> descriptionProperty() {
+		return this.description;
+	}
+	
+	public final String getDescription() {
+		return this.descriptionProperty().getValue();
+	}
+	
+	public final void setDescription(final String description) {
+		this.descriptionProperty().setValue(description);
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "poste :"+this.getId_poste();
 	}
+	
+	
 
 	
 	

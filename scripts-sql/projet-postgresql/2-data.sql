@@ -129,18 +129,18 @@ INSERT INTO raid
 			(2,'Mini Bol d''air 2020', '22/08/2020', '20', '7');
 
 --Postes
-INSERT INTO poste VALUES ('1', '1', '3');
-INSERT INTO poste VALUES ('2', '1', '2');
-INSERT INTO poste VALUES ('3', '1', '2');
-INSERT INTO poste VALUES ('4', '1', '3');
-INSERT INTO poste VALUES ('5', '1', '2');
-INSERT INTO poste VALUES ('6', '1', '3');
-INSERT INTO poste VALUES ('7', '2', '3');
-INSERT INTO poste VALUES ('8', '2', '2');
-INSERT INTO poste VALUES ('9', '2', '2');
-INSERT INTO poste VALUES ('10', '2', '3');
-INSERT INTO poste VALUES ('11', '2', '2');
-INSERT INTO poste VALUES ('12', '2', '3');
+INSERT INTO poste VALUES ('1', '1', '3', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('2', '1', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('3', '1', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('4', '1', '3', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('5', '1', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('6', '1', '3', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('7', '2', '3', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('8', '2', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('9', '2', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('10', '2', '3', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('11', '2', '2', 'Description, position GPS, ...');
+INSERT INTO poste VALUES ('12', '2', '3', 'Description, position GPS, ...');
 
 --Bénévoles
 
