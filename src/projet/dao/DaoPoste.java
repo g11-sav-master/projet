@@ -31,10 +31,11 @@ public class DaoPoste {
 				cn = dataSource.getConnection();
 
 				// Insère le poste
-				sql = "INSERT INTO poste ( id_raid, nbr_benev) VALUES ( ?, ?)";
+				sql = "INSERT INTO poste ( id_raid, nbr_benev) VALUES ( ?, ?, ?)";
 				stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
 				stmt.setObject(	1, poste.getId_raid() );
 				stmt.setObject(	2, poste.getNbr_benev() );
+				stmt.setObject(	3, poste.getDescription() );
 				stmt.executeUpdate();
 
 				// Récupère l'identifiant généré par le SGBD
@@ -63,11 +64,12 @@ public class DaoPoste {
 				cn = dataSource.getConnection();
 
 				// Modifie le poste
-				sql = "UPDATE poste SET id_raid = ?, nbr_benev = ? WHERE id_poste  =  ?";
+				sql = "UPDATE poste SET id_raid = ?, nbr_benev = ?, description = ? WHERE id_poste  =  ?";
 				stmt = cn.prepareStatement( sql );
 				stmt.setObject( 1, poste.getId_raid() );
 				stmt.setObject( 2, poste.getNbr_benev() );
-				stmt.setObject( 3, poste.getId_poste() );
+				stmt.setObject( 3, poste.getDescription() );
+				stmt.setObject( 4, poste.getId_poste() );
 				stmt.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -195,6 +197,7 @@ public class DaoPoste {
 			poste.setId_poste(rs.getObject( "id_poste", Integer.class ));
 			poste.setId_raid(rs.getObject( "id_raid", Integer.class ));
 			poste.setNbr_benev(rs.getObject( "nbr_benev", Integer.class ));
+			poste.setDescription(rs.getObject( "description", String.class ));
 
 			return poste;
 		}

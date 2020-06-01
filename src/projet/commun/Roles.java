@@ -9,13 +9,15 @@ public final class Roles {
 	
 	// Champs statiques
 	
-	public static final String ADMINISTRATEUR	= "admin";
-	public static final String UTILISATEUR		= "UTILISATEUR";
+	public static final String ADMINISTRATEUR	= "Administrateur";
+	public static final String RESPONSABLE_PARTICIPANT	= "Responsable participant";
+	public static final String RESPONSABLE_BENEVOLE	= "Responsable Bénévole";
 	
 	
 	private static final List<String>	roles = Collections.unmodifiableList( Arrays.asList( 
 			ADMINISTRATEUR,			
-			UTILISATEUR
+			RESPONSABLE_PARTICIPANT, 
+			RESPONSABLE_BENEVOLE
 	) );
 
 	private static final String[]	 	libellés = new String[] {

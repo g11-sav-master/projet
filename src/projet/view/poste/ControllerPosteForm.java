@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.converter.IntegerStringConverter;
 import jfox.javafx.view.IManagerGui;
@@ -26,6 +27,8 @@ public class ControllerPosteForm {
 	private TextField textFieldNbrBen;
 	@FXML
 	private ComboBox<Raid> CBNomRaid;
+	@FXML
+	private TextArea textAreaDescription;
 
 	// Autres champs
 
@@ -51,6 +54,7 @@ public class ControllerPosteForm {
 		textFieldNbrBen.textProperty().bindBidirectional(courant.nbr_benevProperty(), new IntegerStringConverter());
 		CBNomRaid.setItems(FXCollections.observableArrayList(daoRaid.listerTout()));
 		CBNomRaid.getSelectionModel().select(daoRaid.retrouver(courant.getId_raid()));
+		textAreaDescription.textProperty().bindBidirectional(courant.descriptionProperty());
 
 	}
 
