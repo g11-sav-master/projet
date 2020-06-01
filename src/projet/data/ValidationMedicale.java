@@ -1,6 +1,7 @@
 package projet.data;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 
@@ -13,20 +14,20 @@ public class ValidationMedicale {
 	// Données observables
 	private final Property<Integer>		id_validation	= new SimpleObjectProperty<>();
 	private final Property<Participant> participant		= new SimpleObjectProperty<>();
-	private final Property<Boolean>		est_valide		= new SimpleObjectProperty<>();
 	private final Property<LocalDate>	date_expiration = new SimpleObjectProperty<>();
+	private final Property<Boolean>		valide			= new SimpleObjectProperty<>();
 	
 	
 	// Constructeurs
 
 	public ValidationMedicale() {}
 	
-	public ValidationMedicale(int id_validation,Participant participant, boolean est_valide, LocalDate date) {
+	public ValidationMedicale(int id_validation,Participant participant, LocalDate date) {
 		super();
 		setId_validation(id_validation);
 		setParticipant(participant);
-		setEst_valide(est_valide);
 		setDate_expiration(date);
+		setValide();
 	}
 	
 	// Getters & setters
@@ -60,20 +61,6 @@ public class ValidationMedicale {
 		this.participantProperty().setValue(participant);
 	}
 	
-	public final Property<Boolean> est_valideProperty() {
-		return this.est_valide;
-	}
-	
-
-	public final Boolean getEst_valide() {
-		return this.est_valideProperty().getValue();
-	}
-	
-
-	public final void setEst_valide(final Boolean est_valide) {
-		this.est_valideProperty().setValue(est_valide);
-	}
-	
 
 	public final Property<LocalDate> date_expirationProperty() {
 		return this.date_expiration;
@@ -95,7 +82,7 @@ public class ValidationMedicale {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(date_expiration, est_valide, id_validation);
+		result = prime * result + Objects.hash(date_expiration,  id_validation, valide);
 		return result;
 	}
 
@@ -108,14 +95,30 @@ public class ValidationMedicale {
 		if (getClass() != obj.getClass())
 			return false;
 		ValidationMedicale other = (ValidationMedicale) obj;
-		return Objects.equals(date_expiration, other.date_expiration) && Objects.equals(est_valide, other.est_valide)
+		return Objects.equals(date_expiration, other.date_expiration) 
 				&& Objects.equals(id_validation, other.id_validation);
 	}
 	
 	@Override
 	public String toString() {
-		return participant.getValue().getPrenom()+" "+participant.getValue().getNom()+ " "+ getEst_valide();
+		Boolean valide = LocalDate.now().isBefore(getDate_expiration()); 
+		return participant.getValue().getPrenom()+" "+participant.getValue().getNom()+ " "+ valide;
 	}
+
+	public final Property<Boolean> valideProperty() {
+		return this.valide;
+	}
+	
+
+	public final Boolean getValide() {
+		return this.valideProperty().getValue();
+	}
+	
+
+	public final void setValide() {
+		this.valideProperty().setValue(this.getDate_expiration().isAfter(LocalDate.now()));
+	}
+	
 
 	
 	
