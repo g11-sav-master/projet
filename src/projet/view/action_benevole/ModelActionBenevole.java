@@ -86,6 +86,10 @@ public class ModelActionBenevole {
 		if (message.length() > 0) {
 			throw new ExceptionValidation(message.toString().substring(1));
 		}
+		if(courant.getPanneau_prendre() == null)
+			courant.setPanneau_prendre(false);
+		if(courant.getSignaleur() == null)
+			courant.setSignaleur(false);
 
 		// Effectue la mise à jour
 
@@ -94,7 +98,6 @@ public class ModelActionBenevole {
 			courant.setId_action(daoActionBenevole.inserer(courant));
 		} else {
 			// modficiation
-			System.out.println(courant.posteProperty().toString());
 			daoActionBenevole.modifier(courant);
 		}
 	}

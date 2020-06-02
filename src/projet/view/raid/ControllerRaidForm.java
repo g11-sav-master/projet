@@ -58,9 +58,7 @@ public class ControllerRaidForm {
 			courant.setPrix_repas(0.0);
 		}
 		DecimalFormat dformat = new DecimalFormat("0.00");
-		System.out.println(courant.getPrix_insc());
 		textFieldPrixInscription.setText(dformat.format(courant.getPrix_insc()));
-		System.out.println(textFieldPrixInscription.getText());
 		textFieldPrixRepas.setText(dformat.format(courant.getPrix_repas()));
 
 		courant.prix_inscProperty().addListener(new ChangeListener<Double>() {

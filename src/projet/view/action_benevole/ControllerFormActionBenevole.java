@@ -1,24 +1,17 @@
 package projet.view.action_benevole;
 
 import java.time.LocalTime;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.LocalTimeStringConverter;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.view.IManagerGui;
 import projet.data.ActionBenevole;
@@ -92,6 +85,12 @@ public class ControllerFormActionBenevole {
 		textAreaDesc.textProperty().bindBidirectional(courant.descr_actionProperty());
 		checkBoxPanneau.selectedProperty().bindBidirectional(courant.panneau_prendreProperty());
 		checkBoxSignal.selectedProperty().bindBidirectional(courant.signaleurProperty());
+		if(courant.getHoraire_debut() == null) {
+			courant.setHoraire_debut(LocalTime.of(14, 0));
+		}
+		if(courant.getHoraire_fin() == null) {
+			courant.setHoraire_fin(LocalTime.of(15, 0));
+		}
 		textFieldHeureDebut.setText(courant.getHoraire_debut().getHour()+"");
 		textFieldHeureFin.setText(courant.getHoraire_fin().getHour()+"");
 		textFieldMinuteDebut.setText(courant.getHoraire_debut().getMinute()+"");
@@ -99,7 +98,11 @@ public class ControllerFormActionBenevole {
 
 		courant.horaire_debutProperty().addListener(new ChangeListener<LocalTime>() {
 			@Override
-			public void changed(ObservableValue<? extends LocalTime> arg0, LocalTime arg1, LocalTime arg2) {
+			public void changed(ObservableValue<? extends LocalTime> arg0, LocalTime arg1, LocalTime newVal) {
+				if(newVal == null) {
+					courant.setHoraire_debut(LocalTime.of(14, 0));
+					newVal = LocalTime.of(14, 0);
+				}
 				textFieldHeureDebut.setText(courant.getHoraire_debut().getHour()+"");
 				textFieldMinuteDebut.setText(courant.getHoraire_debut().getMinute()+"");
 			}
@@ -107,7 +110,11 @@ public class ControllerFormActionBenevole {
 		
 		courant.horaire_finProperty().addListener(new ChangeListener<LocalTime>() {
 			@Override
-			public void changed(ObservableValue<? extends LocalTime> arg0, LocalTime arg1, LocalTime arg2) {
+			public void changed(ObservableValue<? extends LocalTime> arg0, LocalTime arg1, LocalTime newVal) {
+				if(newVal == null) {
+					courant.setHoraire_fin(LocalTime.of(15, 0));
+					newVal = LocalTime.of(15, 0);
+				}
 				textFieldHeureFin.setText(courant.getHoraire_fin().getHour()+"");
 				textFieldMinuteFin.setText(courant.getHoraire_fin().getMinute()+"");
 			}
@@ -155,18 +162,20 @@ public class ControllerFormActionBenevole {
 			int minute = courant.getHoraire_debut().getMinute();
 			if (heure >= 0 && heure <= 24) {
 				courant.setHoraire_debut(LocalTime.of(heure, minute));
-			}
+			}else 
+				throw new Exception();
 		} catch (Exception exception) {
 			throw new ExceptionValidation("Erreur dans l'heure de début");
 		}
-		
+
 		//pour les minutes du début
 		try {
 			int heure = courant.getHoraire_debut().getHour();
 			int minute = Integer.parseInt(textFieldMinuteDebut.getText());
 			if(minute >= 0 && minute <= 59) {
 				courant.setHoraire_debut(LocalTime.of(heure, minute));
-			}
+			}else 
+				throw new Exception();
 		} catch (Exception exception) {
 			throw new ExceptionValidation("Erreur dans les minutes de début");
 		}
@@ -176,7 +185,9 @@ public class ControllerFormActionBenevole {
 			int heure = Integer.parseInt(textFieldHeureFin.getText());
 			int minute = courant.getHoraire_fin().getMinute();
 			if (heure >= 0 && heure <= 24)
-				courant.setHoraire_debut(LocalTime.of(heure, minute));
+				courant.setHoraire_fin(LocalTime.of(heure, minute));
+			else 
+				throw new Exception();
 		} catch (Exception exception) {
 			throw new ExceptionValidation("Erreur dans l'heure de fin");
 		}
@@ -186,7 +197,9 @@ public class ControllerFormActionBenevole {
 			int heure = courant.getHoraire_fin().getHour();
 			int minute = Integer.parseInt(textFieldMinuteFin.getText());
 			if(minute >= 0 && minute <= 59)
-				courant.setHoraire_debut(LocalTime.of(heure, minute));
+				courant.setHoraire_fin(LocalTime.of(heure, minute));
+			else 
+				throw new Exception();
 		} catch (Exception exception) {
 			throw new ExceptionValidation("Erreur dans les minutes de fin");
 		}
