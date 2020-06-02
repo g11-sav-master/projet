@@ -1,18 +1,14 @@
 package projet.view.raid;
 
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
-
 import javax.inject.Inject;
 
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.util.StringConverter;
-import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.ConverterStringLocalDate;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
@@ -32,9 +28,9 @@ public class ControllerRaidForm {
 	@FXML
 	private DatePicker 		datePickerAnnee;
 	@FXML
-	private TextField		textFieldPrixI;
+	private TextField		textFieldPrixInscription;
 	@FXML
-	private TextField		textFieldPrixR;
+	private TextField		textFieldPrixRepas;
 	
 	// Autres champs
 	
@@ -42,35 +38,6 @@ public class ControllerRaidForm {
 	private IManagerGui		managerGui;
 	@Inject
 	private ModelRaid modelraid;
-
-	Pattern pattern = Pattern.compile("(^[0-9][0-9].[0-9][0-9]$)|(^[0-9].[0-9]$)|(^[0-9].[0-9][0-9]$)|(^[0-9][0-9].[0-9]$)|(^[0-9]$)|(^.[0-9]$)");
-	
-	UnaryOperator<TextFormatter.Change> filter = c -> {
-		String heure = c.getControlNewText();
-		if (pattern.matcher(heure).matches()) {
-			return c;
-		} else {
-			return null;
-		}
-	};
-	
-	StringConverter<Double> converter = new StringConverter<Double>() {
-
-	    @Override
-	    public Double fromString(String s) {
-	        if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
-	            return 0.0 ;
-	        } else {
-	            return Double.valueOf(s);
-	        }
-	    }
-
-
-	    @Override
-	    public String toString(Double d) {
-	        return d.toString();
-	    }
-	};
 
 	// Initialisation du Controller
 
@@ -83,23 +50,23 @@ public class ControllerRaidForm {
 		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new IntegerStringConverter()  );
 		textFieldNom.textProperty().bindBidirectional( courant.nomProperty() );
 		UtilFX.bindBidirectional( datePickerAnnee.getEditor(), courant.anneeProperty(), new ConverterStringLocalDate() );
-		if ( courant.getPrix_insc()!=null)
-		{
-		textFieldPrixI.textProperty().bindBidirectional( courant.prix_inscProperty(), new DoubleStringConverter() );
-		TextFormatter<Double> tfD = new TextFormatter<>(filter);
-		textFieldPrixI.setTextFormatter(tfD);
-		textFieldPrixR.textProperty().bindBidirectional( courant.prix_repasProperty(), new DoubleStringConverter() );
-		TextFormatter<Double> tfD2 = new TextFormatter<>(filter);
-		textFieldPrixR.setTextFormatter(tfD2);
-		}else {
-			textFieldPrixI.textProperty().bindBidirectional( courant.prix_inscProperty(), new DoubleStringConverter() );
-			TextFormatter<Double> tfD = new TextFormatter<>(converter, 0.0,filter);
-			textFieldPrixI.setTextFormatter(tfD);
-			textFieldPrixR.textProperty().bindBidirectional( courant.prix_repasProperty(), new DoubleStringConverter() );
-			TextFormatter<Double> tfD2 = new TextFormatter<>(converter, 0.0,filter );
-			textFieldPrixR.setTextFormatter(tfD2);
-			
-		}
+		textFieldPrixInscription.setText(courant.getPrix_insc().toString());
+		textFieldPrixRepas.setText(courant.getPrix_repas().toString());
+		courant.prix_inscProperty().addListener(new ChangeListener<Double>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Double> arg0, Double oldValue, Double newValue) {
+				textFieldPrixInscription.setText(courant.getPrix_insc().toString());
+			}
+		});
+		courant.prix_repasProperty().addListener(new ChangeListener<Double>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Double> arg0, Double oldValue, Double newValue) {
+				textFieldPrixRepas.setText(courant.getPrix_repas().toString());
+			}
+		});
+		
 		
 	
 	}
@@ -109,11 +76,28 @@ public class ControllerRaidForm {
 	
 	@FXML
 	private void doAnnuler() {
+		Raid courant = modelraid.getCourant();
+		textFieldPrixInscription.setText(courant.getPrix_insc().toString());
+		textFieldPrixRepas.setText(courant.getPrix_repas().toString());
 		managerGui.showView( EnumView.RaidView );
 	}
 	
 	@FXML
 	private void doValider() {
+		Raid courant = modelraid.getCourant();
+		try {
+			double prix = Double.parseDouble(textFieldPrixInscription.getText());
+			courant.setPrix_insc(prix);
+		} catch (Exception e) {
+			throw new ExceptionValidation("Erreur dans le prix de l'inscription");
+
+		}
+		try {
+			double prix = Double.parseDouble(textFieldPrixRepas.getText());
+			courant.setPrix_repas(prix);
+		} catch (Exception e) {
+			throw new ExceptionValidation("Erreur dans le prix du repas");
+		}
 		modelraid.validerMiseAJour();
 		managerGui.showView( EnumView.RaidView );
 	}
