@@ -220,6 +220,7 @@ public class MenuBarAppli extends MenuBar {
 				itemCategorieRaid.setVisible(true);
 				itemRaid.setVisible(true);
 				itemActionBenevole.setVisible(true);
+				itemValidationMedicale.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}
