@@ -1,5 +1,8 @@
 package projet.view.raid;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import javax.inject.Inject;
 
 import javafx.beans.value.ChangeListener;
@@ -15,27 +18,25 @@ import jfox.javafx.view.IManagerGui;
 import projet.data.Raid;
 import projet.view.EnumView;
 
-
 public class ControllerRaidForm {
 
-	
 	// Composants de la vue
-	
+
 	@FXML
-	private TextField		textFieldId;
+	private TextField textFieldId;
 	@FXML
-	private TextField		textFieldNom;
+	private TextField textFieldNom;
 	@FXML
-	private DatePicker 		datePickerAnnee;
+	private DatePicker datePickerAnnee;
 	@FXML
-	private TextField		textFieldPrixInscription;
+	private TextField textFieldPrixInscription;
 	@FXML
-	private TextField		textFieldPrixRepas;
-	
+	private TextField textFieldPrixRepas;
+
 	// Autres champs
-	
+
 	@Inject
-	private IManagerGui		managerGui;
+	private IManagerGui managerGui;
 	@Inject
 	private ModelRaid modelraid;
 
@@ -45,61 +46,81 @@ public class ControllerRaidForm {
 	private void initialize() {
 
 		// Data binding
-		
+
 		Raid courant = modelraid.getCourant();
-		textFieldId.textProperty().bindBidirectional( courant.idProperty(), new IntegerStringConverter()  );
-		textFieldNom.textProperty().bindBidirectional( courant.nomProperty() );
-		UtilFX.bindBidirectional( datePickerAnnee.getEditor(), courant.anneeProperty(), new ConverterStringLocalDate() );
-		textFieldPrixInscription.setText(courant.getPrix_insc().toString());
-		textFieldPrixRepas.setText(courant.getPrix_repas().toString());
+		textFieldId.textProperty().bindBidirectional(courant.idProperty(), new IntegerStringConverter());
+		textFieldNom.textProperty().bindBidirectional(courant.nomProperty());
+		UtilFX.bindBidirectional(datePickerAnnee.getEditor(), courant.anneeProperty(), new ConverterStringLocalDate());
+		if (courant.getPrix_insc() == null) {
+			courant.setPrix_insc(0.0);
+		}
+		if (courant.getPrix_repas() == null) {
+			courant.setPrix_repas(0.0);
+		}
+		DecimalFormat dformat = new DecimalFormat("0.00");
+		System.out.println(courant.getPrix_insc());
+		textFieldPrixInscription.setText(dformat.format(courant.getPrix_insc()));
+		System.out.println(textFieldPrixInscription.getText());
+		textFieldPrixRepas.setText(dformat.format(courant.getPrix_repas()));
+
 		courant.prix_inscProperty().addListener(new ChangeListener<Double>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Double> arg0, Double oldValue, Double newValue) {
-				textFieldPrixInscription.setText(courant.getPrix_insc().toString());
+				if (newValue == null) {
+					courant.setPrix_insc(0.0);
+					newValue = 0.0;
+				}
+				DecimalFormat df1 = new DecimalFormat("0.00");
+				df1.setRoundingMode(RoundingMode.DOWN);
+				textFieldPrixInscription.setText(df1.format(newValue.doubleValue()));
 			}
 		});
 		courant.prix_repasProperty().addListener(new ChangeListener<Double>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Double> arg0, Double oldValue, Double newValue) {
-				textFieldPrixRepas.setText(courant.getPrix_repas().toString());
+				if (newValue == null) {
+					courant.setPrix_repas(0.0);
+					newValue = 0.0;
+				}
+				DecimalFormat df1 = new DecimalFormat("0.00");
+				df1.setRoundingMode(RoundingMode.DOWN);
+				textFieldPrixRepas.setText(df1.format(newValue.doubleValue()));
 			}
 		});
-		
-		
-	
+
 	}
-	
-	
+
 	// Actions
-	
+
 	@FXML
 	private void doAnnuler() {
 		Raid courant = modelraid.getCourant();
 		textFieldPrixInscription.setText(courant.getPrix_insc().toString());
 		textFieldPrixRepas.setText(courant.getPrix_repas().toString());
-		managerGui.showView( EnumView.RaidView );
+		managerGui.showView(EnumView.RaidView);
 	}
-	
+
 	@FXML
 	private void doValider() {
 		Raid courant = modelraid.getCourant();
 		try {
-			double prix = Double.parseDouble(textFieldPrixInscription.getText());
+			String txt = textFieldPrixInscription.getText().replace(",", ".");
+			double prix = Double.parseDouble(txt);
 			courant.setPrix_insc(prix);
 		} catch (Exception e) {
 			throw new ExceptionValidation("Erreur dans le prix de l'inscription");
 
 		}
 		try {
-			double prix = Double.parseDouble(textFieldPrixRepas.getText());
+			String txt = textFieldPrixRepas.getText().replace(",", ".");
+			double prix = Double.parseDouble(txt);
 			courant.setPrix_repas(prix);
 		} catch (Exception e) {
 			throw new ExceptionValidation("Erreur dans le prix du repas");
 		}
 		modelraid.validerMiseAJour();
-		managerGui.showView( EnumView.RaidView );
+		managerGui.showView(EnumView.RaidView);
 	}
-	
 }
