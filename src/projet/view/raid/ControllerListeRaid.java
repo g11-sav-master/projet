@@ -43,7 +43,7 @@ public class ControllerListeRaid {
 	private void initialize() {
 		listView.setItems( modelraid.getListe());
 		
-		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom_raid() ));
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom_raid() + " " + item.getAnnee().getYear() ));
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
 				(obs, oldVal, newVal) -> {

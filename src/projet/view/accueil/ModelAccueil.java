@@ -126,7 +126,7 @@ public class ModelAccueil {
 			for(Poste poste : postes)
 			{
 				if(daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId()) != poste.getNbr_benev())
-					listes.add(Character.toString('\u261b') +raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev()+Character.toString('\u261a'));
+					listes.add(Character.toString('\u261b') +raid.getNom_raid() + " " + raid.getAnnee().getYear()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev()+Character.toString('\u261a'));
 				else
 					listes.add(raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev());
 			}

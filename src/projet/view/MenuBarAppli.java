@@ -61,6 +61,11 @@ public class MenuBarAppli extends MenuBar {
 		menu =  new Menu( "Système" );;
 		this.getMenus().add(menu);
 		
+		item = new MenuItem( "Accueil" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
+		menu.getItems().add( item );
+		itemAccueil = item;
+		
 		item = new MenuItem( "Se déconnecter" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Connexion )  );
 		menu.getItems().add( item );
@@ -69,11 +74,6 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Quitter" );
 		item.setOnAction(  (e) -> managerGui.exit()  );
 		menu.getItems().add( item );
-		
-		item = new MenuItem( "Accueil" );
-		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
-		menu.getItems().add( item );
-		itemAccueil = item;
 		
 		// Menu Données
 		

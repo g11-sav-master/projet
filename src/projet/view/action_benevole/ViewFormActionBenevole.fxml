@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="paneRoot" prefHeight="390.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.action_benevole.ControllerFormActionBenevole">
    <children>
@@ -53,8 +54,20 @@
                   </HBox>
                   <Label text="Heure début" GridPane.rowIndex="6" />
                   <Label text="Heure fin" GridPane.rowIndex="7" />
-                  <TextField fx:id="textFieldDebut" maxWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" text="00:00:00" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="textFieldFin" maxWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" text="00:00:00" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <TextField fx:id="textFieldHeureDebut" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                        <TextField fx:id="textFieldMinuteDebut" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                        <TextField fx:id="textFieldHeureFin" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+                        <TextField fx:id="textFieldMinuteFin" />
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>

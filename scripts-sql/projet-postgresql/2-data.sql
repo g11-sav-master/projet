@@ -125,8 +125,8 @@ INSERT INTO role_benevole (nom_role)
 --Raids
 
 INSERT INTO raid 
-	VALUES (1,'Bol d''air 2020', '20/08/2020', '25', '7'),
-			(2,'Mini Bol d''air 2020', '22/08/2020', '20', '7');
+	VALUES (1,'Bol d''air', '20/08/2020', '25', '7'),
+			(2,'Mini Bol d''air', '22/08/2020', '20', '7');
 
 --Postes
 INSERT INTO poste VALUES ('1', '1', '3', 'Description, position GPS, ...');

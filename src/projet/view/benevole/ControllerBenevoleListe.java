@@ -42,7 +42,7 @@ public class ControllerBenevoleListe {
 		// Data binding
 		listView.setItems( modelBenevole.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() ));
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.getNom() + " " + item.getPrenom() ));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
