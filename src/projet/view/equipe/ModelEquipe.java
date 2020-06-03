@@ -26,6 +26,8 @@ public class ModelEquipe {
 	
 	private final ObservableList<ParticipantDuo> liste = FXCollections.observableArrayList();
 	private final ParticipantDuo courant = new ParticipantDuo();
+	private Participant capitaine;
+	private Participant equipier;
 	
 	// Autres champs
 	
@@ -116,7 +118,8 @@ public class ModelEquipe {
 	}
 	
 	public void preparerAjouter() {
-		 mapper.update(courant, new ParticipantDuo());
+		 mapper.update(courant, new 
+				 ParticipantDuo());
 	}
 	
 	public void supprimer(ParticipantDuo item) {
@@ -134,7 +137,6 @@ public class ModelEquipe {
 			mapper.update(courant, UtilFX.findNext(liste, item));
 		}
 
-		
 	}
 
 	public void actualiserListe() {
@@ -144,8 +146,23 @@ public class ModelEquipe {
 	public ParticipantDuo getCourant() {
 		return courant;
 	}
+	
+	public void majParticipants(Participant capitaine, Participant equipier) {
+		FormeDuo formeDuoCap = new FormeDuo();
+		formeDuoCap.setEstCapitaine(true);
+		formeDuoCap.setIdUtilisateur(capitaine);
+		formeDuoCap.setIdPartDuo(courant.getId_part_duo());
+		daoFormeDuo.modifier(formeDuoCap);
+		
+		FormeDuo formeDuoEq = new FormeDuo();
+		formeDuoEq.setEstCapitaine(false);
+		formeDuoEq.setIdUtilisateur(equipier);
+		formeDuoEq.setIdPartDuo(courant.getId_part_duo());
+		daoFormeDuo.modifier(formeDuoEq);
+		
+	}
 
-	public void validerMiseAJour() {
+	public void validerMiseAJour(Participant cap, Participant eq) {
 		
 		StringBuilder message = new StringBuilder();
 		
@@ -157,6 +174,12 @@ public class ModelEquipe {
 			message.append("\nLe raid doit être défini.");
 		if(courant.getNbr_repas() == null)
 			message.append("\nLe nombre de repas doit être défini.");
+		
+		if(courant.getId_part_duo() == null) {
+			daoParticipantDuo.modifier(courant);
+			majParticipants(cap, eq);
+		}
+			
 	}
 	
 }
