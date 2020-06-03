@@ -1,5 +1,7 @@
 package projet.view.equipe;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
@@ -66,10 +68,8 @@ public class ControllerFormEquipe {
 		comboBoxParticipantCapitaine.getSelectionModel().select(daoParticipant.retrouver(daoFormeDuo.retrouverId(courant.getId_part_duo()).getIdUtilisateur()));
 		comboBoxParticipantEquipier.setItems(modelEquipe.getParticipantPourUnRaid(comboBoxRaids.getValue().getId()));
 		comboBoxParticipantEquipier.getSelectionModel().select(daoParticipant.retrouver(daoFormeDuo.retrouverAutre(courant.getId_part_duo(),capitaine.getIdUtilisateur()).getIdUtilisateur()));
-		
 		textFieldNombreRepas.textProperty().bindBidirectional(courant.nbr_repasProperty(), new IntegerStringConverter());
 		checkBoxPaiementValidee.selectedProperty().bindBidirectional(courant.paiement_valideProperty());
-
 	}
 
 	// Actions
@@ -81,6 +81,11 @@ public class ControllerFormEquipe {
 
 	@FXML
 	private void doValider() {
+		ParticipantDuo courant = modelEquipe.getCourant();
+		courant.setId_raid(comboBoxRaids.getSelectionModel().getSelectedItem());
+		courant.setId_categorie(comboBoxCategorieRaid.getSelectionModel().getSelectedItem().getIdCategorieRaid());
+		courant.setNbr_repas(Integer.parseInt(textFieldNombreRepas.getText()));
+		courant.setPaiement_valide(checkBoxPaiementValidee.isDisabled());
 		modelEquipe.validerMiseAJour();
 		managerGui.showView(EnumView.EquipeListe);
 	}

@@ -135,6 +135,7 @@ public class ModelEquipe {
 			mapper.update(courant, UtilFX.findNext(liste, item));
 		}
 
+		
 	}
 
 	public void actualiserListe() {
@@ -146,7 +147,17 @@ public class ModelEquipe {
 	}
 
 	public void validerMiseAJour() {
-		// TODO Auto-generated method stub
+		
+		StringBuilder message = new StringBuilder();
+		
+		if(courant.getPaiement_valide() == null)
+			message.append("\nLe paiement doit être défini.");
+		if(courant.getId_categorie() == null)
+			message.append("\nLa catégorie de raid doit être défini.");
+		if(courant.getId_raid() == null)
+			message.append("\nLe raid doit être défini.");
+		if(courant.getNbr_repas() == null)
+			message.append("\nLe nombre de repas doit être défini.");
 	}
 	
 }
