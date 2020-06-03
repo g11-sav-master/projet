@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import jfox.javafx.util.UtilFX;
 import projet.dao.DaoFormeDuo;
+import projet.dao.DaoParticipant;
 import projet.data.FormeDuo;
 
 
@@ -22,6 +23,8 @@ public class ControllerTestDaoFormeDuo {
 	
 	@Inject
 	private DaoFormeDuo	dao;
+	@Inject
+	private DaoParticipant daoParticipant;
 	
 	private final int		idPartDuo = 1, idUtilisateur = 31;
 	
@@ -57,13 +60,12 @@ public class ControllerTestDaoFormeDuo {
 	@FXML
 	private void doInsererSupprimer() {
 		textArea.clear();
-		
 		int idPartDuoTest=1, idUtilisateurTest=32;
 		
 		FormeDuo formeDuoTest = new FormeDuo();
 		formeDuoTest.setEstCapitaine(true);
 		formeDuoTest.setIdPartDuo(idPartDuoTest);
-		formeDuoTest.setIdUtilisateur(idUtilisateurTest);
+		formeDuoTest.setIdUtilisateur(daoParticipant.retrouver(idUtilisateurTest));
 		
 		dao.inserer( formeDuoTest );
 		textArea.appendText( UtilFX.objectToString( dao.retrouver(idPartDuoTest, idUtilisateurTest) ) );

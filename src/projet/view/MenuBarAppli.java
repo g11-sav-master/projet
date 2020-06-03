@@ -20,8 +20,11 @@ public class MenuBarAppli extends MenuBar {
 	
 	private Menu	menuDonnees;
 	private Menu	menuTests;
+	private Menu	menuEquipe;
 	
 	private MenuItem itemDeconnecter;
+	
+	private MenuItem itemAccueil;
 
 	private MenuItem itemBenevole;
 	
@@ -34,6 +37,10 @@ public class MenuBarAppli extends MenuBar {
 	private MenuItem itemRaid;
 	
 	private MenuItem itemActionBenevole;
+	
+	private MenuItem itemCreerEquipe;
+	
+	private MenuItem itemEquipeListe;
 	
 	@Inject
 	private IManagerGui 	managerGui;
@@ -76,7 +83,7 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Accueil" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
 		menu.getItems().add( item );
-		itemBenevole = item;
+		itemAccueil = item;
 		
 		item = new MenuItem( "Bénévoles" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
@@ -111,6 +118,21 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Validation Médicale" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ValidationListe )  );
 		menu.getItems().add( item );
+		
+		menu =  new Menu( "Equipe" );;
+		this.getMenus().add(menu);
+		menuEquipe = menu;
+		
+		item = new MenuItem("Créer une équipe");
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.CreerEquipeForm )  );
+		menu.getItems().add(item);
+		itemCreerEquipe = item;
+		
+		item = new MenuItem("Lister les équipes");
+		item.setOnAction( (e) -> managerGui.showView( EnumView.EquipeListe ));
+		menu.getItems().add(item);
+		itemEquipeListe = item;
+		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
 		menuTests = menu;

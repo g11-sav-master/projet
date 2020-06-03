@@ -7,6 +7,7 @@ import org.mapstruct.MappingTarget;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;
 import projet.data.Participant;
+import projet.data.ParticipantDuo;
 import projet.data.Raid;
 import projet.data.RoleBenevole;
 import projet.data.ValidationMedicale;
@@ -28,4 +29,5 @@ public interface IMapper {
 	RoleBenevole update (@MappingTarget RoleBenevole actionBenevole, RoleBenevole source);
 	@Mapping( target="participant", expression="java( source.getParticipant() )" )
 	ValidationMedicale update (@MappingTarget ValidationMedicale validationMedicale, ValidationMedicale source);
+	ParticipantDuo update(@MappingTarget ParticipantDuo courant, ParticipantDuo retrouver);
 }
