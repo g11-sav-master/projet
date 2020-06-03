@@ -37,12 +37,11 @@ public class DaoValidationMedicale {
 
 			// Insère la validation médicale
 			if (daoParticipant.retrouver(validation.getParticipant().getIdUtilisateur()) != null) {
-				sql = "INSERT INTO validation_medicale ( id_utilisateur, est_valide, date_expiration) VALUES ( ?, ?, ?)";
+				sql = "INSERT INTO validation_medicale ( id_utilisateur, date_expiration) VALUES ( ?, ?)";
 				// Vérif
 				stmt = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setInt(1, validation.getParticipant().getIdUtilisateur());
-				stmt.setBoolean(2, validation.getEst_valide());
-				stmt.setObject(3, validation.getDate_expiration());
+				stmt.setObject(2, validation.getDate_expiration());
 				stmt.executeUpdate();
 
 				// Récupère l'identifiant généré par le SGBD
@@ -71,12 +70,11 @@ public class DaoValidationMedicale {
 			if (daoParticipant.retrouver(validation.getParticipant().getIdUtilisateur()) != null) {
 				cn = dataSource.getConnection();
 				// Modifie la validation
-				sql = "UPDATE validation_medicale SET est_valide = ?, date_expiration = ? WHERE id_validation  =  ? AND id_utilisateur = ?";
+				sql = "UPDATE validation_medicale SET date_expiration = ? WHERE id_validation  =  ? AND id_utilisateur = ?";
 				stmt = cn.prepareStatement(sql);
-				stmt.setObject(1, validation.getEst_valide());
-				stmt.setObject(2, validation.getDate_expiration());
-				stmt.setObject(3, validation.getId_validation());
-				stmt.setObject(4, validation.getParticipant().getIdUtilisateur());
+				stmt.setObject(1, validation.getDate_expiration());
+				stmt.setObject(2, validation.getId_validation());
+				stmt.setObject(3, validation.getParticipant().getIdUtilisateur());
 				stmt.executeUpdate();
 			}
 
@@ -201,8 +199,8 @@ public class DaoValidationMedicale {
 		{
 			validation.setParticipant(daoParticipant.retrouver(idP));
 		}
-		validation.setEst_valide(rs.getObject("est_valide", Boolean.class));
 		validation.setDate_expiration(rs.getObject("date_expiration", LocalDate.class));
+		validation.setValide();
 		return validation;
 	}
 }

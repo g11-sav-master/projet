@@ -105,6 +105,10 @@ public class DaoActionBenevole {
 				}
 			stmt.setBoolean(3, actionBenevole.getPanneau_prendre());
 			stmt.setObject(4,actionBenevole.getDescr_action());
+			if (actionBenevole.getSignaleur() == null)
+			{
+				actionBenevole.setSignaleur(false);
+			}
 			stmt.setBoolean(5,actionBenevole.getSignaleur());
 			stmt.setObject(6, actionBenevole.getHoraire_debut());
 			stmt.setObject(7, actionBenevole.getHoraire_fin());

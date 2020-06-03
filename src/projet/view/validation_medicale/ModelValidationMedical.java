@@ -1,5 +1,7 @@
 package projet.view.validation_medicale;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
@@ -35,6 +37,10 @@ public class ModelValidationMedical {
 	}
 
 	public ValidationMedicale getCourant() {
+		if ((courant.getDate_expiration() != null)) 
+		{
+			courant.setValide();
+		}
 		return courant;
 	}
 
@@ -54,6 +60,10 @@ public class ModelValidationMedical {
 	public void preparerModifier(ValidationMedicale item) {
 		modelParticipant.actualiserListe();
 		mapper.update(courant, daoValidationMedicale.retrouver(item.getId_validation()));
+		if ((courant.getDate_expiration() != null)) 
+		{
+			courant.setValide();
+		}
 	}
 
 	public void validerMiseAJour() {

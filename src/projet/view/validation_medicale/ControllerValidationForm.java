@@ -1,11 +1,13 @@
 package projet.view.validation_medicale;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
@@ -27,7 +29,7 @@ public class ControllerValidationForm {
 	@FXML
 	private TextField		textFieldNomParticipant;
 	@FXML
-	private CheckBox		checkBoxValide;
+	private RadioButton		radioButtonValide;
 	@FXML
 	private DatePicker		datePickerExpiration;
 	
@@ -63,13 +65,13 @@ public class ControllerValidationForm {
 	private void initialize() {
 
 		// Data binding
-		
+		actualiserRadio();
 		ValidationMedicale courant = modelValidation.getCourant();
 		textFieldIdValidation.textProperty().bindBidirectional(courant.id_validationProperty(), new IntegerStringConverter()); // textProperty.bindBidirectional(courant.getId_validation().toString());
 		textFieldNomParticipant.textProperty().bindBidirectional(courant.participantProperty(), ParticipantConverter() );
-		checkBoxValide.selectedProperty().bindBidirectional(courant.est_valideProperty());
+		//boolean valide=LocalDate.now().isBefore((ChronoLocalDate) courant.date_expirationProperty());
+		radioButtonValide.selectedProperty().bindBidirectional(courant.valideProperty());//addListener( obs -> actualiserRadio());
 		UtilFX.bindBidirectional( datePickerExpiration.getEditor(), courant.date_expirationProperty(), new ConverterStringLocalDate() );
-	
 	}
 	
 	
@@ -84,6 +86,11 @@ public class ControllerValidationForm {
 	private void doValider() {
 		modelValidation.validerMiseAJour();
 		managerGui.showView( EnumView.ValidationListe );
+	}
+	@FXML
+	private void actualiserRadio() {
+		Boolean valide = modelValidation.getCourant().getDate_expiration().isAfter(LocalDate.now());
+		radioButtonValide.setSelected(valide);
 	}
 	
 }

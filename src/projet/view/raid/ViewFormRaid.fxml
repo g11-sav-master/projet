@@ -39,8 +39,8 @@
                   <Label text="Annee" GridPane.rowIndex="2" />
                   <Label text="Prix Inscription" GridPane.rowIndex="3" />
                   <Label text="Prix Repas" GridPane.rowIndex="4" />
-                  <TextField fx:id="textFieldPrixI" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="textFieldPrixR" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="textFieldPrixInscription" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="textFieldPrixRepas" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <DatePicker fx:id="datePickerAnnee" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>

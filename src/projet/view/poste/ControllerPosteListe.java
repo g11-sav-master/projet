@@ -9,6 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
+import projet.dao.DaoRaid;
 import projet.data.Poste;
 import projet.view.EnumView;
 
@@ -32,6 +33,8 @@ public class ControllerPosteListe {
 	private IManagerGui			managerGui;
 	@Inject
 	private ModelPoste		modelposte;
+	@Inject
+	private DaoRaid		daoRaid;
 	
 	
 	// Initialisation du Controller
@@ -42,7 +45,7 @@ public class ControllerPosteListe {
 		// Data binding
 		listView.setItems( modelposte.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> item.getId_poste()+" "));
+		listView.setCellFactory(  UtilFX.cellFactory(item -> daoRaid.retrouver(item.getId_raid()).getNom_raid() + " -  Poste n°" + item.getId_poste()));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(

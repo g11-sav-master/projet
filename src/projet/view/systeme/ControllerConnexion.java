@@ -9,58 +9,58 @@ import javafx.scene.control.TextField;
 import jfox.javafx.view.IManagerGui;
 import projet.data.Compte;
 import projet.view.EnumView;
-
+import projet.commun.Roles;
 
 public class ControllerConnexion {
-	
 
 	// Composants de la vue
-	
-	@FXML
-	private TextField		fieldPseudo;
-	@FXML
-	private PasswordField	fieldMotDePasse;
 
-	
+	@FXML
+	private TextField fieldPseudo;
+	@FXML
+	private PasswordField fieldMotDePasse;
+
 	// Autres champs
-	
+
 	@Inject
-	private IManagerGui		managerGui;
+	private IManagerGui managerGui;
 	@Inject
-	private ModelConnexion	modelConnexion;
-	
-	
+	private ModelConnexion modelConnexion;
+
 	// Initialisation du Controller
-	
+
 	@FXML
 	private void initialize() {
-		
+
 		// Data binding
 		Compte courant = modelConnexion.getCourant();
-		fieldPseudo.textProperty().bindBidirectional( courant.pseudoProperty() );
-		fieldMotDePasse.textProperty().bindBidirectional( courant.motDePasseProperty() );
+		fieldPseudo.textProperty().bindBidirectional(courant.pseudoProperty());
+		fieldMotDePasse.textProperty().bindBidirectional(courant.motDePasseProperty());
 	}
-	
-	
+
 	public void refresh() {
 		// Ferem la session si elle est ouverte
-		if ( modelConnexion.getCompteActif() != null ) {
+		if (modelConnexion.getCompteActif() != null) {
 			modelConnexion.fermerSessionUtilisateur();
 		}
 	}
-	
 
 	// Actions
-	
+
 	@FXML
 	private void doConnexion() {
-		managerGui.execTask( () -> {
+		managerGui.execTask(() -> {
 			modelConnexion.ouvrirSessionUtilisateur();
-			Platform.runLater( () -> {
-        			managerGui.showView(EnumView.Accueil);
-            }) ;
-		} );
+			if (modelConnexion.getCompteActif().getRoles().contains(Roles.ADMINISTRATEUR)) {
+				Platform.runLater(() -> {
+					managerGui.showView(EnumView.Accueil);
+				});
+			}else {
+				Platform.runLater(() -> {
+					managerGui.showView(EnumView.Info);
+				});
+			}
+		});
 	}
-	
 
 }

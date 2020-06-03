@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="318.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.view.systeme.ControllerConnexion">
    <children>
-      <Label alignment="CENTER" styleClass="titre-vue" text="Gestion de Contacts" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+      <Label alignment="CENTER" styleClass="titre-vue" text="Gestionnaire Bol d'Air" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
       <FlowPane alignment="CENTER" layoutY="76.0" prefHeight="119.0" prefWidth="337.0" AnchorPane.bottomAnchor="178.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
       <VBox alignment="CENTER" fillWidth="false" layoutX="119.0" layoutY="100.0" prefHeight="218.0" prefWidth="337.0" spacing="30.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>

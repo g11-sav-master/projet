@@ -1,5 +1,6 @@
 package projet.view.accueil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -78,11 +79,11 @@ public class ModelAccueil {
 			FormeDuo formeDuo = daoFormeDuo.retrouverUtilisateur(participant.getIdUtilisateur());
 			ParticipantDuo participantDuo = daoParticipantDuo.retrouver(formeDuo.getIdPartDuo());
 			
-			if(!validationMedicale.getEst_valide() && !participantDuo.getPaiement_valide())
+			if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
 				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale et paiement en attente");
-			else if(!validationMedicale.getEst_valide() && participantDuo.getPaiement_valide()) 
+			else if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && participantDuo.getPaiement_valide()) 
 				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale en attente");
-			else if(validationMedicale.getEst_valide() && !participantDuo.getPaiement_valide())
+			else if((LocalDate.now().isBefore(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
 				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : paiement en attente");
 		}
 		
@@ -125,7 +126,7 @@ public class ModelAccueil {
 			for(Poste poste : postes)
 			{
 				if(daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId()) != poste.getNbr_benev())
-					listes.add(Character.toString('\u261b') +raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev()+Character.toString('\u261a'));
+					listes.add(Character.toString('\u261b') +raid.getNom_raid() + " " + raid.getAnnee().getYear()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev()+Character.toString('\u261a'));
 				else
 					listes.add(raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev());
 			}

@@ -25,7 +25,6 @@ public class MenuBarAppli extends MenuBar {
 	private MenuItem itemDeconnecter;
 	
 	private MenuItem itemAccueil;
-
 	private MenuItem itemBenevole;
 	
 	private MenuItem itemParticipant;
@@ -41,6 +40,9 @@ public class MenuBarAppli extends MenuBar {
 	private MenuItem itemCreerEquipe;
 	
 	private MenuItem itemEquipeListe;
+
+	private MenuItem itemValidationMedicale;
+
 	
 	@Inject
 	private IManagerGui 	managerGui;
@@ -59,10 +61,15 @@ public class MenuBarAppli extends MenuBar {
 		MenuItem item;
 		
 		
-		// Manu Système
+		// Menu Système
 		
 		menu =  new Menu( "Système" );;
 		this.getMenus().add(menu);
+		
+		item = new MenuItem( "Accueil" );
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
+		menu.getItems().add( item );
+		itemAccueil = item;
 		
 		item = new MenuItem( "Se déconnecter" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Connexion )  );
@@ -72,9 +79,8 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Quitter" );
 		item.setOnAction(  (e) -> managerGui.exit()  );
 		menu.getItems().add( item );
-
 		
-		// Manu Données
+		// Menu Données
 		
 		menu =  new Menu( "Données" );;
 		this.getMenus().add(menu);
@@ -84,7 +90,6 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.Accueil )  );
 		menu.getItems().add( item );
 		itemAccueil = item;
-		
 		item = new MenuItem( "Bénévoles" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.BenevoleListe )  );
 		menu.getItems().add( item );
@@ -132,6 +137,7 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction( (e) -> managerGui.showView( EnumView.EquipeListe ));
 		menu.getItems().add(item);
 		itemEquipeListe = item;
+		itemValidationMedicale = item;
 		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);
@@ -205,21 +211,31 @@ public class MenuBarAppli extends MenuBar {
 		itemDeconnecter.setDisable(true);
 		
 		menuDonnees.setVisible(false);
+		menuTests.setVisible(false);
+		itemAccueil.setVisible(false);
 		itemBenevole.setVisible(false);
 		itemParticipant.setVisible(false);
 		itemCategorieRaid.setVisible(false);
 		itemPoste.setVisible(false);
 		itemRaid.setVisible(false);
 		itemActionBenevole.setVisible(false);
-		menuTests.setVisible(false);
+		itemValidationMedicale.setVisible(false);
 		
 		
 		if( compteActif != null ) {
 			itemDeconnecter.setDisable(false);
-			if( compteActif.isInRole( Roles.UTILISATEUR) ) {
+			if( compteActif.isInRole( Roles.RESPONSABLE_BENEVOLE) ) {
 				menuDonnees.setVisible(true);
+				itemBenevole.setVisible(true);
+				itemActionBenevole.setVisible(true);
+			}
+			if( compteActif.isInRole( Roles.RESPONSABLE_PARTICIPANT) ) {
+				menuDonnees.setVisible(true);
+				itemParticipant.setVisible(true);
+				itemValidationMedicale.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
+				itemAccueil.setVisible(true);
 				menuDonnees.setVisible(true);
 				itemBenevole.setVisible(true);
 				itemParticipant.setVisible(true);
@@ -227,6 +243,7 @@ public class MenuBarAppli extends MenuBar {
 				itemCategorieRaid.setVisible(true);
 				itemRaid.setVisible(true);
 				itemActionBenevole.setVisible(true);
+				itemValidationMedicale.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}
