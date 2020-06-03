@@ -208,6 +208,7 @@ public class MenuBarAppli extends MenuBar {
 		
 		menuDonnees.setVisible(false);
 		menuTests.setVisible(false);
+		menuEquipe.setVisible(false);
 		itemAccueil.setVisible(false);
 		itemBenevole.setVisible(false);
 		itemParticipant.setVisible(false);
@@ -216,6 +217,9 @@ public class MenuBarAppli extends MenuBar {
 		itemRaid.setVisible(false);
 		itemActionBenevole.setVisible(false);
 		itemValidationMedicale.setVisible(false);
+		itemEquipeListe.setVisible(false);
+		itemCreerEquipe.setVisible(false);
+		
 		
 		
 		if( compteActif != null ) {
@@ -229,6 +233,9 @@ public class MenuBarAppli extends MenuBar {
 				menuDonnees.setVisible(true);
 				itemParticipant.setVisible(true);
 				itemValidationMedicale.setVisible(true);
+				menuEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(true);
+				itemEquipeListe.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				itemAccueil.setVisible(true);
@@ -240,6 +247,9 @@ public class MenuBarAppli extends MenuBar {
 				itemRaid.setVisible(true);
 				itemActionBenevole.setVisible(true);
 				itemValidationMedicale.setVisible(true);
+				menuEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(true);
+				itemEquipeListe.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}
