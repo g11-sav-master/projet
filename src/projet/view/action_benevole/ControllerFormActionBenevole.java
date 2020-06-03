@@ -16,6 +16,7 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.view.IManagerGui;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;
+import projet.data.ParticipeOrganisation;
 import projet.data.Poste;
 import projet.view.EnumView;
 
@@ -43,6 +44,8 @@ public class ControllerFormActionBenevole {
 	private TextField textFieldHeureFin;
 	@FXML
 	private TextField textFieldMinuteFin;
+	@FXML
+	private TextField textFieldRepas;
 
 	// Autres champs
 
@@ -77,6 +80,7 @@ public class ControllerFormActionBenevole {
 		// Data binding
 
 		ActionBenevole courant = modelAB.getCourant();
+		ParticipeOrganisation PO = modelAB.getPO();
 		textFieldId.textProperty().bindBidirectional(courant.id_actionProperty(), new IntegerStringConverter());
 		comboBoxUtilisateur.setItems(modelAB.getBenevoles());
 		comboBoxUtilisateur.valueProperty().bindBidirectional(courant.benevoleProperty());
@@ -119,7 +123,7 @@ public class ControllerFormActionBenevole {
 				textFieldMinuteFin.setText(courant.getHoraire_fin().getMinute()+"");
 			}
 		});
-	
+		textFieldRepas.textProperty().bindBidirectional(PO.nbreRepasProperty(),new IntegerStringConverter());
 
 		/*
 		 * if (courant.getHoraire_debut() != null && courant.getHoraire_fin() != null) {

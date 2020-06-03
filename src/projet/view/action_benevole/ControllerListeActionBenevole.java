@@ -12,6 +12,7 @@ import jfox.javafx.view.IManagerGui;
 import projet.data.ActionBenevole;
 import projet.view.EnumView;
 import projet.view.action_benevole.ModelActionBenevole;
+import projet.dao.DaoParticipeOrganisation;
 
 
 public class ControllerListeActionBenevole {
@@ -35,6 +36,8 @@ public class ControllerListeActionBenevole {
 		private IManagerGui		managerGui;
 		@Inject
 		private ModelActionBenevole	modelAB;
+		@Inject
+		private DaoParticipeOrganisation	daoPO;
 	
 	
 	
@@ -43,7 +46,7 @@ public class ControllerListeActionBenevole {
 	private void initialize() {
 		listView.setItems( modelAB.getListe());
 		
-		listView.setCellFactory(  UtilFX.cellFactory( item -> Integer.toString(item.getId_action()) ));
+		listView.setCellFactory(  UtilFX.cellFactory( item -> item.toString() ));
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
 				(obs, oldVal, newVal) -> {

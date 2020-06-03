@@ -33,6 +33,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Id :" />
@@ -56,18 +57,20 @@
                   <Label text="Heure fin" GridPane.rowIndex="7" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <TextField fx:id="textFieldHeureDebut" />
+                        <TextField fx:id="textFieldHeureDebut" prefHeight="26.0" prefWidth="26.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <TextField fx:id="textFieldMinuteDebut" />
+                        <TextField fx:id="textFieldMinuteDebut" prefHeight="26.0" prefWidth="27.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <TextField fx:id="textFieldHeureFin" />
+                        <TextField fx:id="textFieldHeureFin" prefHeight="26.0" prefWidth="27.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <TextField fx:id="textFieldMinuteFin" />
+                        <TextField fx:id="textFieldMinuteFin" prefHeight="26.0" prefWidth="28.0" />
                      </children>
                   </HBox>
+                  <Label text="Repas " GridPane.rowIndex="8" />
+                  <TextField fx:id="textFieldRepas" maxWidth="-Infinity" prefHeight="26.0" prefWidth="26.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </children>

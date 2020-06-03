@@ -9,8 +9,11 @@ import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoActionBenevole;
+import projet.dao.DaoParticipeOrganisation;
+import projet.dao.DaoPoste;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;
+import projet.data.ParticipeOrganisation;
 import projet.data.Poste;
 import projet.view.benevole.ModelBenevole;
 import projet.view.poste.ModelPoste;
@@ -21,17 +24,22 @@ public class ModelActionBenevole {
 	
 
 	private final ActionBenevole courant = new ActionBenevole();
+	
+	private  ParticipeOrganisation PO = new ParticipeOrganisation();
 
 	// Autres champs
 	@Inject
 	private IMapper mapper;
 	@Inject
 	private DaoActionBenevole daoActionBenevole;
+	@Inject
+	private DaoParticipeOrganisation daoPOrga;
 	@Inject 
 	private ModelBenevole modelBenevole;
 	@Inject 
 	private ModelPoste modelPoste;
 	// Getters
+	
 
 	public ObservableList<ActionBenevole> getListe() {
 		return liste;
@@ -47,6 +55,9 @@ public class ModelActionBenevole {
 		return courant;
 	}
 	
+	public ParticipeOrganisation getPO() {
+		return PO;
+	}
 	
 	// Actualisations
 
@@ -61,6 +72,7 @@ public class ModelActionBenevole {
 		modelBenevole.actualiserListe();
 		modelPoste.actualiserListe();
 		mapper.update(courant, new ActionBenevole());
+		this.PO= new ParticipeOrganisation();
 	}
 	
 
@@ -68,6 +80,8 @@ public class ModelActionBenevole {
 		modelBenevole.actualiserListe();
 		modelPoste.actualiserListe();
 		mapper.update(courant, daoActionBenevole.retrouver(item.getId_action()));
+		mapper.update(PO, daoPOrga.retrouver(courant.getBenevole().getIdUtilisateur(), courant.getPoste().getId_raid()));
+		//this.PO=daoPOrga.retrouver(courant.getBenevole().getIdUtilisateur(), courant.getPoste().getId_raid()); 
 	}
 
 	public void validerMiseAJour() {
@@ -99,6 +113,9 @@ public class ModelActionBenevole {
 		} else {
 			// modficiation
 			daoActionBenevole.modifier(courant);
+			this.PO.setIdRaid(courant.getPoste().getId_raid());
+			this.PO.setIdUtilisateur(courant.getBenevole().getIdUtilisateur());
+			daoPOrga.modifier(this.PO);
 		}
 	}
 
