@@ -20,7 +20,6 @@ import projet.data.Participant;
 import projet.data.ParticipantDuo;
 import projet.data.Raid;
 
-
 public class ModelEquipe {
 	
 	// Propriétés
