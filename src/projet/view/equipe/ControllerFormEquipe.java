@@ -61,6 +61,7 @@ public class ControllerFormEquipe {
 		ParticipantDuo courant = modelEquipe.getCourant();
 		
 		Participant capitaine = daoParticipant.retrouver(daoFormeDuo.retrouverId(courant.getId_part_duo()).getIdUtilisateur());
+		comboBoxRaids.setItems(modelEquipe.getRaids());
 		comboBoxRaids.valueProperty().bindBidirectional(courant.id_raidProperty());
 		comboBoxCategorieRaid.setItems(FXCollections.observableArrayList(modelEquipe.getCategorieRaids()));
 		comboBoxCategorieRaid.getSelectionModel().select(daoCategorieRaid.retrouverCategorieRaid(courant.getId_categorie()));
@@ -85,7 +86,7 @@ public class ControllerFormEquipe {
 		courant.setId_raid(comboBoxRaids.getSelectionModel().getSelectedItem());
 		courant.setId_categorie(comboBoxCategorieRaid.getSelectionModel().getSelectedItem().getIdCategorieRaid());
 		courant.setNbr_repas(Integer.parseInt(textFieldNombreRepas.getText()));
-		courant.setPaiement_valide(checkBoxPaiementValidee.isDisabled());
+		courant.setPaiement_valide(checkBoxPaiementValidee.isSelected());
 		Participant cap = comboBoxParticipantCapitaine.getSelectionModel().getSelectedItem();
 		Participant eq = comboBoxParticipantEquipier.getSelectionModel().getSelectedItem();
 		modelEquipe.validerMiseAJour(cap, eq);

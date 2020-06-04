@@ -63,7 +63,7 @@ public class ControllerFormCreerEquipe {
 	
 	@FXML
 	private void doCreer() {
-		modelEquipe.creationEquipe(comboBoxParticipantCapitaine.getValue(), comboBoxParticipantEquipier.getValue(), comboBoxRaids.getValue(), comboBoxCategorieRaid.getValue(), textFieldNombreRepas.getText(), checkBoxPaiementValidee.isPressed());
+		modelEquipe.creationEquipe(comboBoxParticipantCapitaine.getValue(), comboBoxParticipantEquipier.getValue(), comboBoxRaids.getValue(), comboBoxCategorieRaid.getValue(), textFieldNombreRepas.getText(), checkBoxPaiementValidee.isSelected());
 		managerGui.showView(EnumView.EquipeListe);
 	}
 }

@@ -89,6 +89,7 @@ public class ModelValidationMedical {
 		} else {
 			// Modficiation
 			daoValidationMedicale.modifier(courant);
+			courant.setValide();
 		}
 	}
 
