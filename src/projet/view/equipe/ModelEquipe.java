@@ -175,7 +175,7 @@ public class ModelEquipe {
 		if(courant.getNbr_repas() == null)
 			message.append("\nLe nombre de repas doit être défini.");
 		
-		if(courant.getId_part_duo() == null) {
+		if(courant.getId_part_duo() != null) {
 			daoParticipantDuo.modifier(courant);
 			majParticipants(cap, eq);
 		}

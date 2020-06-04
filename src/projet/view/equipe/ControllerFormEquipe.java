@@ -61,6 +61,7 @@ public class ControllerFormEquipe {
 		ParticipantDuo courant = modelEquipe.getCourant();
 		
 		Participant capitaine = daoParticipant.retrouver(daoFormeDuo.retrouverId(courant.getId_part_duo()).getIdUtilisateur());
+		comboBoxRaids.setItems(modelEquipe.getRaids());
 		comboBoxRaids.valueProperty().bindBidirectional(courant.id_raidProperty());
 		comboBoxCategorieRaid.setItems(FXCollections.observableArrayList(modelEquipe.getCategorieRaids()));
 		comboBoxCategorieRaid.getSelectionModel().select(daoCategorieRaid.retrouverCategorieRaid(courant.getId_categorie()));
