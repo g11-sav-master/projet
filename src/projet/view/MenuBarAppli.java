@@ -20,11 +20,11 @@ public class MenuBarAppli extends MenuBar {
 	
 	private Menu	menuDonnees;
 	private Menu	menuTests;
+	private Menu	menuEquipe;
 	
 	private MenuItem itemDeconnecter;
 	
 	private MenuItem itemAccueil;
-	
 	private MenuItem itemBenevole;
 	
 	private MenuItem itemParticipant;
@@ -37,7 +37,12 @@ public class MenuBarAppli extends MenuBar {
 	
 	private MenuItem itemActionBenevole;
 	
+	private MenuItem itemCreerEquipe;
+	
+	private MenuItem itemEquipeListe;
+
 	private MenuItem itemValidationMedicale;
+
 	
 	@Inject
 	private IManagerGui 	managerGui;
@@ -114,6 +119,20 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Validation Médicale" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ValidationListe )  );
 		menu.getItems().add( item );
+		
+		menu =  new Menu( "Equipe" );;
+		this.getMenus().add(menu);
+		menuEquipe = menu;
+		
+		item = new MenuItem("Créer une équipe");
+		item.setOnAction(  (e) -> managerGui.showView( EnumView.CreerEquipeForm )  );
+		menu.getItems().add(item);
+		itemCreerEquipe = item;
+		
+		item = new MenuItem("Lister les équipes");
+		item.setOnAction( (e) -> managerGui.showView( EnumView.EquipeListe ));
+		menu.getItems().add(item);
+		itemEquipeListe = item;
 		itemValidationMedicale = item;
 		
 		menu =  new Menu( "Tests" );;
@@ -189,6 +208,7 @@ public class MenuBarAppli extends MenuBar {
 		
 		menuDonnees.setVisible(false);
 		menuTests.setVisible(false);
+		menuEquipe.setVisible(false);
 		itemAccueil.setVisible(false);
 		itemBenevole.setVisible(false);
 		itemParticipant.setVisible(false);
@@ -197,6 +217,9 @@ public class MenuBarAppli extends MenuBar {
 		itemRaid.setVisible(false);
 		itemActionBenevole.setVisible(false);
 		itemValidationMedicale.setVisible(false);
+		itemEquipeListe.setVisible(false);
+		itemCreerEquipe.setVisible(false);
+		
 		
 		
 		if( compteActif != null ) {
@@ -210,6 +233,9 @@ public class MenuBarAppli extends MenuBar {
 				menuDonnees.setVisible(true);
 				itemParticipant.setVisible(true);
 				itemValidationMedicale.setVisible(true);
+				menuEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(true);
+				itemEquipeListe.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
 				itemAccueil.setVisible(true);
@@ -221,6 +247,9 @@ public class MenuBarAppli extends MenuBar {
 				itemRaid.setVisible(true);
 				itemActionBenevole.setVisible(true);
 				itemValidationMedicale.setVisible(true);
+				menuEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(true);
+				itemEquipeListe.setVisible(true);
 				menuTests.setVisible(true);
 			}
 		}

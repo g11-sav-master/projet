@@ -10,6 +10,9 @@ public enum EnumView implements IEnumView {
 	// Valeurs
 	
 	Accueil				( "accueil/ViewAccueilListe.fxml" ),
+	CreerEquipeForm		( "equipe/ViewFormCreerEquipe.fxml" ),
+	EquipeListe			( "equipe/ViewListeEquipe.fxml" ),
+	EquipeForm			( "equipe/ViewFormEquipe.fxml" ),
 	Info				( "systeme/ViewInfo.fxml" ),
 	Connexion			( "systeme/ViewConnexion.fxml" ),
 	BenevoleListe		( "benevole/ViewBenevoleListe.fxml" ),

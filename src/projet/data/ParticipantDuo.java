@@ -8,18 +8,18 @@ import javafx.beans.property.SimpleObjectProperty;
 public class ParticipantDuo {
 
 	// Données observables
-	private final Property<Integer>		id_part_duo		= new SimpleObjectProperty<>();
-	private final Property<Integer>		id_categorie	= new SimpleObjectProperty<>();
-	private final Property<Integer>		id_raid			= new SimpleObjectProperty<>();
-	private final Property<Integer>		nbr_repas		= new SimpleObjectProperty<>();
-	private final Property<Boolean>		paiement_valide	= new SimpleObjectProperty<>();
+	private final Property<Integer>				id_part_duo		= new SimpleObjectProperty<>();
+	private final Property<Integer>				id_categorie	= new SimpleObjectProperty<>();
+	private final Property<Raid>				id_raid			= new SimpleObjectProperty<>();
+	private final Property<Integer>				nbr_repas		= new SimpleObjectProperty<>();
+	private final Property<Boolean>				paiement_valide	= new SimpleObjectProperty<>();
 
 	// Constructeurs
 
 	public ParticipantDuo() {
 	}
 
-	public ParticipantDuo(int id_partduo, int id_cat, int id_raid, int nbrrepas, boolean paiement) {
+	public ParticipantDuo(int id_partduo, int id_cat, Raid id_raid, int nbrrepas, boolean paiement) {
 		setId_part_duo(id_partduo);
 		setId_categorie(id_cat);
 		setId_raid(id_raid);
@@ -59,17 +59,17 @@ public class ParticipantDuo {
 	}
 	
 
-	public final Property<Integer> id_raidProperty() {
+	public final Property<Raid> id_raidProperty() {
 		return this.id_raid;
 	}
 	
 
-	public final Integer getId_raid() {
+	public final Raid getId_raid() {
 		return this.id_raidProperty().getValue();
 	}
 	
 
-	public final void setId_raid(final Integer id_raid) {
+	public final void setId_raid(final Raid id_raid) {
 		this.id_raidProperty().setValue(id_raid);
 	}
 	
