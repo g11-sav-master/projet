@@ -36,7 +36,7 @@
                   <TextField fx:id="textFieldId" editable="false" focusTraversable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" />
                   <Label text="Nom" GridPane.rowIndex="1" />
                   <TextField fx:id="textFieldNom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Annee" GridPane.rowIndex="2" />
+                  <Label text="Date" GridPane.rowIndex="2" />
                   <Label text="Prix Inscription" GridPane.rowIndex="3" />
                   <Label text="Prix Repas" GridPane.rowIndex="4" />
                   <TextField fx:id="textFieldPrixInscription" maxWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />

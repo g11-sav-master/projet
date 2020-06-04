@@ -99,7 +99,62 @@ public class DaoFormeDuo {
 			UtilJdbc.close(stmt, cn);
 		}
 	}
+	
+	public FormeDuo retrouverId(int idPartDuo) {
 
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM forme_duo WHERE id_part_duo = ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setInt( 1, idPartDuo );
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return construireFormeDuo(rs);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(rs, stmt, cn);
+		}
+	}
+
+	public FormeDuo retrouverAutre(int idPartDuo, int idUtilisateur) {
+
+		Connection cn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql;
+
+		try {
+			cn = dataSource.getConnection();
+
+			sql = "SELECT * FROM forme_duo WHERE id_part_duo = ? AND id_utilisateur <> ?";
+			stmt = cn.prepareStatement(sql);
+			stmt.setInt( 1, idPartDuo );
+			stmt.setInt( 2, idUtilisateur );
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				return construireFormeDuo(rs);
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			UtilJdbc.close(rs, stmt, cn);
+		}
+	}
+	
 	public FormeDuo retrouver(int idPartDuo, int idUtilisateur) {
 
 		Connection cn = null;
@@ -187,7 +242,7 @@ public class DaoFormeDuo {
 	private FormeDuo construireFormeDuo(ResultSet rs) throws SQLException {
 
 		FormeDuo formeDuo = new FormeDuo();
-		formeDuo.setIdUtilisateur(rs.getObject("id_utilisateur", Integer.class));
+		formeDuo.setIdUtilisateur(daoParticipant.retrouver(rs.getObject("id_utilisateur", Integer.class)));
 		formeDuo.setIdPartDuo(rs.getObject("id_part_duo", Integer.class));
 		formeDuo.setEstCapitaine(rs.getObject("est_capitaine", Boolean.class));
 		

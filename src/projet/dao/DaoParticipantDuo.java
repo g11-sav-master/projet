@@ -37,12 +37,12 @@ public class DaoParticipantDuo {
 
 		try {
 			if ((daoCategorie.retrouverCategorieRaid(partduo.getId_categorie()) != null)
-					&& daoRaid.retrouver(partduo.getId_raid()) != null) {
+					&& daoRaid.retrouver(partduo.getId_raid().getId()) != null) {
 				cn = dataSource.getConnection();
 				sql = "INSERT INTO participant_duo ( id_categorie, id_raid, nbr_repas, paiement_valide) VALUES ( ?, ?, ?,?)";
 				stmt = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setInt(1, partduo.getId_categorie());
-				stmt.setInt(2, partduo.getId_raid());
+				stmt.setInt(2, partduo.getId_raid().getId());
 				stmt.setInt(3, partduo.getNbr_repas());
 				stmt.setBoolean(4, partduo.getPaiement_valide());
 				stmt.executeUpdate();
@@ -71,12 +71,12 @@ public class DaoParticipantDuo {
 
 		try {
 			if ((daoCategorie.retrouverCategorieRaid(partduo.getId_categorie()) != null)
-					&& daoRaid.retrouver(partduo.getId_raid()) != null) {
+					&& daoRaid.retrouver(partduo.getId_raid().getId()) != null) {
 				cn = dataSource.getConnection();
 				sql = "UPDATE participant_duo SET id_categorie = ?, id_raid = ?, nbr_repas = ?, paiement_valide = ? WHERE id_part_duo  =  ?";
 				stmt = cn.prepareStatement(sql);
 				stmt.setObject(1, partduo.getId_categorie());
-				stmt.setObject(2, partduo.getId_raid());
+				stmt.setObject(2, partduo.getId_raid().getId());
 				stmt.setObject(3, partduo.getNbr_repas());
 				stmt.setBoolean(4, partduo.getPaiement_valide());
 				stmt.setObject(5, partduo.getId_part_duo());
@@ -173,7 +173,7 @@ public class DaoParticipantDuo {
 		ParticipantDuo participantduo = new ParticipantDuo();
 		participantduo.setId_part_duo(rs.getObject("id_part_duo", Integer.class));
 		participantduo.setId_categorie(rs.getObject("id_categorie", Integer.class));
-		participantduo.setId_raid(rs.getObject("id_raid", Integer.class));
+		participantduo.setId_raid(daoRaid.retrouver(rs.getObject("id_raid", Integer.class)));
 		participantduo.setNbr_repas(rs.getObject("nbr_repas", Integer.class));
 		participantduo.setPaiement_valide(rs.getObject("paiement_valide", Boolean.class));
 

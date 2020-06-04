@@ -66,11 +66,14 @@ public class ModelRaid {
 		} else if (courant.getPrix_insc() < 0) {
 			message.append("\nLe prix ne peux pas être négatif.");
 		}
+		if(courant.getAnnee() == null) {
+			message.append("\nLa date n'est pas sélectionnée");
+		}
 		
 		if (message.length() > 0) {
 			throw new ExceptionValidation(message.toString().substring(1));
 		}
-
+		
 		// Effectue la mise à jour
 
 		if (courant.getId() == null) {

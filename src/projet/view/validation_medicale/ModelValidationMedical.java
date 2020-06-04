@@ -1,7 +1,5 @@
 package projet.view.validation_medicale;
 
-import java.time.LocalDate;
-
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;

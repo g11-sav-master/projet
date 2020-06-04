@@ -11,7 +11,7 @@ public class FormeDuo {
 
 	// Données observables
 	
-	protected final Property<Integer>	idUtilisateur	= new SimpleObjectProperty<>();
+	protected final Property<Participant>	idUtilisateur	= new SimpleObjectProperty<>();
 	protected final Property<Integer>	idPartDuo		= new SimpleObjectProperty<>();
 	protected final Property<Boolean>	estCapitaine	= new SimpleObjectProperty<>();
 	
@@ -21,23 +21,23 @@ public class FormeDuo {
 	public FormeDuo() {
 	}
 
-	public FormeDuo( int utilisateur, int idPartDuo, boolean estCapitaine) {
-		setIdUtilisateur(idUtilisateur.getValue());
+	public FormeDuo( Participant utilisateur, int idPartDuo, boolean estCapitaine) {
+		setIdUtilisateur(utilisateur);
 	}
 	
 	
 	// Getters & setters
 
 	
-	public final Property<Integer> idUtilisateurProperty() {
+	public final Property<Participant> idUtilisateurProperty() {
 		return this.idUtilisateur;
 	}
 	
 	public final Integer getIdUtilisateur() {
-		return this.idUtilisateurProperty().getValue();
+		return this.idUtilisateurProperty().getValue().getIdUtilisateur();
 	}
 	
-	public final void setIdUtilisateur(final Integer idUtilisateur) {
+	public final void setIdUtilisateur(final Participant idUtilisateur) {
 		this.idUtilisateurProperty().setValue(idUtilisateur);
 	}
 	

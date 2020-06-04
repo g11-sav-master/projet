@@ -10,7 +10,6 @@ import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoActionBenevole;
 import projet.dao.DaoParticipeOrganisation;
-import projet.dao.DaoPoste;
 import projet.data.ActionBenevole;
 import projet.data.Benevole;
 import projet.data.ParticipeOrganisation;

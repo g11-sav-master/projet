@@ -70,7 +70,7 @@ public class ModelPoste {
 		StringBuilder message = new StringBuilder();
 
 		if (courant.getId_raid() == null || courant.getId_raid() == 0) {
-			message.append("\nLe numero de raid ne peut pas être nul.");
+			message.append("\nLe raid ne peut pas être vide.");
 		} else if (daoRaid.retrouver(courant.getId_raid()) == null) {
 			message.append("\nLe raid n'existe pas");
 		}

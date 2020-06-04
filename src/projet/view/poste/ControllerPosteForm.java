@@ -1,7 +1,6 @@
 package projet.view.poste;
 
 import javax.inject.Inject;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,11 +50,18 @@ public class ControllerPosteForm {
 		Poste courant = modelposte.getCourant();
 		textFieldIdPoste.textProperty().bindBidirectional(courant.id_posteProperty(), new IntegerStringConverter());
 		//textFieldIdRaid.textProperty().bindBidirectional(courant.id_raidProperty(), new IntegerStringConverter());
+		if(courant.getNbr_benev() == null) {
+			courant.setNbr_benev(0);
+		}
+		textFieldNbrBen.setText(courant.getNbr_benev().toString());
 		textFieldNbrBen.textProperty().bindBidirectional(courant.nbr_benevProperty(), new IntegerStringConverter());
 		CBNomRaid.setItems(FXCollections.observableArrayList(daoRaid.listerTout()));
-		CBNomRaid.getSelectionModel().select(daoRaid.retrouver(courant.getId_raid()));
-		textAreaDescription.textProperty().bindBidirectional(courant.descriptionProperty());
-
+		if(courant.getId_raid() != null) {
+			CBNomRaid.getSelectionModel().select(daoRaid.retrouver(courant.getId_raid()));
+		}
+		if(courant.descriptionProperty() != null) {
+			textAreaDescription.textProperty().bindBidirectional(courant.descriptionProperty());
+		}
 	}
 
 	// Actions

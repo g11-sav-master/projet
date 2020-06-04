@@ -1,6 +1,7 @@
-package projet.view.poste;
+package projet.view.equipe;
 
 import javax.inject.Inject;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -8,18 +9,18 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import jfox.javafx.util.UtilFX;
 import jfox.javafx.view.IManagerGui;
-import projet.dao.DaoRaid;
+import projet.data.ParticipantDuo;
 import projet.data.Poste;
 import projet.view.EnumView;
 
 
-public class ControllerPosteListe {
+public class ControllerListeEquipe {
 	
 	
 	// Composants de la vue
 
 	@FXML
-	private ListView<Poste>	listView;
+	private ListView<ParticipantDuo>		listView;
 	@FXML
 	private Button				buttonModifier;
 	@FXML
@@ -31,9 +32,7 @@ public class ControllerPosteListe {
 	@Inject
 	private IManagerGui			managerGui;
 	@Inject
-	private ModelPoste		modelposte;
-	@Inject
-	private DaoRaid		daoRaid;
+	private ModelEquipe			modelEquipe;
 	
 	
 	// Initialisation du Controller
@@ -42,9 +41,9 @@ public class ControllerPosteListe {
 	private void initialize() {
 
 		// Data binding
-		listView.setItems( modelposte.getListe() );
+		listView.setItems( modelEquipe.getListe() );
 		
-		listView.setCellFactory(  UtilFX.cellFactory(item -> daoRaid.retrouver(item.getId_raid()).getNom_raid() + " -  Poste n°" + item.getId_poste()));
+		listView.setCellFactory(  UtilFX.cellFactory(item -> item.toString()+" "));
 		
 		// Configuraiton des boutons
 		listView.getSelectionModel().selectedItemProperty().addListener(
@@ -56,8 +55,8 @@ public class ControllerPosteListe {
 	}
 	
 	public void refresh() {
-		modelposte.actualiserListe();
-		UtilFX.selectInListView( listView, modelposte.getCourant() );
+		modelEquipe.actualiserListe();
+		UtilFX.selectInListView( listView, modelEquipe.getCourant() );
 		listView.requestFocus();
 	}
 
@@ -66,30 +65,30 @@ public class ControllerPosteListe {
 	
 	@FXML
 	private void doAjouter() {
-		modelposte.preparerAjouter();;
-		managerGui.showView( EnumView.PosteForm );
+		modelEquipe.preparerAjouter();
+		managerGui.showView( EnumView.CreerEquipeForm);
 	}
 
 	@FXML
 	private void doModifier() {
-		Poste item = listView.getSelectionModel().getSelectedItem();
+		ParticipantDuo item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
-			modelposte.preparerModifier(item);
-			managerGui.showView( EnumView.PosteForm );
+			modelEquipe.preparerModifier(item);
+			managerGui.showView( EnumView.EquipeForm );
 		}
 	}
 
 	@FXML
 	private void doSupprimer() {
-		Poste item = listView.getSelectionModel().getSelectedItem();
+		ParticipantDuo item = listView.getSelectionModel().getSelectedItem();
 		if ( item == null ) {
 			managerGui.showDialogError( "Aucun élément n'est sélectionné dans la liste.");
 		} else {
 			boolean reponse = managerGui.showDialogConfirm( "Confirmez-vous la suppresion ?" );
 			if ( reponse ) {
-				modelposte.supprimer( item );
+				modelEquipe.supprimer( item );
 				refresh();
 			}
 		}

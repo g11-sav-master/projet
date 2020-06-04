@@ -130,6 +130,7 @@ public class ModelAccueil {
 				else
 					listes.add(raid.getNom_raid()+" - id poste : "+poste.getId_poste()+" - "+daoActionBenevole.nombreBenevoleAttribue(poste.getId_poste(),raid.getId())+"/"+poste.getNbr_benev());
 			}
+			postes.clear();
 		}
 		return listes;
 	}
