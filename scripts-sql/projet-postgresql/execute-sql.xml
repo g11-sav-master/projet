@@ -45,13 +45,12 @@
     	<execute-sql sqlfile="2-data.sql"/>
     </target>
 	
-
-    <!-- ================================= 
-          target: 3-procedures              
-         ================================= -->
-    <target name="3-procedures" description="Crée triggers et procédures stockées">
-    	<execute-sql sqlfile="3-procedures.sql" delimiter="/" />
-    </target>
+	<!-- ================================= 
+	          target: 2.1-data              
+	         ================================= -->
+	    <target name="2.1-data" description="Insère données initiales">
+	    	<execute-sql sqlfile="2-dataVide.sql"/>
+	    </target>
 	
 
     <!-- ================================= 
@@ -61,9 +60,18 @@
     	
     	<antcall target="1-tables" />
 		<antcall target="2-data" />
-		<antcall target="3-procedures" />
         
     </target>
+	
+	<!-- ================================= 
+	          target: 9.1-tout              
+	         ================================= -->
+	    <target name="9.1-toutVide" description="description">
+	    	
+	    	<antcall target="1-tables" />
+			<antcall target="2.1-data" />
+	        
+	    </target>
 	
 	
 	<!-- = = = = = = = = = = = = = = = = =
