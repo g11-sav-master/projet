@@ -63,7 +63,7 @@ public class ModelConnexion {
 //		courant.setPseudo( "victan65" );
 //		courant.setMotDePasse( "victanvapo45" );
 //		
-//		// NON DESIGNE
+		// NON DESIGNE
 //		courant.setPseudo( "daudaudu01" );
 //		courant.setMotDePasse( "duciva54" );
 		

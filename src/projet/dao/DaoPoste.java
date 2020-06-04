@@ -31,7 +31,7 @@ public class DaoPoste {
 				cn = dataSource.getConnection();
 
 				// Insère le poste
-				sql = "INSERT INTO poste ( id_raid, nbr_benev) VALUES ( ?, ?, ?)";
+				sql = "INSERT INTO poste ( id_raid, nbr_benev, description) VALUES ( ?, ?, ?)";
 				stmt = cn.prepareStatement( sql, Statement.RETURN_GENERATED_KEYS  );
 				stmt.setObject(	1, poste.getId_raid() );
 				stmt.setObject(	2, poste.getNbr_benev() );
