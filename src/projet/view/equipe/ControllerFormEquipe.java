@@ -86,7 +86,7 @@ public class ControllerFormEquipe {
 		courant.setId_raid(comboBoxRaids.getSelectionModel().getSelectedItem());
 		courant.setId_categorie(comboBoxCategorieRaid.getSelectionModel().getSelectedItem().getIdCategorieRaid());
 		courant.setNbr_repas(Integer.parseInt(textFieldNombreRepas.getText()));
-		courant.setPaiement_valide(checkBoxPaiementValidee.isDisabled());
+		courant.setPaiement_valide(checkBoxPaiementValidee.isSelected());
 		Participant cap = comboBoxParticipantCapitaine.getSelectionModel().getSelectedItem();
 		Participant eq = comboBoxParticipantEquipier.getSelectionModel().getSelectedItem();
 		modelEquipe.validerMiseAJour(cap, eq);
