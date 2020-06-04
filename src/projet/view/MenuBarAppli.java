@@ -119,6 +119,7 @@ public class MenuBarAppli extends MenuBar {
 		item = new MenuItem( "Validation Médicale" );
 		item.setOnAction(  (e) -> managerGui.showView( EnumView.ValidationListe )  );
 		menu.getItems().add( item );
+		itemValidationMedicale = item;
 		
 		menu =  new Menu( "Equipe" );;
 		this.getMenus().add(menu);
@@ -133,7 +134,6 @@ public class MenuBarAppli extends MenuBar {
 		item.setOnAction( (e) -> managerGui.showView( EnumView.EquipeListe ));
 		menu.getItems().add(item);
 		itemEquipeListe = item;
-		itemValidationMedicale = item;
 		
 		menu =  new Menu( "Tests" );;
 		this.getMenus().add(menu);

@@ -51,15 +51,15 @@ public class ModelConnexion {
 	
 	@PostConstruct
 	public void init() {
-//		//ADMINISTRATEUR
+		//ADMINISTRATEUR
 		courant.setPseudo( "isidu25" );
 		courant.setMotDePasse( "2525isirob" );
-//		
+
 //		// RESPONSABLE PARTICIPANT
 //		courant.setPseudo( "angietan65" );
 //		courant.setMotDePasse( "angtanvapo45" );
-//		
-		// RESPONSABLE BENEVOLE
+////		
+//		// RESPONSABLE BENEVOLE
 //		courant.setPseudo( "victan65" );
 //		courant.setMotDePasse( "victanvapo45" );
 //		
