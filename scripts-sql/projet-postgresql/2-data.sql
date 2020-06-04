@@ -121,7 +121,7 @@ INSERT INTO utilisateur (nom,prenom,e_mail,num_tel,date_naissance,login,mot_pass
 
 --Rôles-Bénévole
 INSERT INTO role_benevole (nom_role)
-	VALUES ('admin'),('role1'),('role2'),('role3'),('role4');
+	VALUES ('Administrateur'),('role1'),('role2'),('role3'),('role4');
 --Raids
 
 INSERT INTO raid 
