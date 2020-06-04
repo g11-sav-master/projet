@@ -34,6 +34,8 @@ public class ModelActionBenevole {
 	private DaoActionBenevole daoActionBenevole;
 	@Inject
 	private DaoParticipeOrganisation daoPOrga;
+	@Inject
+	private DaoActionBenevole daoPoste;
 	@Inject 
 	private ModelBenevole modelBenevole;
 	@Inject 
@@ -81,7 +83,8 @@ public class ModelActionBenevole {
 		modelPoste.actualiserListe();
 		mapper.update(courant, daoActionBenevole.retrouver(item.getId_action()));
 		mapper.update(PO, daoPOrga.retrouver(courant.getBenevole().getIdUtilisateur(), courant.getPoste().getId_raid()));
-		//this.PO=daoPOrga.retrouver(courant.getBenevole().getIdUtilisateur(), courant.getPoste().getId_raid()); 
+		//System.out.println(modelPoste.getCourant());
+		modelPoste.preparerModifier(courant.getPoste());
 	}
 
 	public void validerMiseAJour() {

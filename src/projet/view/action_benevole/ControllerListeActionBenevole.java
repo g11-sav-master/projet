@@ -79,6 +79,7 @@ public class ControllerListeActionBenevole {
 		} else {
 			modelAB.preparerModifier(item);
 			managerGui.showView( EnumView.ActionBenevoleForm );
+			//System.out.println(item.getPoste());
 		}
 	}
 

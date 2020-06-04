@@ -85,6 +85,7 @@ public class ControllerFormActionBenevole {
 		comboBoxUtilisateur.setItems(modelAB.getBenevoles());
 		comboBoxUtilisateur.valueProperty().bindBidirectional(courant.benevoleProperty());
 		comboBoxPoste.setItems(modelAB.getPostes());
+		comboBoxPoste.setValue(courant.getPoste());
 		comboBoxPoste.valueProperty().bindBidirectional(courant.posteProperty());
 		textAreaDesc.textProperty().bindBidirectional(courant.descr_actionProperty());
 		checkBoxPanneau.selectedProperty().bindBidirectional(courant.panneau_prendreProperty());
@@ -153,6 +154,7 @@ public class ControllerFormActionBenevole {
 		textFieldHeureFin.setText(courant.getHoraire_fin().getHour()+"");
 		textFieldMinuteDebut.setText(courant.getHoraire_debut().getMinute()+"");
 		textFieldMinuteFin.setText(courant.getHoraire_fin().getMinute()+"");
+		comboBoxPoste.setValue(courant.getPoste());
 		managerGui.showView(EnumView.ActionBenevoleListe);
 	}
 
@@ -207,7 +209,7 @@ public class ControllerFormActionBenevole {
 		} catch (Exception exception) {
 			throw new ExceptionValidation("Erreur dans les minutes de fin");
 		}
-		
+		comboBoxPoste.setValue(courant.getPoste());
 		modelAB.validerMiseAJour();
 		managerGui.showView(EnumView.ActionBenevoleListe);
 	}
