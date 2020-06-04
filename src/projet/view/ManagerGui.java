@@ -39,8 +39,8 @@ public class ManagerGui extends ManagerGuiAbstract {
 		
 		// Configure le stage
 		stage.setTitle( "Gestionnaire association" );
-		stage.setWidth(700);
-		stage.setHeight(500);
+		stage.setWidth(620);
+		stage.setHeight(480);
 		stage.setMinWidth(400);
 		stage.setMinHeight(300);
 		stage.getIcons().add(new Image(getClass().getResource("icone.png").toExternalForm()));
