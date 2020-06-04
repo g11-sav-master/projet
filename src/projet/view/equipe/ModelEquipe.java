@@ -178,8 +178,7 @@ public class ModelEquipe {
 		if(courant.getId_part_duo() != null) {
 			daoParticipantDuo.modifier(courant);
 			majParticipants(cap, eq);
-		}
-			
+		}	
 	}
 	
 }
