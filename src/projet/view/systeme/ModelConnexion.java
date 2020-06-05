@@ -56,14 +56,14 @@ public class ModelConnexion {
 		courant.setMotDePasse( "2525isirob" );
 
 //		// RESPONSABLE PARTICIPANT
-//		courant.setPseudo( "angietan65" );
-//		courant.setMotDePasse( "angtanvapo45" );
+		courant.setPseudo( "angietan65" );
+		courant.setMotDePasse( "angtanvapo45" );
 ////		
-//		// RESPONSABLE BENEVOLE
+		// RESPONSABLE BENEVOLE
 //		courant.setPseudo( "victan65" );
 //		courant.setMotDePasse( "victanvapo45" );
 //		
-//		// NON DESIGNE
+		// NON DESIGNE
 //		courant.setPseudo( "daudaudu01" );
 //		courant.setMotDePasse( "duciva54" );
 		

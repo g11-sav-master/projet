@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
 import projet.dao.DaoCategorieRaid;
@@ -92,22 +93,41 @@ public class ModelEquipe {
 	
 	public void creationEquipe(Participant capitaine, Participant equipier, Raid raid, CategorieRaid categorieRaid, String nombreRepas, boolean paiementValide) {
 		ParticipantDuo participantDuo = new ParticipantDuo();
+		if(categorieRaid == null) {
+			throw new ExceptionValidation("Categorie du raid non sélectionné");
+		}
 		participantDuo.setId_categorie(categorieRaid.getIdCategorieRaid());
+		if(raid == null) {
+			throw new ExceptionValidation("Raid non sélectionné");
+		}
 		participantDuo.setId_raid(raid);
-		participantDuo.setNbr_repas(Integer.parseInt(nombreRepas));
+		try {
+			int i = Integer.parseInt(nombreRepas);
+			if(i<0) {
+				throw new ExceptionValidation("Erreur dans le nombre de repas");
+			}
+			participantDuo.setNbr_repas(i);
+		} catch (Exception e) {
+			throw new ExceptionValidation("Erreur dans le nombre de repas");
+		}
 		participantDuo.setPaiement_valide(paiementValide);
-		
 		int idPartDuo = daoParticipantDuo.inserer(participantDuo);
 		
 		FormeDuo formeDuoCap = new FormeDuo();
 		formeDuoCap.setEstCapitaine(true);
 		formeDuoCap.setIdPartDuo(idPartDuo);
+		if(capitaine == null) {
+			throw new ExceptionValidation("Capitaine non sélectionné");
+		}
 		formeDuoCap.setIdUtilisateur(daoParticipant.retrouver(capitaine.getIdUtilisateur()));
 		daoFormeDuo.inserer(formeDuoCap);
 		
 		FormeDuo formeDuoEq = new FormeDuo();
 		formeDuoEq.setEstCapitaine(false);
 		formeDuoEq.setIdPartDuo(idPartDuo);
+		if(equipier == null) {
+			throw new ExceptionValidation("Equipier non sélectionné");
+		}
 		formeDuoEq.setIdUtilisateur(daoParticipant.retrouver(equipier.getIdUtilisateur()));
 		daoFormeDuo.inserer(formeDuoEq);
 		
@@ -174,6 +194,9 @@ public class ModelEquipe {
 			message.append("\nLe raid doit être défini.");
 		if(courant.getNbr_repas() == null)
 			message.append("\nLe nombre de repas doit être défini.");
+		if (message.length() > 0) {
+			throw new ExceptionValidation(message.toString().substring(1));
+		}
 		
 		if(courant.getId_part_duo() != null) {
 			daoParticipantDuo.modifier(courant);

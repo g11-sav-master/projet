@@ -55,6 +55,7 @@ public class ControllerPosteForm {
 		}
 		textFieldNbrBen.setText(courant.getNbr_benev().toString());
 		textFieldNbrBen.textProperty().bindBidirectional(courant.nbr_benevProperty(), new IntegerStringConverter());
+		
 		CBNomRaid.setItems(FXCollections.observableArrayList(daoRaid.listerTout()));
 		if(courant.getId_raid() != null) {
 			CBNomRaid.getSelectionModel().select(daoRaid.retrouver(courant.getId_raid()));
@@ -62,6 +63,8 @@ public class ControllerPosteForm {
 		if(courant.descriptionProperty() != null) {
 			textAreaDescription.textProperty().bindBidirectional(courant.descriptionProperty());
 		}
+		CBNomRaid.valueProperty().bindBidirectional(modelposte.raidProperty());
+		
 	}
 
 	// Actions

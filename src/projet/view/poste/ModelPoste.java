@@ -1,7 +1,10 @@
 package projet.view.poste;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
@@ -19,6 +22,8 @@ public class ModelPoste {
 	private final ObservableList<Poste> liste = FXCollections.observableArrayList();
 
 	private final Poste courant = new Poste();
+	
+	private final Property<Raid> raid = new SimpleObjectProperty<Raid>();
 
 	// Autres champs
 	@Inject
@@ -32,7 +37,12 @@ public class ModelPoste {
 	@Inject
 	private DaoRaid daoRaid;
 
-
+	@PostConstruct
+	public void initialize() {
+		courant.id_raidProperty().addListener(c -> {
+			raid.setValue(daoRaid.retrouver(courant.getId_raid()));
+		});
+	}
 	// Getters
 
 	public ObservableList<Poste> getListe() {
@@ -41,6 +51,9 @@ public class ModelPoste {
 
 	public Poste getCourant() {
 		return courant;
+	}
+	public Property<Raid> raidProperty(){
+		return raid;
 	}
 	
 	public ObservableList<Raid> getRaid() {
@@ -64,7 +77,7 @@ public class ModelPoste {
 	}
 
 	public void validerMiseAJour() {
-
+		courant.setId_raid(raid.getValue().getId());
 		// Vérifie la validité des données
 
 		StringBuilder message = new StringBuilder();

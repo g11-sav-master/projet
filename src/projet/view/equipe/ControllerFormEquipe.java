@@ -1,11 +1,8 @@
 package projet.view.equipe;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -15,11 +12,9 @@ import jfox.javafx.view.IManagerGui;
 import projet.dao.DaoCategorieRaid;
 import projet.dao.DaoFormeDuo;
 import projet.dao.DaoParticipant;
-import projet.dao.DaoRaid;
 import projet.data.CategorieRaid;
 import projet.data.Participant;
 import projet.data.ParticipantDuo;
-import projet.data.Poste;
 import projet.data.Raid;
 import projet.view.EnumView;
 
