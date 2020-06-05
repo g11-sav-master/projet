@@ -76,15 +76,20 @@ public class ModelAccueil {
 		for(Participant participant : participants)
 		{
 			ValidationMedicale validationMedicale = daoValidationMedicale.retrouverUtilisateur(participant.getIdUtilisateur());
-			FormeDuo formeDuo = daoFormeDuo.retrouverUtilisateur(participant.getIdUtilisateur());
-			ParticipantDuo participantDuo = daoParticipantDuo.retrouver(formeDuo.getIdPartDuo());
+			try {
+				FormeDuo formeDuo = daoFormeDuo.retrouverUtilisateur(participant.getIdUtilisateur());
+				ParticipantDuo participantDuo = daoParticipantDuo.retrouver(formeDuo.getIdPartDuo());
+				if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
+					dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale et paiement en attente");
+				else if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && participantDuo.getPaiement_valide()) 
+					dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale en attente");
+				else if((LocalDate.now().isBefore(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
+					dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : paiement en attente");
+			} catch (Exception e) {
+				//System.out.println(e.getMessage());
+			}
 			
-			if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
-				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale et paiement en attente");
-			else if((LocalDate.now().isAfter(validationMedicale.getDate_expiration())) && participantDuo.getPaiement_valide()) 
-				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : dossier médicale en attente");
-			else if((LocalDate.now().isBefore(validationMedicale.getDate_expiration())) && !participantDuo.getPaiement_valide())
-				dossierEnAttente.add(participant.getNom()+" "+participant.getPrenom()+" : paiement en attente");
+			
 		}
 		
 		return dossierEnAttente;
