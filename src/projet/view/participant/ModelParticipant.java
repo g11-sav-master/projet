@@ -9,10 +9,14 @@ import javafx.collections.ObservableList;
 import jfox.commun.exception.ExceptionValidation;
 import jfox.javafx.util.UtilFX;
 import projet.commun.IMapper;
+import projet.dao.DaoFormeDuo;
 import projet.dao.DaoParticipant;
 import projet.dao.DaoUtilisateur;
+import projet.dao.DaoValidationMedicale;
+import projet.data.FormeDuo;
 import projet.data.Participant;
 import projet.data.Utilisateur;
+import projet.data.ValidationMedicale;
 
 public class ModelParticipant {
 
@@ -27,7 +31,10 @@ public class ModelParticipant {
 	private DaoParticipant daoParticipant;
 	@Inject
 	private DaoUtilisateur daoUtilisateur;
-
+	@Inject
+	private DaoValidationMedicale daoV;
+	@Inject
+	private DaoFormeDuo daoFD;
 	// Getters
 
 	public ObservableList<Participant> getListe() {
@@ -121,6 +128,10 @@ public class ModelParticipant {
 		if (courant.getIdUtilisateur() == null) {
 			// Insertion
 			courant.setIdUtilisateur(daoParticipant.inserer(courant));
+			ValidationMedicale validation = new ValidationMedicale();
+			validation.setParticipant(courant);
+			validation.setDate_expiration(LocalDate.now());
+			daoV.inserer(validation);
 		} else {
 			// modficiation
 			daoParticipant.modifier(courant);
