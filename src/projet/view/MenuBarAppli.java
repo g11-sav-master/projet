@@ -234,7 +234,7 @@ public class MenuBarAppli extends MenuBar {
 				itemParticipant.setVisible(true);
 				itemValidationMedicale.setVisible(true);
 				menuEquipe.setVisible(true);
-				itemCreerEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(false);
 				itemEquipeListe.setVisible(true);
 			}
 			if( compteActif.isInRole( Roles.ADMINISTRATEUR ) ) {
@@ -248,7 +248,7 @@ public class MenuBarAppli extends MenuBar {
 				itemActionBenevole.setVisible(true);
 				itemValidationMedicale.setVisible(true);
 				menuEquipe.setVisible(true);
-				itemCreerEquipe.setVisible(true);
+				itemCreerEquipe.setVisible(false);
 				itemEquipeListe.setVisible(true);
 				menuTests.setVisible(true);
 			}
