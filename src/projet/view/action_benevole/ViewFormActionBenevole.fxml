@@ -55,18 +55,18 @@
                   </HBox>
                   <Label text="Heure début" GridPane.rowIndex="6" />
                   <Label text="Heure fin" GridPane.rowIndex="7" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <TextField fx:id="textFieldHeureDebut" prefHeight="26.0" prefWidth="26.0" />
+                        <TextField fx:id="textFieldHeureDebut" prefHeight="26.0" prefWidth="42.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <TextField fx:id="textFieldMinuteDebut" prefHeight="26.0" prefWidth="27.0" />
+                        <TextField fx:id="textFieldMinuteDebut" prefHeight="26.0" prefWidth="42.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <children>
-                        <TextField fx:id="textFieldHeureFin" prefHeight="26.0" prefWidth="27.0" />
+                        <TextField fx:id="textFieldHeureFin" prefHeight="26.0" prefWidth="42.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <TextField fx:id="textFieldMinuteFin" prefHeight="26.0" prefWidth="28.0" />
+                        <TextField fx:id="textFieldMinuteFin" prefHeight="26.0" prefWidth="42.0" />
                      </children>
                   </HBox>
                   <Label text="Repas " GridPane.rowIndex="8" />
